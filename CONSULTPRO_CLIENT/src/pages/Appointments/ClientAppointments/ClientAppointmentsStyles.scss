@@ -1,0 +1,17 @@
+@use "../../../colors/systemColors" as sysColors;
+.appoinments-container {
+  width: 100vw;
+  height: 100%;
+  background-color: sysColors.$primary-bg-color;
+  justify-content: center;
+  padding-top: 85px;
+  justify-content: center;
+
+  padding-left: 80px;
+  padding-right: 80px;
+
+  .appoinments {
+    display: flex;
+    flex-wrap: wrap;
+  }
+}

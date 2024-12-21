@@ -1,0 +1,55 @@
+@use '../../../colors/systemColors' as sysColors;
+
+.dashboard-container {
+  width: 100%;
+  height: 100%;
+  padding-top: 85px;
+  background-color: sysColors.$primary-bg-color;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  .featured-consultants {
+    width: 100%;
+    padding-left: 80px;
+    padding-right: 80px;
+    margin-bottom: 10px;
+  }
+
+  .spcialities-consultants {
+    width: 100%;
+    padding-left: 80px;
+    padding-right: 80px;
+    margin-bottom: 10px;
+  }
+
+  // Recent Appointments Section
+  .recent-apointments-consultants{
+    width: 100%;
+    padding-left: 80px;
+    padding-right: 80px;
+    margin-bottom: 10px;
+    .recentAppoinemts{
+      display: flex ;
+      justify-content: space-between;
+    }
+  }
+
+  .consult-list {
+    display: flex;
+    align-items: center; // Center vertically in the flex container
+    justify-content: space-between; // Space between buttons and cards
+    margin: 20px 0; // Add margin for better spacing
+
+
+    .left-button {
+      margin-right: auto; // Push left button to the left
+    }
+
+    .right-button {
+      margin-left: auto; // Push right button to the right
+    }
+  }
+
+}

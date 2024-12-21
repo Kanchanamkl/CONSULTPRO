@@ -1,0 +1,124 @@
+
+@use '../../colors/systemColors' as sysColors;
+
+.hero {
+    width: 100%;
+    height: 100vh;
+    background: url('../../images/hero_bg.png') no-repeat center center;
+    background-size: cover;
+    color: #fff;
+    text-align: center;
+    font-family: 'Inter', sans-serif;
+  
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 11px;
+      background-color:sysColors.$primary-color; 
+  
+      .navbar-brand .logo {
+        font-size: 1.8rem;
+        font-weight: bold;
+        color: #fff;
+        text-decoration: none;
+      }
+  
+      .navbar-links {
+        list-style: none;
+        display: flex;
+        gap: 20px;
+  
+        li a {
+          color: #fff;
+          text-decoration: none;
+          font-size: 1rem;
+          padding: 10px 20px;
+          margin-top: 10px;
+          border-radius: 5px;
+          font-family: 'Inter', sans-serif;
+          transition: background 0.3s ease;
+          
+  
+          &:hover {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px 20px;
+          }
+
+   
+        }
+  
+        .nav-item-sign-in {
+          background: sysColors.$tertiary-color;
+            color: #fff;
+            padding: 10px 20px;
+            font-size: 1rem;
+            border-radius: 5px;
+            margin-top: 10px;
+            font-family: 'Inter', sans-serif;
+            transition: background 0.3s ease;
+  
+            &:hover {
+              background: sysColors.$tertiary-color-hover;
+              padding: 10px 20px;
+            
+            }
+        }
+      }
+    }
+  
+    .hero-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 100px 20px;
+  
+      .hero-title {
+        font-size: 3rem;
+        font-weight: bold;
+        margin-bottom: 20px;
+        margin-top: 120px;
+      }
+  
+      .hero-subtitle {
+        font-size: 1.5rem;
+        margin-bottom: 40px;
+      }
+  
+      .hero-buttons {
+        display: flex;
+        gap: 20px;
+  
+        .btn {
+          display: inline-block;
+          padding: 15px 30px;
+          font-size: 1rem;
+          font-weight: bold;
+          color: #fff;
+          border-radius:10px;
+          transition: background 0.3s ease;
+          text-decoration: none;
+  
+          &.btn-signup {
+            background: sysColors.$primary-color;
+  
+            &:hover {
+              background: sysColors.$secondary-color;
+              border: 1px solid #f5f5f5be;
+            }
+          }
+  
+          &.btn-join-consultant {
+            background:sysColors.$tertiary-color;
+  
+            &:hover {
+              background:sysColors.$secondary-color;
+              border: 1px solid #f5f5f5be;
+            }
+          }
+        }
+      }
+    }
+  }
+  

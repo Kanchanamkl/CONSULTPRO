@@ -1,0 +1,66 @@
+@use '../../colors/systemColors' as sysColors;
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 11px;
+  height: 85px;
+  background-color: sysColors.$primary-color;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 100;
+
+  .navbar-brand .logo {
+    font-size: 1.9rem;
+    font-weight: bold;
+    color: #fff;
+    text-decoration: none;
+    padding-left: 10px;
+  }
+
+  .navbar-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+
+    li a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 1rem;
+      padding: 10px 10px;
+      margin-top: 10px;
+      border-radius: 20px;
+      font-family: "Inter", sans-serif;
+    }
+
+    .nav-item-sign-in {
+      border: 2px solid  #f5f5f585;
+      font-weight: 600;
+      color: #fff;
+      padding: 10px 10px;
+      font-size: 1rem;
+      border-radius: 20px;
+      margin-top: 10px;
+      font-family: "Inter", sans-serif;
+      transition: background 0.3s ease;
+      &:hover {
+        background-color: sysColors.$secondary-color;
+      }
+    }
+    .nav-item-sign-up {
+      border: 2px solid #f5f5f585;
+      font-weight: 600;
+      color: #fff;
+      padding: 10px 10px;
+      border-radius: 20px;
+      margin-top: 10px;
+      font-weight: 600;
+      font-family: "Inter", sans-serif;
+      transition: background 0.3s ease;
+      &:hover {
+        background-color: sysColors.$secondary-color;
+      }
+    }
+  }
+}

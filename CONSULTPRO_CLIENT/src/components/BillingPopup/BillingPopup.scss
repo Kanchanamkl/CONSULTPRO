@@ -1,0 +1,80 @@
+@use '../../colors/systemColors' as sysColors;
+.billing-popup {
+  position: fixed;
+  top: 5px;
+  left: 0px;
+  width: 100%;
+  padding-left: 250px;
+  padding-right: 250px;
+  margin-bottom: 20px;
+  background-color: rgba(14, 14, 14, 0.616);
+
+  .appointment-summary {
+    margin: 5px;
+    height: fit-content;
+    background-color: sysColors.$primary-bg-color;
+    padding: 30px;
+    border-radius: 10px;
+    color: sysColors.$font-color-gray;
+
+    .header-container {
+      display: flex;
+      justify-content: space-between;
+
+      .close-popup {
+        background: red;
+        color: white;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+      }
+    }
+    .summary-details {
+      margin-bottom: 5px;
+      margin-top: 5px;
+      background-color: #ffff;
+      padding: 25px;
+      border-radius: 10px;
+      -webkit-border-radius: 10px;
+      -moz-border-radius: 10px;
+      -ms-border-radius: 10px;
+      -o-border-radius: 10px;
+    }
+
+    .appointment-summary strong {
+      color: aquamarine;
+    }
+
+    .billing-form strong {
+      color: rgb(255, 255, 255);
+    }
+
+    .charges {
+      margin-top: 10px;
+      padding: 25px;
+      border-radius: 10px;
+      background-color: #ffff;
+    }
+
+    .charges span {
+      display: flex;
+      justify-content: space-between;
+      margin: 10px 5px;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+    }
+
+  
+    .summary-details p,
+    ul {
+      margin: 10px 0;
+    }
+
+    .summary-details span {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+}
