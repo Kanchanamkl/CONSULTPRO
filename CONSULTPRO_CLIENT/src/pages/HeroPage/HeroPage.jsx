@@ -27,7 +27,7 @@ const Hero = () => {
             Get Start
           </a>
           <a href="/consultant-register" className="btn btn-join-consultant">
-            Join as Consultant
+            Join as Counselor
           </a>
         </div>
       </div>

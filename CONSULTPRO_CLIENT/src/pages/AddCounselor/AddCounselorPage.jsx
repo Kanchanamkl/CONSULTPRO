@@ -155,7 +155,7 @@ const AddCounselor = () => {
           </Link>
         </div>
       </div>
-    </div><Footer /></>
+    </div></>
   );
 };
 

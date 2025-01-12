@@ -60,54 +60,139 @@ const Applications = () => {
                 {application.isPsychiatrist && (
                   <div>
                     <strong>Medical Qualification:</strong>{" "}
-                    <a
-                      href={`path/to/${application.medicalQualification}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
+                    <button
+                      className="view-button"
+                      onClick={() => {
+                        const newWindow = window.open(
+                          "",
+                          "_blank",
+                          "width=800,height=600"
+                        );
+                        newWindow.document.write(`
+                <html>
+                  <head>
+                    <title>NIC Document</title>
+                  </head>
+                  <body>
+                    <embed src="${application.medicalQualification}" width="auto" height="90%" />
+                  </body>
+                </html>
+              `);
+                      }}
                     >
                       View
-                    </a>
+                    </button>
                   </div>
                 )}
                 <div>
                   <strong>Profile Image:</strong>{" "}
-                  <a
-                    href={`path/to/${application.profileImg}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    View
-                  </a>
+                  <button
+                      className="view-button"
+                      onClick={() => {
+                        const newWindow = window.open(
+                          "",
+                          "_blank",
+                          "width=800,height=600"
+                        );
+                        newWindow.document.write(`
+                <html>
+                  <head>
+                    <title>NIC Document</title>
+                  </head>
+                  <body>
+                    <embed src="${application.profileImg}" width="auto" height="90%" />
+                  </body>
+                </html>
+              `);
+                      }}
+                    >
+                      View
+                    </button>
                 </div>
                 <div>
-                  <strong>NIC:</strong>{" "}
-                  <a
-                    href={`path/to/${application.nic}`}
+                  {/* <strong>NIC:</strong>{" "} */}
+                  {/* <a
+                    href={`${application.nic}`}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    View
-                  </a>
+                    View */}
+                  <div>
+                    <strong>NIC:</strong>{" "}
+                    <button
+                      className="view-button"
+                      onClick={() => {
+                        const newWindow = window.open(
+                          "",
+                          "_blank",
+                          "width=800,height=600"
+                        );
+                        newWindow.document.write(`
+                <html>
+                  <head>
+                    <title>NIC Document</title>
+                  </head>
+                  <body>
+                    <embed src="${application.nic}" width="auto" height="90%" />
+                  </body>
+                </html>
+              `);
+                      }}
+                    >
+                      View
+                    </button>
+                  </div>
+                  {/* </a> */}
                 </div>
                 <div>
                   <strong>Degree Transcript:</strong>{" "}
-                  <a
-                    href={`path/to/${application.degreeTranscript}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    View
-                  </a>
+                  <button
+                      className="view-button"
+                      onClick={() => {
+                        const newWindow = window.open(
+                          "",
+                          "_blank",
+                          "width=800,height=600"
+                        );
+                        newWindow.document.write(`
+                <html>
+                  <head>
+                    <title>NIC Document</title>
+                  </head>
+                  <body>
+                    <embed src="${application.degreeTranscript}" width="auto" height="90%" />
+                  </body>
+                </html>
+              `);
+                      }}
+                    >
+                      View
+                    </button>
                 </div>
                 <div>
                   <strong>Signature:</strong>{" "}
-                  <a
-                    href={`path/to/${application.signature}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    View
-                  </a>
+                  <button
+                      className="view-button"
+                      onClick={() => {
+                        const newWindow = window.open(
+                          "",
+                          "_blank",
+                          "width=800,height=600"
+                        );
+                        newWindow.document.write(`
+                <html>
+                  <head>
+                    <title>NIC Document</title>
+                  </head>
+                  <body>
+                    <embed src="${application.signature}" width="auto" height="90%" />
+                  </body>
+                </html>
+              `);
+                      }}
+                    >
+                      View
+                    </button>
                 </div>
 
                 <div className="experience-container">
@@ -127,7 +212,7 @@ const Applications = () => {
           ))}
         </div>
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 };

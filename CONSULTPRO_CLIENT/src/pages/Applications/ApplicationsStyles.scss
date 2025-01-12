@@ -5,11 +5,10 @@
   height: 100%;
   background-color: sysColors.$primary-bg-color;
   padding-top: 85px;
-  padding-bottom: 85px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  padding: 85px;
   text-align: center;
+  justify-items: center;
+
 
   h1 {
     color: sysColors.$primary-text-color;
@@ -17,21 +16,20 @@
   }
 
   .applications-list {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    width: 80%;
-    justify-content: left;
+    display: grid;
+    gap: 40px;
+    width: 70%;
+
   }
 
   .application-card {
     background-color: sysColors.$card-bg-color;
     color: sysColors.$primary-text-color;
     border-radius: 8px;
-    padding: 20px;
+    padding: 40px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: left;
-    width: 80%;
+    // width: 80%;
 
     h2 {
       margin-bottom: 10px;
@@ -48,6 +46,20 @@
       div {
         width: 48%;
         font-size: 14px;
+      }
+      .view-button{
+        background-color: sysColors.$button-bg-color;
+        width: 70px;
+        color: #fff;
+        padding: 5px 5px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-left: 10px;
+
+        &:hover {
+          background-color: sysColors.$button-hover-bg-color;
+        }
       }
 
       .experience-container {

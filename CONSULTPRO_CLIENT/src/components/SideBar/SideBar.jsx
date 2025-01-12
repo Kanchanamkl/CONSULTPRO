@@ -120,12 +120,12 @@ const SideBar = () => {
                         <span> Approvals </span>
                       </Link>
                     </li>
-                    <li className="side-item">
+                    {/* <li className="side-item">
                       <Link to="/add-counselor">
                         <FaUserMd />
                         <span> Add Counselor </span>
                       </Link>
-                    </li>
+                    </li> */}
                   </>
                 )}
               </>
