@@ -12,11 +12,11 @@ const applicationsData = [
     contact: "john.doe@example.com",
     isPsychiatrist: true,
     medicalQualification: "medical_qualification.pdf",
-    profileImg: "profile_img.jpg",
-    nic: "file:///C:/Users/kanchana_m/Downloads/PUSL3120_2024-2025_Assessments.pdf",
-    degreeTranscript: "degree_transcript.pdf",
+    profileImg: "",
+    nic: "https://firebasestorage.googleapis.com/v0/b/restarantappfilerepo.appspot.com/o/profilePics%2Fadmin%2FOOP%20Lab%20Based%20Practicals%20Sample%20(1).pdf?alt=media&token=b7d20c6b-8f7f-4824-b622-14e6adb20250",
+    degreeTranscript: "",
     experience: "5 years of experience in mental health counseling.",
-    signature: "signature.png",
+    signature: "",
   },
   {
     id: 2,
@@ -33,9 +33,11 @@ const applicationsData = [
     profileImg:
       "https://firebasestorage.googleapis.com/v0/b/restarantappfilerepo.appspot.com/o/profilePics%2Fadmin%2FOOP%20Lab%20Based%20Practicals%20Sample%20(1).pdf?alt=media&token=b7d20c6b-8f7f-4824-b622-14e6adb20250",
     nic: "https://firebasestorage.googleapis.com/v0/b/restarantappfilerepo.appspot.com/o/profilePics%2Fcoach%2F20212055.jpg?alt=media&token=453dcd01-fd0d-4ddd-8dde-08987be01f51",
-    degreeTranscript: "",
+    degreeTranscript:
+      "https://firebasestorage.googleapis.com/v0/b/restarantappfilerepo.appspot.com/o/profilePics%2Fcoach%2F20212055.jpg?alt=media&token=453dcd01-fd0d-4ddd-8dde-08987be01f51",
     experience: "10 years of experience in therapy.",
-    signature: "signature.png",
+    signature:
+      "https://firebasestorage.googleapis.com/v0/b/restarantappfilerepo.appspot.com/o/profilePics%2Fcoach%2F20212055.jpg?alt=media&token=453dcd01-fd0d-4ddd-8dde-08987be01f51",
   },
   {
     id: 3,
@@ -55,6 +57,43 @@ const applicationsData = [
     experience: "10 years of experience in therapy.",
     signature: "signature.png",
   },
+  {
+    id: 4,
+    firstName: "Jane",
+    lastName: "Smith",
+    username: "janesmith",
+    age: 40,
+    address: "456 Elm St",
+    city: "Los Angeles",
+    district: "Hollywood",
+    specialization: "Therapist",
+    contact: "jane.smith@example.com",
+    isPsychiatrist: false,
+    profileImg: "profile_img.jpg",
+    nic: "nic.pdf",
+    degreeTranscript: "degree_transcript.pdf",
+    experience: "10 years of experience in therapy.",
+    signature: "signature.png",
+  },
+  {
+    id: 5,
+    firstName: "Jane",
+    lastName: "Smith",
+    username: "janesmith",
+    age: 40,
+    address: "456 Elm St",
+    city: "Los Angeles",
+    district: "Hollywood",
+    specialization: "Therapist",
+    contact: "jane.smith@example.com",
+    isPsychiatrist: false,
+    profileImg: "profile_img.jpg",
+    nic: "nic.pdf",
+    degreeTranscript: "degree_transcript.pdf",
+    experience: "10 years of experience in therapy.",
+    signature: "signature.png",
+  },
+
 ];
 
 export default applicationsData;

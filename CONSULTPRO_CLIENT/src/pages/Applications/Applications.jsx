@@ -1,12 +1,13 @@
 import React, { useState } from "react";
-import "./ApplicationsStyles.scss";
+import { Table, Button , Popconfirm } from "antd";
+import { EyeOutlined ,} from "@ant-design/icons";
 import applicationsData from "../../assets/tempdata/applicationsData";
+import "./ApplicationsStyles.scss";
 
 const Applications = () => {
   const [applications, setApplications] = useState(applicationsData);
 
   const handleApprove = (id) => {
-    // Approve request logic
     alert(`Request approved for ID: ${id}`);
     setApplications(
       applications.filter((application) => application.id !== id)
@@ -14,206 +15,192 @@ const Applications = () => {
   };
 
   const handleReject = (id) => {
-    // Reject request logic
     alert(`Request rejected for ID: ${id}`);
     setApplications(
       applications.filter((application) => application.id !== id)
     );
   };
 
-  return (
-    <>
-      <div className="applications-container">
-        <h1>Counselor Applications</h1>
-        <div className="applications-list">
-          {applications.map((application) => (
-            <div key={application.id} className="application-card">
-              <h2>
-                {application.firstName} {application.lastName}
-              </h2>
-              <div className="application-details">
-                <div>
-                  <strong>Username:</strong> {application.username}
-                </div>
-                <div>
-                  <strong>Age:</strong> {application.age}
-                </div>
-                <div>
-                  <strong>Address:</strong> {application.address}
-                </div>
-                <div>
-                  <strong>City:</strong> {application.city}
-                </div>
-                <div>
-                  <strong>District:</strong> {application.district}
-                </div>
-                <div>
-                  <strong>Specialization:</strong> {application.specialization}
-                </div>
-                <div>
-                  <strong>Contact:</strong> {application.contact}
-                </div>
-                <div>
-                  <strong>Is Psychiatrist:</strong>{" "}
-                  {application.isPsychiatrist ? "Yes" : "No"}
-                </div>
-                {application.isPsychiatrist && (
-                  <div>
-                    <strong>Medical Qualification:</strong>{" "}
-                    <button
-                      className="view-button"
-                      onClick={() => {
-                        const newWindow = window.open(
-                          "",
-                          "_blank",
-                          "width=800,height=600"
-                        );
-                        newWindow.document.write(`
-                <html>
-                  <head>
-                    <title>NIC Document</title>
-                  </head>
-                  <body>
-                    <embed src="${application.medicalQualification}" width="auto" height="90%" />
-                  </body>
-                </html>
-              `);
-                      }}
-                    >
-                      View
-                    </button>
-                  </div>
-                )}
-                <div>
-                  <strong>Profile Image:</strong>{" "}
-                  <button
-                      className="view-button"
-                      onClick={() => {
-                        const newWindow = window.open(
-                          "",
-                          "_blank",
-                          "width=800,height=600"
-                        );
-                        newWindow.document.write(`
-                <html>
-                  <head>
-                    <title>NIC Document</title>
-                  </head>
-                  <body>
-                    <embed src="${application.profileImg}" width="auto" height="90%" />
-                  </body>
-                </html>
-              `);
-                      }}
-                    >
-                      View
-                    </button>
-                </div>
-                <div>
-                  {/* <strong>NIC:</strong>{" "} */}
-                  {/* <a
-                    href={`${application.nic}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    View */}
-                  <div>
-                    <strong>NIC:</strong>{" "}
-                    <button
-                      className="view-button"
-                      onClick={() => {
-                        const newWindow = window.open(
-                          "",
-                          "_blank",
-                          "width=800,height=600"
-                        );
-                        newWindow.document.write(`
-                <html>
-                  <head>
-                    <title>NIC Document</title>
-                  </head>
-                  <body>
-                    <embed src="${application.nic}" width="auto" height="90%" />
-                  </body>
-                </html>
-              `);
-                      }}
-                    >
-                      View
-                    </button>
-                  </div>
-                  {/* </a> */}
-                </div>
-                <div>
-                  <strong>Degree Transcript:</strong>{" "}
-                  <button
-                      className="view-button"
-                      onClick={() => {
-                        const newWindow = window.open(
-                          "",
-                          "_blank",
-                          "width=800,height=600"
-                        );
-                        newWindow.document.write(`
-                <html>
-                  <head>
-                    <title>NIC Document</title>
-                  </head>
-                  <body>
-                    <embed src="${application.degreeTranscript}" width="auto" height="90%" />
-                  </body>
-                </html>
-              `);
-                      }}
-                    >
-                      View
-                    </button>
-                </div>
-                <div>
-                  <strong>Signature:</strong>{" "}
-                  <button
-                      className="view-button"
-                      onClick={() => {
-                        const newWindow = window.open(
-                          "",
-                          "_blank",
-                          "width=800,height=600"
-                        );
-                        newWindow.document.write(`
-                <html>
-                  <head>
-                    <title>NIC Document</title>
-                  </head>
-                  <body>
-                    <embed src="${application.signature}" width="auto" height="90%" />
-                  </body>
-                </html>
-              `);
-                      }}
-                    >
-                      View
-                    </button>
-                </div>
 
-                <div className="experience-container">
-                  <strong>Experience:</strong>
-                  <textarea value={application.experience} readOnly />
-                </div>
-              </div>
-              <div className="actions">
-                <button onClick={() => handleApprove(application.id)}>
-                  Approve
-                </button>
-                <button onClick={() => handleReject(application.id)}>
-                  Reject
-                </button>
-              </div>
-            </div>
-          ))}
+
+  const columns = [
+    {
+      title: "First Name",
+      dataIndex: "firstName",
+      key: "firstName",
+    },
+    {
+      title: "Last Name",
+      dataIndex: "lastName",
+      key: "lastName",
+    },
+    {
+      title: "Username",
+      dataIndex: "username",
+      key: "username",
+    },
+    {
+      title: "Age",
+      dataIndex: "age",
+      key: "age",
+    },
+    {
+      title: "Address",
+      dataIndex: "address",
+      key: "address",
+    },
+    {
+      title: "City",
+      dataIndex: "city",
+      key: "city",
+    },
+    {
+      title: "District",
+      dataIndex: "district",
+      key: "district",
+    },
+    {
+      title: "Specialization",
+      dataIndex: "specialization",
+      key: "specialization",
+    },
+    {
+      title: "Contact",
+      dataIndex: "contact",
+      key: "contact",
+    },
+    {
+      title: "Profile Image",
+      dataIndex: "profileImg",
+      key: "profileImg",
+      render: (text) => (
+        <Button
+          icon={
+            <EyeOutlined
+              style={{
+                fontSize: "20px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                color: text ? "inherit" : "gray",
+                cursor: text ? "pointer" : "not-allowed",
+              }}
+            />
+          }
+          onClick={() => text && window.open(text, "_blank")}
+          disabled={!text}
+        />
+      ),
+    },
+    {
+      title: "NIC",
+      dataIndex: "nic",
+      key: "nic",
+      render: (text) => (
+        <Button
+          icon={
+            <EyeOutlined
+              style={{
+                fontSize: "20px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                color: text ? "inherit" : "gray",
+                cursor: text ? "pointer" : "not-allowed",
+              }}
+            />
+          }
+          onClick={() => text && window.open(text, "_blank")}
+          disabled={!text}
+        />
+      ),
+    },
+    {
+      title: "Degree Transcript",
+      dataIndex: "degreeTranscript",
+      key: "degreeTranscript",
+      render: (text) => (
+        <Button
+          icon={
+            <EyeOutlined
+              style={{
+                fontSize: "20px",
+                color: text ? "inherit" : "gray",
+                cursor: text ? "pointer" : "not-allowed",
+              }}
+            />
+          }
+          onClick={() => text && window.open(text, "_blank")}
+          disabled={!text}
+        />
+      ),
+    },
+    {
+      title: "Signature",
+      dataIndex: "signature",
+      key: "signature",
+      render: (text) => (
+        <Button
+          icon={
+            <EyeOutlined
+              style={{
+                fontSize: "20px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                color: text ? "inherit" : "gray",
+                cursor: text ? "pointer" : "not-allowed",
+              }}
+            />
+          }
+          onClick={() => text && window.open(text, "_blank")}
+          disabled={!text}
+        />
+      ),
+    },
+    {
+      title: "Actions",
+      key: "actions",
+      render: (text, record) => (
+        <div style={{ display: "flex", gap: "10px" }}>
+          <Popconfirm
+            title={
+              <>
+                Are you sure to approve this application? <br />
+                And Send Account Setup Email
+              </>
+            }
+            onConfirm={() => handleApprove(record.id)}
+            okText="Yes"
+            cancelText="No"
+          >
+            <Button>Approve</Button>
+          </Popconfirm>
+          <Popconfirm
+            title="Are you sure to reject this application?"
+            onConfirm={() => handleReject(record.id)}
+            okText="Yes"
+            cancelText="No"
+          >
+            <Button>Reject</Button>
+          </Popconfirm>
         </div>
-      </div>
-      {/* <Footer /> */}
-    </>
+      ),
+    },
+  ];
+
+  return (
+    <div className="applications-container">
+      <h1>Counselor Applications</h1>
+      <Table
+        className="custom-table"
+        dataSource={applications}
+        columns={columns}
+        rowKey="id"
+        pagination={false}
+        scroll={{ x: 2000 }}
+      />
+    </div>
   );
 };
 

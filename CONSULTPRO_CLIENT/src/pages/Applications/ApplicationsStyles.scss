@@ -1,14 +1,14 @@
-@use '../../colors/systemColors' as sysColors;
+@use "../../colors/systemColors" as sysColors;
 
 .applications-container {
   width: 100%;
   height: 100%;
   background-color: sysColors.$primary-bg-color;
-  padding-top: 85px;
-  padding: 85px;
+  padding-top: 150px;
+  padding: 100px;
   text-align: center;
   justify-items: center;
-
+  min-height: 100vh;
 
   h1 {
     color: sysColors.$primary-text-color;
@@ -19,7 +19,6 @@
     display: grid;
     gap: 40px;
     width: 70%;
-
   }
 
   .application-card {
@@ -34,20 +33,20 @@
     h2 {
       margin-bottom: 10px;
       font-size: 18px;
-      padding:10px;
+      padding: 10px;
     }
 
     .application-details {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
-      padding:12px;
+      padding: 12px;
 
       div {
         width: 48%;
         font-size: 14px;
       }
-      .view-button{
+      .view-button {
         background-color: sysColors.$button-bg-color;
         width: 70px;
         color: #fff;
@@ -111,6 +110,44 @@
           }
         }
       }
+    }
+  }
+
+  .custom-table {
+    position: relative;
+    padding-top:100px;
+    .ant-table-thead > tr > th {
+      background-color: ButtonFace; /* System color for button face */
+      color: ButtonText; /* System color for button text */
+      font-weight: bold;
+      text-align: center;
+    }
+
+    .ant-table-thead > tr > th {
+      background-color: #adb9c1;
+
+    }
+
+    .ant-table-tbody > tr > td {
+      text-align: center;
+    }
+
+    .ant-table-tbody > tr:hover > td {
+      background-color: #adb9c1;
+    }
+
+    .ant-table-pagination {
+      margin: 16px 0;
+    }
+
+    .ant-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: rgb(234, 240, 240);
+      width: fit-content;
+      padding-left: 0px;
+      margin: 0;
     }
   }
 }

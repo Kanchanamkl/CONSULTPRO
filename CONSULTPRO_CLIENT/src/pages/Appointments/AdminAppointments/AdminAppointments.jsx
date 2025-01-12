@@ -73,7 +73,7 @@ const AdminAppointments = () => {
         </div>
         <Table headers={headers} body={body} />
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 };
