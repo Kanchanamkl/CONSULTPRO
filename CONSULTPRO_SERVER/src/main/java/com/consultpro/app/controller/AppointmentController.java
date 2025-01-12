@@ -12,9 +12,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
-
 @RestController
 @RequestMapping("/api/appointments")
 @RequiredArgsConstructor
@@ -42,16 +42,16 @@ public class AppointmentController {
         return  appointmentService.getAllAppointments();
     }
 
-    @GetMapping("/get_appointments_by_client/{userId}")
-    public List<Appointment> getAppointmentsByClientId(@PathVariable Long userId) {
-        Optional<Client> member = clientRepository.findByUser(userService.getUserById(userId));
-        List<Appointment> appointments = appointmentService.getAppointmentsByClientId(member.get().getId());
+    @GetMapping("/get_appointments_by_clientId/")
+    public List<Appointment> getAppointmentsByClientId(@RequestParam Long userId) {
+        Optional<Client> client = clientRepository.findByUser(userService.getUserById(userId));
+        List<Appointment> appointments = appointmentService.getAppointmentsByClientId(client.get().getId());
         return appointments;
 
     }
 
-    @GetMapping("/get_appointments_by_client/{userId}")
-    public List<Appointment> getAppointmentsByCounselorId(@PathVariable Long userId) {
+    @GetMapping("/get_appointments_by_counselorId")
+    public List<Appointment> getAppointmentsByCounselorId(@RequestParam Long userId) {
         Optional<Counselor> counselor = counselorRepository.findByUser(userService.getUserById(userId));
         List<Appointment> appointments = appointmentService.getAppointmentsByCounselorId(counselor.get().getId());
         return appointments;
@@ -67,11 +67,19 @@ public class AppointmentController {
         return ResponseEntity.ok(updateAppointment);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteAppointment(@PathVariable Long id) {
+    @DeleteMapping("")
+    public ResponseEntity<Void> deleteAppointment(@RequestParam Long id) {
         appointmentService.deleteAppointment(id);
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping("/get_appointment_slots_by_date_and_counselorId")
+    public List<String> getAppointmentSlotsByDateAndCounselorId(@RequestParam LocalDate appointmentDate, @RequestParam Long counselorId) {
+        List<String> appointmentsSlotsByDateAndCounselorID = appointmentService.getAppointmentsSlotsByDateAndCounselorID(appointmentDate,counselorId);
+        return appointmentsSlotsByDateAndCounselorID;
+
+    }
+
 
 
 }

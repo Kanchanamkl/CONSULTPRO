@@ -8,6 +8,7 @@ import com.consultpro.app.dto.AuthenticationReqDTO;
 import com.consultpro.app.dto.AuthenticationResDTO;
 import com.consultpro.app.dto.UserDTO;
 import com.consultpro.app.enums.ROLE;
+import com.consultpro.app.enums.USER_STATUS;
 import com.consultpro.app.exception.UserAlreadyExistsException;
 import com.consultpro.app.exception.UserNotFoundException;
 import com.consultpro.app.repository.AppointmentRepository;
@@ -50,7 +51,7 @@ public class UserService {
         User updatedUser = userRepository.save(user);
 
         if (user.getRole().equals(ROLE.COUNSELOR)) {
-            Counselor counselor = counselorRepository.findByUser(user).orElseThrow(() -> new UserNotFoundException("Coach not found"));
+            Counselor counselor = counselorRepository.findByUser(user).orElseThrow(() -> new UserNotFoundException("Counselor not found"));
             counselor.setFirstName(userDTO.getFirstName());
             counselor.setLastName(userDTO.getLastName());
             counselor.setPhoneNumber(userDTO.getPhoneNumber());
@@ -60,7 +61,7 @@ public class UserService {
             counselor.setProfilePic(userDTO.getProfilePic());
             counselorRepository.save(counselor);
         } else if (user.getRole().equals(ROLE.CLIENT)) {
-            Client client = clientRepository.findByUser(user).orElseThrow(() -> new UserNotFoundException("Member not found"));
+            Client client = clientRepository.findByUser(user).orElseThrow(() -> new UserNotFoundException("Client not found"));
             client.setFirstName(userDTO.getFirstName());
             client.setLastName(userDTO.getLastName());
             client.setPhoneNumber(userDTO.getPhoneNumber());
@@ -86,6 +87,7 @@ public class UserService {
                     .username(userDTO.getUsername())
                     .password(passwordEncoder.encode(userDTO.getPassword()))
                     .role(userDTO.getRole())
+                    .status(userDTO.getRole().equals(ROLE.COUNSELOR) ? USER_STATUS.INACTIVE : USER_STATUS.ACTIVE)
                     .build();
 
             userRepository.save(user);
@@ -101,6 +103,13 @@ public class UserService {
                         .dob(userDTO.getDob())
                         .profilePic(userDTO.getProfilePic())
                         .specialize(userDTO.getSpecialize())
+                        .city(userDTO.getCity())
+                        .nic(userDTO.getNic())
+                        .isPsychologist(userDTO.isPsychologist())
+                        .profileImage(userDTO.getProfileImage())
+                        .degreeTranscript(userDTO.getDegreeTranscript())
+                        .medicalQualification(userDTO.getMedicalQualification())
+                        .experienceDescription(userDTO.getExperienceDescription())
                         .build();
                 counselorRepository.save(counselor);
             } else if (userDTO.getRole().equals(ROLE.CLIENT)) {

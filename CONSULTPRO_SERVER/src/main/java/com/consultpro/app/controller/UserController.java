@@ -23,7 +23,7 @@ import java.util.List;
 @RequestMapping("/api/users")
 @RequiredArgsConstructor
 public class UserController {
-
+    @Autowired
     private UserService userService;
 
 

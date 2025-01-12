@@ -4,6 +4,7 @@ import com.consultpro.app.dto.AppointmentDTO;
 import com.consultpro.app.entity.Appointment;
 import com.consultpro.app.entity.Client;
 import com.consultpro.app.entity.Counselor;
+import com.consultpro.app.exception.UserNotFoundException;
 import com.consultpro.app.repository.AppointmentRepository;
 import com.consultpro.app.exception.AppointmentNotFoundException;
 import com.consultpro.app.repository.CounselorRepository;
@@ -12,6 +13,8 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -52,8 +55,8 @@ public class AppointmentService {
                 .orElseThrow(() -> new AppointmentNotFoundException("appointment not found with id: " + id));
     }
 
-    public List<Appointment> getAppointmentsByClientId(Long memberId) {
-        return appointmentRepository.findAllByClientId(memberId);
+    public List<Appointment> getAppointmentsByClientId(Long clientId) {
+        return appointmentRepository.findAllByClientId(clientId);
     }
 
     public List<Appointment> getAppointmentsByCounselorId(Long counselorId) {
@@ -91,6 +94,18 @@ public class AppointmentService {
             throw new AppointmentNotFoundException("appointment not found with id: " + id);
         }
         appointmentRepository.deleteById(id);
+    }
+
+    public List<String> getAppointmentsSlotsByDateAndCounselorID(LocalDate date , Long counselorId) {
+        Counselor counselor = counselorRepository.findById(counselorId)
+                .orElseThrow(() -> new UserNotFoundException("Counselor not found with id: " +counselorId));
+        List<Appointment> appointments = appointmentRepository.findAppointmentsByDateAndCounselor(date, counselor);
+        List<String> slots = new ArrayList<>();
+        for (Appointment appointment : appointments) {
+            String slot = appointment.getStartTime().toString() + " - " + appointment.getEndTime().toString();
+            slots.add(slot);
+        }
+        return slots;
     }
 
 

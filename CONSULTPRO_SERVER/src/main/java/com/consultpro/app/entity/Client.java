@@ -1,5 +1,6 @@
 package com.consultpro.app.entity;
 
+import com.consultpro.app.enums.USER_STATUS;
 import jakarta.persistence.*;
 import lombok.*;
  import java.time.LocalDate;
@@ -16,7 +17,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "CLIENT")
-public class Client extends User {
+public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

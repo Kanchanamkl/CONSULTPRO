@@ -1,6 +1,7 @@
 package com.consultpro.app.entity;
 
 import com.consultpro.app.enums.ROLE;
+import com.consultpro.app.enums.USER_STATUS;
 import jakarta.persistence.*;
 import jakarta.persistence.Table;
 import lombok.*;
@@ -30,6 +31,8 @@ public class User implements UserDetails {
     private String password;
     @Enumerated(EnumType.STRING)
     private ROLE role;
+    @Enumerated(EnumType.STRING)
+    private USER_STATUS status;
 
 
     @Override
