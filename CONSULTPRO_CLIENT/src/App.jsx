@@ -23,6 +23,7 @@ import AdminDashBoard from "./pages/DashBoard/AdminDashBoard/AdminDashBoard";
 import CounselorDashBoard from "./pages/DashBoard/CounselorDashBoard/CounselorDashBoard";
 import ClientDashboard from "./pages/DashBoard/ClientDashBoard/ClientDashboard";
 import Footer from "./components/Footer/Footer";
+import AccountSetUp from "./pages/AccountSetup/AccountSetup";
 
 function App() {
   const { isLoggedIn, role } = useContext(StoreContext);
@@ -36,8 +37,9 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/consultant-register" element={<ConsultantRegister />} />
+          <Route path="/accSetup" element={<AccountSetUp />} />
         </Routes>
-        <Footer/>
+        <Footer />
       </>
     );
   } else {
@@ -49,7 +51,7 @@ function App() {
             <Routes>
               <Route path="/" element={<AdminDashBoard />} />
               <Route path="/dashboard" element={<AdminDashBoard />} />
-              <Route path="/appointments" element={<AdminAppointments/>} />
+              <Route path="/appointments" element={<AdminAppointments />} />
               <Route path="/consultants" element={<Consultants />} />
               <Route path="/applications" element={<Applications />} />
               <Route path="/book" element={<BookingPage />} />
@@ -79,7 +81,7 @@ function App() {
             <Routes>
               <Route path="/" element={<ClientDashboard />} />
               <Route path="/dashboard" element={<ClientDashboard />} />
-              <Route path="/appointments" element={<ClientAppointments/>} />
+              <Route path="/appointments" element={<ClientAppointments />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/book" element={<BookingPage />} />
               <Route path="/meeting-page" element={<MeetingPage />} />

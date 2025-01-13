@@ -6,18 +6,8 @@ import "./HeroPageStyles.scss";
 const Hero = () => {
   return (
     <div className="hero">
-      {/* <nav className="navbar">
-        <div className="navbar-brand">
-          <a href="/" className="logo">ConsultPro</a>
-        </div>
-        <ul className="navbar-links">
-          <li className='nav-item-sign-in'><Link to="/login">Sign In</Link></li>
-          <li className='nav-item-contact-us'><a href="/contact_us">Contact Us</a></li>
-        </ul>
-      </nav> */}
-
       <div className="hero-content">
-        <h1 className="hero-title">Expert Consultation, Anytime, Anywhere</h1>
+        <h1 className="hero-title">Expert Counselling , Anytime, Anywhere</h1>
         <p className="hero-subtitle">
           Connect with professionals in various fields and get the advice you
           need.

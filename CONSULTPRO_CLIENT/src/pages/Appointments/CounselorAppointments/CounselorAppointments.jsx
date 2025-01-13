@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./CounselorAppointmentsStyles.scss";
 import SectionContainer from "../../../components/SectionContainer/SectionContainer";
-import TableComponent from "../../../components/Table/Table";
+import Table from "../../../components/Table/Table";
 import CounselorAppointmentCard from "../../../components/AppointmentCard/CounselorAppoinmentCard/CounselorAppoinmentCard";
 
 const CounselorAppointments = () => {
@@ -143,7 +143,7 @@ const CounselorAppointments = () => {
             Completed
           </button>
         </div>
-        <TableComponent headers={headers} body={body} />
+        <Table headers={headers} body={body} />
       </SectionContainer>
     </div>
   );
