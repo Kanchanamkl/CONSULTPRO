@@ -164,8 +164,11 @@ public class UserService {
                 )
         );
         var user = userRepository.findByUsername(request.getEmail()).orElseThrow();
+        var client = clientRepository.findByUser(user).orElseThrow();
         return AuthenticationResDTO.builder()
                 .Id(user.getUserId().toString())
+                .firstName(client.getFirstName())
+                .lastName(client.getLastName())
                 .username(user.getUsername())
                 .role(user.getRole().toString())
                 .message("")
