@@ -7,6 +7,7 @@ import com.consultpro.app.dto.UserDTO;
 import com.consultpro.app.entity.Counselor;
 import com.consultpro.app.entity.User;
 import com.consultpro.app.enums.ROLE;
+import com.consultpro.app.service.EmailService;
 import com.consultpro.app.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,7 @@ import java.util.List;
 public class UserController {
     @Autowired
     private UserService userService;
+    private EmailService emailService;
 
 
     @PostMapping("/authenticate")
@@ -69,5 +71,13 @@ public class UserController {
     @GetMapping("/get-all-counselors")
     public List<Counselor> getAllCounselors() {
         return userService.getAllCounselors();
+    }
+
+    @PostMapping("/approve-counselor")
+    public void approveCounselor(@RequestParam String userId, @RequestParam String userEmail) {
+        // Logic to approve the counselor (e.g., update database status)
+
+        // Send account setup email
+        emailService.sendAccountSetupEmail(userEmail, userId);
     }
 }

@@ -14,3 +14,14 @@ spring:
       ddl-auto: update
       format_sql: true
 
+  mail:
+    host: smtp.example.com
+    port: 587
+    username: kanchana20212055@iit.ac.lk
+    password: 20829LIVEiit
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
