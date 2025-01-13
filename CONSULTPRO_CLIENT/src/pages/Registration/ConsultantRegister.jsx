@@ -46,7 +46,7 @@ const ConsultantRegister = () => {
   const handleFileUpload = async (file) => {
     const storageRef = ref(
       imageDb,
-      `ConsultPro_File_Storage/Counselor_Files/${file.name}`
+      `ConsultPro_File_Storage/Counselor_Files/${formData.username}/${file.name}`
     );
     await uploadBytes(storageRef, file);
     return await getDownloadURL(storageRef);
