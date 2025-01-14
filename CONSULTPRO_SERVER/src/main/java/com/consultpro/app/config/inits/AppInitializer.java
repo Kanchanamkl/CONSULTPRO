@@ -1,6 +1,7 @@
 package com.consultpro.app.config.inits;
 import com.consultpro.app.dto.UserDTO;
 import com.consultpro.app.enums.ROLE;
+import com.consultpro.app.enums.USER_STATUS;
 import com.consultpro.app.exception.UserAlreadyExistsException;
 import com.consultpro.app.service.UserService;
 import org.springframework.boot.CommandLineRunner;
@@ -30,7 +31,10 @@ public class AppInitializer implements CommandLineRunner {
     private void initializeAdminUsers() {
         UserDTO adminUser =UserDTO.builder()
                         .username("admin@gmail.com")
+                        .firstName("Admin")
+                        .lastName("User")
                         .password("admin123")
+                        .status(USER_STATUS.ACTIVE)
                         .role(ROLE.ADMIN)
                  .build();
 

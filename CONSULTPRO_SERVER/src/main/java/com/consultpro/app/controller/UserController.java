@@ -1,14 +1,13 @@
 package com.consultpro.app.controller;
 
 
-import com.consultpro.app.dto.AuthenticationReqDTO;
-import com.consultpro.app.dto.AuthenticationResDTO;
-import com.consultpro.app.dto.UserDTO;
+import com.consultpro.app.dto.*;
 import com.consultpro.app.entity.Counselor;
 import com.consultpro.app.entity.User;
 import com.consultpro.app.enums.ROLE;
 import com.consultpro.app.service.EmailService;
 import com.consultpro.app.service.UserService;
+import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +25,7 @@ import java.util.List;
 public class UserController {
     @Autowired
     private UserService userService;
+    @Autowired
     private EmailService emailService;
 
 
@@ -72,12 +72,22 @@ public class UserController {
     public List<Counselor> getAllCounselors() {
         return userService.getAllCounselors();
     }
+    @GetMapping("/get-inactive-counselors")
+    public List<InactiveCounselorDTO> getAllInactiveCounselors() {
+        return userService.getAllInactiveCounselors();
+    }
 
     @PostMapping("/approve-counselor")
-    public void approveCounselor(@RequestParam String userId, @RequestParam String userEmail) {
-        // Logic to approve the counselor (e.g., update database status)
-
-        // Send account setup email
+    public ResponseEntity<String> approveCounselor(@RequestParam String userId, @RequestParam String userEmail) throws MessagingException {
+        System.out.println("Incoming request: userId=" + userId + ", userEmail=" + userEmail);
         emailService.sendAccountSetupEmail(userEmail, userId);
+        return ResponseEntity.ok("Counselor approved and email sent successfully.");
+    }
+
+
+
+    @PostMapping("/account-setup")
+    public ResponseEntity<AccountSetupResDTO>accountSetup(@RequestBody AccountSetupReqDTO request) {
+        return ResponseEntity.ok(userService.accountSetup(request));
     }
 }

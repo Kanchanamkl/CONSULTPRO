@@ -1,12 +1,10 @@
 package com.consultpro.app.service;
 
 
+import com.consultpro.app.dto.*;
 import com.consultpro.app.entity.Client;
 import com.consultpro.app.entity.Counselor;
 import com.consultpro.app.entity.User;
-import com.consultpro.app.dto.AuthenticationReqDTO;
-import com.consultpro.app.dto.AuthenticationResDTO;
-import com.consultpro.app.dto.UserDTO;
 import com.consultpro.app.enums.ROLE;
 import com.consultpro.app.enums.USER_STATUS;
 import com.consultpro.app.exception.UserAlreadyExistsException;
@@ -85,6 +83,8 @@ public class UserService {
         } else {
             User user = User.builder()
                     .username(userDTO.getUsername())
+                    .firstName(userDTO.getFirstName())
+                    .lastName(userDTO.getLastName())
                     .password(passwordEncoder.encode(userDTO.getPassword()))
                     .role(userDTO.getRole())
                     .status(userDTO.getRole().equals(ROLE.COUNSELOR) ? USER_STATUS.INACTIVE : USER_STATUS.ACTIVE)
@@ -156,7 +156,6 @@ public class UserService {
     }
 
     public AuthenticationResDTO authenticateUser(AuthenticationReqDTO request) {
-
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         request.getEmail(),
@@ -164,14 +163,14 @@ public class UserService {
                 )
         );
         var user = userRepository.findByUsername(request.getEmail()).orElseThrow();
-        var client = clientRepository.findByUser(user).orElseThrow();
         return AuthenticationResDTO.builder()
                 .Id(user.getUserId().toString())
-                .firstName(client.getFirstName())
-                .lastName(client.getLastName())
+                .firstName(user.getFirstName())
+                .lastName(user.getLastName())
                 .username(user.getUsername())
                 .role(user.getRole().toString())
                 .message("")
+                .userStatus(user.getStatus().toString())
                 .responseCode(HttpStatus.OK)
                 .build();
     }
@@ -200,6 +199,8 @@ public class UserService {
         } else {
             User user = User.builder()
                     .username(userDTO.getUsername())
+                    .firstName(userDTO.getFirstName())
+                    .lastName(userDTO.getLastName())
                     .password(passwordEncoder.encode(userDTO.getPassword()))
                     .role(ROLE.ADMIN) // Set the role to ADMIN
                     .build();
@@ -216,5 +217,53 @@ public class UserService {
 
     public List<Counselor> getAllCounselors() {
         return counselorRepository.findAll();
+    }
+
+    public List<InactiveCounselorDTO> getAllInactiveCounselors() {
+        return userRepository.findUsersByStatusAndRole(USER_STATUS.INACTIVE, ROLE.COUNSELOR)
+                .stream()
+                .map(user -> {
+                    Counselor counselor = counselorRepository.findByUser(user).orElseThrow();
+                    return InactiveCounselorDTO.builder()
+                            .id(user.getUserId())
+                            .firstName(counselor.getFirstName())
+                            .lastName(counselor.getLastName())
+                            .username(user.getUsername())
+                            .dob(counselor.getDob()) // Implement calculateAge method
+                            .address(counselor.getAddress())
+                            .city(counselor.getCity())
+                            .district(counselor.getCity())
+                            .specialization(counselor.getSpecialize())
+                            .contact(user.getUsername()) // Assuming username is the email
+                            .isPsychiatrist(counselor.isPsychologist())
+                            .medicalQualification(counselor.getMedicalQualification())
+                            .profileImg(counselor.getProfileImage())
+                            .nic(counselor.getNic())
+                            .degreeTranscript(counselor.getDegreeTranscript())
+                            .experience(counselor.getExperienceDescription())
+                            .signature("") // Assuming signature is not available
+                            .build();
+                })
+                .collect(Collectors.toList());
+    }
+
+    @Transactional
+    public AccountSetupResDTO accountSetup(AccountSetupReqDTO accountSetupReqDTO) {
+        User user = userRepository.findByUsername(accountSetupReqDTO.getEmail())
+                .orElseThrow(() -> new UserNotFoundException("User not found"));
+
+        user.setPassword(passwordEncoder.encode(accountSetupReqDTO.getPassword()));
+        user.setStatus(USER_STATUS.valueOf(String.valueOf(USER_STATUS.ACTIVE)));
+        userRepository.save(user);
+
+        AccountSetupResDTO accountSetupResDTO = AccountSetupResDTO.builder()
+                .Id(user.getUserId().toString())
+                .username(user.getUsername())
+                .role(user.getRole().toString())
+                .message("Account setup successfully")
+                .userStatus(user.getStatus().toString())
+                .email(user.getUsername())
+                .build();
+        return accountSetupResDTO;
     }
 }

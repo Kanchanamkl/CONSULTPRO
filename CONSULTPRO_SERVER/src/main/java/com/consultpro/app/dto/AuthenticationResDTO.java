@@ -22,5 +22,6 @@ public class AuthenticationResDTO {
     String lastName;
     String profilePic;
     String message;
+    String userStatus;
     HttpStatus responseCode;
 }
