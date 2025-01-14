@@ -1,14 +1,35 @@
-import React, { useState } from "react";
+import React, { useState,useEffect  } from "react";
 import { Table, Button , Popconfirm } from "antd";
 import { EyeOutlined ,} from "@ant-design/icons";
 import applicationsData from "../../assets/tempdata/applicationsData";
+import axios from "axios";
 import "./ApplicationsStyles.scss";
 
 const Applications = () => {
-  const [applications, setApplications] = useState(applicationsData);
+  const [applications, setApplications] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("http://localhost:8080/api/users/get-inactive-counselors");
+        setApplications(response.data);
+      } catch (error) {
+        console.error("Error fetching data: ", error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const handleApprove = (id) => {
     alert(`Request approved for ID: ${id}`);
+    axios.post(`http://localhost:8080/api/users/approve-counselor?userId=${id}&userEmail=${applications.find((application) => application.id === id).username}`)
+    .then((response) => {
+      console.log("Approval successful: ", response);
+    })
+    .catch((error) => {
+      console.error("Error approving request: ", error);
+    });
     setApplications(
       applications.filter((application) => application.id !== id)
     );
@@ -40,9 +61,9 @@ const Applications = () => {
       key: "username",
     },
     {
-      title: "Age",
-      dataIndex: "age",
-      key: "age",
+      title: "DOB",
+      dataIndex: "dob",
+      key: "dob",
     },
     {
       title: "Address",

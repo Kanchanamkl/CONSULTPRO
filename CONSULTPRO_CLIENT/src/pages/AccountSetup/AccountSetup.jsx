@@ -1,12 +1,32 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
+import { isExpired, decodeToken } from "react-jwt";
 import "./AccountSetUpStyles.scss";
 
-const AccountSetUp = ({ token }) => {
+const AccountSetUp = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const email = token?.email || "d"; // Safely access the email property
+  const [email, setEmail] = useState("");
   const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    const queryParams = new URLSearchParams(location.search);
+    const token = queryParams.get("token");
+
+    if (token) {
+      const expired = isExpired(token);
+      if (expired) {
+        alert("Sign-up link has expired!");
+      } else {
+        const decodedToken = decodeToken(token);
+        setEmail(decodedToken.email || "d");
+        console.log("Decoded Token Data:", decodedToken);
+      }
+    } else {
+      alert("Invalid sign-up link");
+    }
+  }, [location.search]);
 
   const handleRegister = async () => {
     if (password !== confirmPassword) {
@@ -16,7 +36,7 @@ const AccountSetUp = ({ token }) => {
 
     try {
       const response = await fetch(
-        "http://localhost:8080/api/users/approve-counselor",
+        "http://localhost:8080/api/users/account-setup",
         {
           method: "POST",
           headers: {
@@ -25,14 +45,13 @@ const AccountSetUp = ({ token }) => {
           body: JSON.stringify({
             email,
             password,
-            status: "active",
           }),
         }
       );
 
       if (response.ok) {
         alert("Registration successful");
-        navigate("/login"); // Navigate to the login page
+        navigate("/login");
       } else {
         alert("Registration failed");
         navigate("/login");
@@ -48,7 +67,7 @@ const AccountSetUp = ({ token }) => {
       <form className="account-setup-form">
         <h2>Account Setup</h2>
         <div className="form-group">
-          <label htmlFor="username">Username (Email)</label>
+          <label htmlFor="username">Email</label>
           <input type="text" id="username" value={email} readOnly />
         </div>
         <div className="form-group">

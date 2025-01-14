@@ -51,9 +51,14 @@ const Login = () => {
       console.log("login-res", response);
 
       if (response.status === 200) {
+        if (response.data.userStatus === "INACTIVE") {
+          alert("Your account is Inactive. Please contact support.");
+          return;
+        }
+
         const role = response.data.role;
         const firstName = response.data.firstName;
-        const lastName = response.data.firstName;
+        const lastName = response.data.lastName;
         const username = response.data.username;
 
         console.log("First Name:", firstName);
