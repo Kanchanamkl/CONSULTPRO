@@ -77,14 +77,18 @@ public class UserController {
         return userService.getAllInactiveCounselors();
     }
 
+    @GetMapping("/get-active-counselors")
+    public List<Counselor> getAllActiveCounselors() {
+        return userService.getAllActiveCounselors();
+    }
+
+
     @PostMapping("/approve-counselor")
     public ResponseEntity<String> approveCounselor(@RequestParam String userId, @RequestParam String userEmail) throws MessagingException {
         System.out.println("Incoming request: userId=" + userId + ", userEmail=" + userEmail);
         emailService.sendAccountSetupEmail(userEmail, userId);
         return ResponseEntity.ok("Counselor approved and email sent successfully.");
     }
-
-
 
     @PostMapping("/account-setup")
     public ResponseEntity<AccountSetupResDTO>accountSetup(@RequestBody AccountSetupReqDTO request) {

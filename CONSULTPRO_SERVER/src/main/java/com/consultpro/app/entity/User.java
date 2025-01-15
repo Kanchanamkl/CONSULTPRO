@@ -36,6 +36,9 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private USER_STATUS status;
 
+    @Column(length = 2048)
+    private String profilePic;
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

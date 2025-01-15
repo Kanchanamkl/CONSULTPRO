@@ -30,11 +30,13 @@ public class Counselor {
     private String city;
     private String gender;
     private LocalDate dob;
+    @Column(length = 2048)
     private String profilePic;
     private String specialize;
+    @Column(length = 2048)
     private String nic;
     private boolean isPsychologist;
-    private String profileImage;
+    @Column(length = 2048)
     private String degreeTranscript;
     private String medicalQualification;
     private String experienceDescription;

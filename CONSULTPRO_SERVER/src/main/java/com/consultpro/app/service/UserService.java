@@ -87,6 +87,7 @@ public class UserService {
                     .lastName(userDTO.getLastName())
                     .password(passwordEncoder.encode(userDTO.getPassword()))
                     .role(userDTO.getRole())
+                    .profilePic(userDTO.getProfilePic())
                     .status(userDTO.getRole().equals(ROLE.COUNSELOR) ? USER_STATUS.INACTIVE : USER_STATUS.ACTIVE)
                     .build();
 
@@ -106,7 +107,8 @@ public class UserService {
                         .city(userDTO.getCity())
                         .nic(userDTO.getNic())
                         .isPsychologist(userDTO.isPsychologist())
-                        .profileImage(userDTO.getProfileImage())
+                        .profilePic(userDTO.getProfileImage())
+                        .specialize("Clinical Psychologists")
                         .degreeTranscript(userDTO.getDegreeTranscript())
                         .medicalQualification(userDTO.getMedicalQualification())
                         .experienceDescription(userDTO.getExperienceDescription())
@@ -169,6 +171,7 @@ public class UserService {
                 .lastName(user.getLastName())
                 .username(user.getUsername())
                 .role(user.getRole().toString())
+                .profilePic(user.getProfilePic())
                 .message("")
                 .userStatus(user.getStatus().toString())
                 .responseCode(HttpStatus.OK)
@@ -237,7 +240,7 @@ public class UserService {
                             .contact(user.getUsername()) // Assuming username is the email
                             .isPsychiatrist(counselor.isPsychologist())
                             .medicalQualification(counselor.getMedicalQualification())
-                            .profileImg(counselor.getProfileImage())
+                            .profileImg(counselor.getProfilePic())
                             .nic(counselor.getNic())
                             .degreeTranscript(counselor.getDegreeTranscript())
                             .experience(counselor.getExperienceDescription())
@@ -246,6 +249,29 @@ public class UserService {
                 })
                 .collect(Collectors.toList());
     }
+
+    public List<Counselor> getAllActiveCounselors() {
+        return userRepository.findUsersByStatusAndRole(USER_STATUS.ACTIVE, ROLE.COUNSELOR)
+                .stream()
+                .map(user -> {
+                    Counselor counselor = counselorRepository.findByUser(user).orElseThrow();
+                    return Counselor.builder()
+                            .id(user.getUserId())
+                            .firstName(counselor.getFirstName())
+                            .lastName(counselor.getLastName())
+                            .profilePic(counselor.getProfilePic())
+                            .specialize(counselor.getSpecialize())
+                            .dob(counselor.getDob())
+                            .address(counselor.getAddress())
+                            .city(counselor.getCity())
+                            .medicalQualification(counselor.getMedicalQualification())
+                            .nic(counselor.getNic())
+                            .degreeTranscript(counselor.getDegreeTranscript())
+                            .build();
+                })
+                .collect(Collectors.toList());
+    }
+
 
     @Transactional
     public AccountSetupResDTO accountSetup(AccountSetupReqDTO accountSetupReqDTO) {
