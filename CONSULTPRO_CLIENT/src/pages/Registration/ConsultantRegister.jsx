@@ -216,16 +216,6 @@ const ConsultantRegister = () => {
               />
             </div>
             <div className="form-group">
-            <input
-                name="district"
-                value={formData.district}
-                required
-                onChange={handleChange}
-                placeholder="Enter District"
-                id="district"
-              />
-            </div>
-            <div className="form-group">
               <label>Are you a psychiatrist?</label>
               <div className="psychiatrist">
                 <label htmlFor="yes">Yes</label>

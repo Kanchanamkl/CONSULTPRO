@@ -4,14 +4,21 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { StoreContext } from "../../StoreContext/StoreContext";
+import { GiConsoleController } from "react-icons/gi";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-  const { setIsLoggedIn, setFirstName, setRole, setUsername, setLastName } =
-    useContext(StoreContext);
-
+  const {
+    setIsLoggedIn,
+    setUserId,
+    setFirstName,
+    setRole,
+    setUsername,
+    setLastName,
+    setProfilePic,
+} = useContext(StoreContext);
   const demoUsers = [
     {
       username: "client@gmail.com",
@@ -65,11 +72,14 @@ const Login = () => {
         console.log("Last Name:", lastName);
         console.log("Role:", role);
         console.log("username", username);
+        console.log("profile-pic",response.data.profilePic)
 
+        setUserId(response.data.id);
         setFirstName(firstName);
         setLastName(lastName);
         setUsername(username);
         setRole(role);
+        setProfilePic(response.data.profilePic);
         setIsLoggedIn(true);
         navigate("/");
 

@@ -11,6 +11,9 @@ const StoreContextProvider = (props) => {
     return localStorage.getItem("isLoggedIn") === "true";
   });
 
+  const [userId, setUserId] = useState(
+    () => localStorage.getItem("userId") || ""
+  );
   const [username, setUsername] = useState(
     () => localStorage.getItem("username") || ""
   );
@@ -21,10 +24,19 @@ const StoreContextProvider = (props) => {
     () => localStorage.getItem("lastName") || ""
   );
   const [role, setRole] = useState(() => localStorage.getItem("role") || "");
+  const [profilePic, setProfilePic] = useState(
+    () => localStorage.getItem("profilePic") || ""
+  );
 
-  const [selectedConsultant, setSelectedConsultant] = useState(null);
-  const updateSelectedConsultant = (consultant) => {
-    setSelectedConsultant(consultant);
+  const [selectedCounselor, setSelectedCounselor] = useState(null);
+
+  const [selectedSlots, setSelectedSlots] = useState([]);
+
+  const addSlot = (startTime, endTime, description) => {
+    setSelectedSlots((prevSlots) => [
+      ...prevSlots,
+      { startTime, endTime, description },
+    ]);
   };
   useEffect(() => {
     localStorage.setItem("isLoggedIn", isLoggedIn);
@@ -32,32 +44,53 @@ const StoreContextProvider = (props) => {
     localStorage.setItem("firstName", firstName);
     localStorage.setItem("lastName", lastName);
     localStorage.setItem("role", role);
-  }, [isLoggedIn, firstName, lastName, role]);
+    localStorage.setItem("profilePic", profilePic);
+    localStorage.setItem("userId", userId);
+    localStorage.setItem(
+      "selectedCounselor",
+      JSON.stringify(selectedCounselor)
+    );
+  }, [
+    isLoggedIn,
+    username,
+    firstName,
+    lastName,
+    role,
+    profilePic,
+    userId,
+    selectedCounselor,
+    selectedSlots,
+  ]);
 
   const handleLogout = () => {
     setIsLoggedIn(false);
+    setUserId("");
     setUsername("");
     setFirstName("");
     setLastName("");
     setRole("");
+    setProfilePic("");
     localStorage.clear();
     navigate("/");
   };
 
   const contextValue = {
+    userId,
     isLoggedIn,
     username,
-    setIsLoggedIn,
     firstName,
     lastName,
     role,
+    profilePic,
+    setUserId,
+    setIsLoggedIn,
     setUsername,
     setFirstName,
     setLastName,
     setRole,
+    setProfilePic,
+    setSelectedCounselor,
     handleLogout,
-    selectedConsultant,
-    updateSelectedConsultant,
   };
 
   return (

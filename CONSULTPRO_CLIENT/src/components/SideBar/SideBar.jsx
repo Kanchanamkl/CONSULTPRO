@@ -19,10 +19,17 @@ import {
 import { FaUsers } from "react-icons/fa6";
 import Swal from "sweetalert2"; // Import SweetAlert2
 import "./SideBarStyles.scss";
-
+import UserProfileCard from "../../components/ProfileCard/ProfileCard";
 const SideBar = () => {
-  const { isLoggedIn, handleLogout, firstName, role, username } =
-    useContext(StoreContext);
+  const {
+    isLoggedIn,
+    handleLogout,
+    firstName,
+    lastName,
+    role,
+    username,
+    profilePic,
+} = useContext(StoreContext);
 
   const [sidebar, setSidebar] = useState(false);
 
@@ -54,6 +61,16 @@ const SideBar = () => {
     }
   };
 
+  const handleUserIconClick = () => {
+    setShowProfileCard(!showProfileCard);
+  };
+
+  const handleOutsideClick = (e) => {
+    if (e.target.closest(".user-profile-card") === null) {
+      setShowProfileCard(false);
+    }
+  };
+
   return (
     <>
       <IconContext.Provider value={{ color: "#fff" }}>
@@ -74,9 +91,17 @@ const SideBar = () => {
               </button>
             )}
 
-            <li className="nav-item">
+            <li className="nav-item" onClick={handleUserIconClick}>
               <Link onClick={toggleProfileCard}>
                 <FaUser />
+                {showProfileCard && (
+                  <UserProfileCard
+                    profile_icon={profilePic}
+                    name={`${firstName} ${lastName}`}
+                    role={role}
+                    onClose={() => setShowProfileCard(false)}
+                  />
+                )}
               </Link>
             </li>
           </div>
