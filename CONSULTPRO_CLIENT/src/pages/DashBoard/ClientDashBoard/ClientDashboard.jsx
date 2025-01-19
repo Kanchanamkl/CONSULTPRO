@@ -13,17 +13,28 @@ const ClientDashboard = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const consultsPerPage = 4;
 
-  useEffect(() => {
-    // const topConsultants = consult_list.slice(0, 4);
-    const topConsultants = consult_list;
-    setFeaturedConsultant(topConsultants);
-  }, []);
+  // useEffect(() => {
+  //   // const topConsultants = consult_list.slice(0, 4);
+  //   const topConsultants = consult_list;
+  //   setFeaturedConsultant(topConsultants);
+  // }, []);
 
   const nextConsults = () => {
     if (currentIndex != 0) {
       setCurrentIndex(currentIndex - 1);
     }
   };
+
+  useEffect(() => {
+    fetch("http://localhost:8080/api/users/get-active-counselors")
+      .then((response) => response.json())
+      .then((data) => {
+      setFeaturedConsultant(data);
+      })
+      .catch((error) => {
+      console.error("Error fetching data:", error);
+      });
+  }, []);
 
   const previousConsults = () => {
     if (currentIndex + consultsPerPage < featuredConsultant.length) {
@@ -81,7 +92,7 @@ const ClientDashboard = () => {
               <GrFormPrevious size={30} cursor={"pointer"} />
             </div>
             {currentConsults.map((consult) => (
-              <ConsultantCard key={consult.counselor_id} consultant={consult} />
+              <ConsultantCard key={consult.id} consultant={consult} />
             ))}
             {/* Next Arrow Icon */}
             <div
@@ -112,9 +123,9 @@ const ClientDashboard = () => {
       </div>
 
       <div className="spcialities-consultants">
-      <SectionContainer title="Our Spcialities">
-        <Specialties />
-      </SectionContainer>
+        <SectionContainer title="Our Spcialities">
+          <Specialties />
+        </SectionContainer>
       </div>
     </div>
   );

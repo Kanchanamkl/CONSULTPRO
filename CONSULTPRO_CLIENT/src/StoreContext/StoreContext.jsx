@@ -30,6 +30,10 @@ const StoreContextProvider = (props) => {
 
   const [selectedCounselor, setSelectedCounselor] = useState(null);
 
+  const updateSelectedCounselor = (coach) => {
+    setSelectedCounselor(coach);
+  };
+
   const [selectedSlots, setSelectedSlots] = useState([]);
 
   const addSlot = (startTime, endTime, description) => {
@@ -38,6 +42,34 @@ const StoreContextProvider = (props) => {
       { startTime, endTime, description },
     ]);
   };
+
+  const [activeCounselors, setActiveCounselors] = useState([]);
+
+  const fetchActiveCounselors = async () => {
+    try {
+      const response = await fetch(
+        "http://localhost:8080/api/users/get-active-counselors"
+      );
+      const data = await response.json();
+      const formattedData = data.map((counselor) => ({
+        counselor_id: counselor.counselor_id,
+        name: counselor.firstName + " " + counselor.lastName,
+        specialize: counselor.specialize,
+        counselor_img: counselor.profilePic,
+      }));
+      setActiveCounselors(formattedData);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchActiveCounselors();
+    const intervalId = setInterval(fetchActiveCounselors, 60000);
+
+    return () => clearInterval(intervalId);
+  }, []);
+
   useEffect(() => {
     localStorage.setItem("isLoggedIn", isLoggedIn);
     localStorage.setItem("username", username);
@@ -82,6 +114,9 @@ const StoreContextProvider = (props) => {
     lastName,
     role,
     profilePic,
+    activeCounselors,
+    selectedCounselor,
+    selectedSlots,
     setUserId,
     setIsLoggedIn,
     setUsername,
@@ -90,7 +125,11 @@ const StoreContextProvider = (props) => {
     setRole,
     setProfilePic,
     setSelectedCounselor,
+    updateSelectedCounselor,
     handleLogout,
+    setSelectedSlots,
+    addSlot,
+    fetchActiveCounselors,
   };
 
   return (

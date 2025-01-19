@@ -38,6 +38,7 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/consultant-register" element={<ConsultantRegister />} />
           <Route path="/accSetup" element={<AccountSetUp />} />
+          <Route path="*" element={<HeroPage />} />
         </Routes>
         <Footer />
       </>
@@ -56,6 +57,7 @@ function App() {
               <Route path="/applications" element={<Applications />} />
               <Route path="/book" element={<BookingPage />} />
               <Route path="/add-counselor" element={<AddCounselor />} />
+              <Route path="*" element={<AdminDashBoard />} />
             </Routes>
             <Footer />
           </>
@@ -70,6 +72,7 @@ function App() {
               <Route path="/appointments" element={<CounselorAppointments />} />
               <Route path="/profile" element={<CounsellorProfile />} />
               <Route path="/meeting-page" element={<MeetingPage />} />
+              <Route path="*" element={<CounselorDashBoard />} />
             </Routes>
             <Footer />
           </>
@@ -86,6 +89,7 @@ function App() {
               <Route path="/book" element={<BookingPage />} />
               <Route path="/meeting-page" element={<MeetingPage />} />
               <Route path="/consultants" element={<Consultants />} />
+              <Route path="*" element={<ClientDashboard />} />
             </Routes>
             <Footer />
           </>
@@ -102,6 +106,7 @@ function App() {
                 path="/consultant-register"
                 element={<ConsultantRegister />}
               />
+              <Route path="*" element={<HeroPage />} />
             </Routes>
             <Footer />
           </>

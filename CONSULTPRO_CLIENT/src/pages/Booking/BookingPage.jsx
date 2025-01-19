@@ -1,56 +1,81 @@
-import { useEffect, useRef, useState, useContext } from "react";
+import { useEffect, useState, useContext } from "react";
 import DatePicker from "../../components/DatePicker/DatePicker";
 import BillingPopup from "../../components/BillingPopup/BillingPopup";
 import { useLocation, useNavigate } from "react-router-dom";
 import { IoMdCloseCircle } from "react-icons/io";
 import { StoreContext } from "../../StoreContext/StoreContext";
 import timeSlots from "../../assets/timeSlots";
-import "./BookingPageStyels.scss"; // Import the SCSS file
+import "./BookingPageStyels.scss";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import axios from "axios";
 
 const BookingPage = () => {
-  const { selectedConsultant } = useContext(StoreContext);
+  const { selectedCounselor, userId } = useContext(StoreContext);
   const [query, setQuery] = useState("");
-  const [selected, setSelected] = useState([]);
+  const [selectedSlot, setSelectedSlot] = useState(null);
   const [menuOpen, setMenuOpen] = useState(true);
-  const { updateSelectedConsultant } = useContext(StoreContext); 
-
   const navigate = useNavigate();
-  const navigateToCounselors = useNavigate();
+  const [filteredTags, setFilteredTags] = useState("");
+  useEffect(() => {
+    setSelectedSlot(null);
+  }, []);
 
   const formatTimeSlot = (slot) => {
-    return `${slot.start.time} ${slot.start.period} - ${slot.end.time} ${slot.end.period}`;
+    return `${slot.start.time} - ${slot.end.time}`;
   };
-
-  const tags_ = timeSlots.map(formatTimeSlot);
-
-
-  const filteredTags = tags_.filter(
-    (item) =>
-      item.toLocaleLowerCase().includes(query.toLocaleLowerCase().trim()) &&
-      !selected.includes(item)
-  );
-
-
   const getFirstDayOfCurrentMonth = () => {
     const now = new Date();
     return new Date();
   };
 
   const [selectedDate, setSelectedDate] = useState(getFirstDayOfCurrentMonth());
+  useEffect(() => {
+    const fetchBookedSlots = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:8080/api/appointments/get_appointment_slots_by_date_and_counselorId?appointmentDate=${
+            selectedDate.toISOString().split("T")[0]
+          }&counselorId=${1}`
+        );
+        const bookedSlots = response.data;
+        const availableSlots = timeSlots
+          .map(formatTimeSlot)
+          .filter((slot) => !bookedSlots.includes(slot));
+        setFilteredTags(availableSlots);
+      } catch (error) {
+        console.error("Error fetching booked slots:", error);
+      }
+    };
+
+    fetchBookedSlots();
+  }, [selectedDate]);
+  const tags_ = timeSlots.map(formatTimeSlot);
+
+  // const filteredTags = tags_.filter(
+  //     (item) =>
+  //         item
+  //             .toLocaleLowerCase()
+  //             .includes(query.toLocaleLowerCase().trim()) &&
+  //         item !== selectedSlot
+  // );
 
   useEffect(() => {
-    setSelected([]);
+    setSelectedSlot(null);
   }, [selectedDate]);
 
-  // Billing popup
   const [showPopup, setShowPopup] = useState(false);
   const appointmentDetails = {
     date: selectedDate.toLocaleDateString(),
-    counselor: selectedConsultant ? selectedConsultant.name : "",
-    selectedSlots: selected,
+    counselor: selectedCounselor ? selectedCounselor: "",
+    selectedSlot: selectedSlot,
   };
 
   const handleCheckout = () => {
+    if (!selectedSlot) {
+      toast.error("Please select a time slot.");
+      return;
+    }
     setShowPopup(true);
   };
 
@@ -58,52 +83,108 @@ const BookingPage = () => {
     setShowPopup(false);
   };
 
-  useEffect(() => {
-    window.payhere.onCompleted = function onCompleted(orderId) {
-      console.log("Payment completed. OrderID:" + orderId);
-      if (orderId) {
-        updateSelectedConsultant(null);
+  const handlePaymentCompletion = async (orderId) => {
+    console.log("Payment completed. OrderID:" + orderId);
+    console.log("Selected Slot:", selectedSlot);
+    console.log("Selected Counselor:", selectedCounselor);
+    if (orderId) {
+      try {
+        if (!selectedCounselor) {
+          throw new Error("Selected counselor is not defined");
+        }
+        if (!userId) {
+          throw new Error("User ID is not defined");
+        }
+        if (!selectedDate) {
+          throw new Error("Selected date is not defined");
+        }
+        if (!selectedSlot) {
+          throw new Error("Selected slot is not defined");
+        }
+
+        const [startTime, endTime] = selectedSlot.split(" - ");
+        const response = await axios.post(
+          "http://localhost:8080/api/appointments/create",
+          {
+            counselorId: selectedCounselor.id,
+            clientId: userId,
+            date: selectedDate.toISOString().split("T")[0],
+            startTime: startTime,
+            endTime: endTime,
+            description: "Training session",
+          }
+        );
+
+        console.log("Booking response:", response.data);
+        setShowPopup(false);
+        setTimeout(() => {
+          window.location.replace("/appointments");
+        }, 1000);
+        setSelectedSlot(null);
+      } catch (error) {
+        console.error("Error creating booking:", error);
       }
-      setShowPopup(false);
-      navigate("/appointments");
-      
-    };
+    }
+  };
 
-    window.payhere.onDismissed = function onDismissed() {
-      console.log("Payment dismissed");
-    };
+  window.payhere.onCompleted = function onCompleted(orderId) {
+    handlePaymentCompletion(orderId);
+  };
+  window.payhere.onDismissed = function onDismissed() {
+    console.log("Payment dismissed");
+  };
 
-    window.payhere.onError = function onError(error) {
-      console.log("Error: " + error);
-    };
-  }, []);
+  window.payhere.onError = function onError(error) {
+    console.log("Error: " + error);
+  };
 
   const location = useLocation();
-  const { consultant } = location.state || {}; // Retrieve the consultant object
+  const { consultant } = location.state || {};
+
+  useEffect(() => {
+    if (!selectedCounselor) {
+      navigate("/appointments");
+    }
+  }, [selectedCounselor, navigate]);
 
   return (
     <div className="booking-container">
-     {selectedConsultant ? (
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
+      {selectedCounselor && (
         <div className="counselor-container">
           <div className="counselor-container-left">
             <img
-              src={selectedConsultant.counselor_img}
-              alt={selectedConsultant.name}
+              src={selectedCounselor.profilePic}
+              alt={`${selectedCounselor.firstName} ${selectedCounselor.lastName}`} 
               className="consultn-img"
             />
           </div>
           <div className="counselor-container-right">
-            <h3 className="consultn-name">{selectedConsultant.name}</h3>
-            <p className="consultn-specialize">{selectedConsultant.specialize}</p>
-            <p className="consultn-specialize">Email: alicehs@gmail.com</p> 
-            <p className="consultn-specialize">Mobile: 076 0570 695</p>
-            <p className="consultn-specialize">Country: Sri Lanka</p> 
-            <p className="consultn-specialize">City: Colombo</p>
-
-
+            <h3 className="consultn-name">
+            {selectedCounselor.firstName}{selectedCounselor.lastName} 
+            </h3>
+            <p className="consultn-detail-item"> Specialize : {selectedCounselor.specialization}</p>
+            <p className="consultn-detail-item">
+              Email : {"thenuka@gmail.com"}
+            </p>
+            <p className="consultn-detail-item">
+              Mobile : {selectedCounselor.contact}
+            </p>
+            <p className="consultn-detail-item">City : {selectedCounselor.city}</p>
           </div>
         </div>
-      ) : navigateToCounselors("/consultants")}
+      )}
 
       <div className="slot-selection">
         <div className="selector-section">
@@ -113,48 +194,42 @@ const BookingPage = () => {
           />
         </div>
         <div className="availability-info">
-          <p>Available Slots On:</p>
+          <p>Available Time Slots On:</p>
           <label>{selectedDate.toLocaleDateString()}</label>
         </div>
 
-        {selected.length ? (
+        {selectedSlot && (
           <div className="selected-slots">
-            <div className="slot-label">Selected Slots :</div>
+            <div className="slot-label">Selected Slot :</div>
 
             <div className="slot-chips">
-              {selected.map((tag) => (
-                <div key={tag} className="slot-item">
-                  {tag}
-                  <div onMouseDown={(e) => e.preventDefault()}>
-                    <IoMdCloseCircle
-                      onClick={() =>
-                        setSelected(selected.filter((i) => i !== tag))
-                      }
-                      size="20px"
-                      style={{ cursor: "pointer" }}
-                    />
-                  </div>
+              <div className="slot-item">
+                {selectedSlot}
+                <div onMouseDown={(e) => e.preventDefault()}>
+                  <IoMdCloseCircle
+                    onClick={() => {
+                      setSelectedSlot(null);
+                    }}
+                    size="20px"
+                    style={{ cursor: "pointer" }}
+                  />
                 </div>
-              ))}
-            </div>
-
-            <div className="clear-all" onClick={() => setSelected([])}>
-              Clear all
+              </div>
             </div>
           </div>
-        ) : null}
-        <p>Select Your Slots:</p>
+        )}
+        <p>Pick Your Slot:</p>
         {menuOpen && (
           <div className="slot-menu">
             <ul>
               {filteredTags.length ? (
-                filteredTags.map((tag) => (
+                filteredTags.map((tag, index) => (
                   <li
-                    key={tag}
+                    key={`${tag}-${index}`}
                     onMouseDown={(e) => e.preventDefault()}
                     onClick={() => {
                       setMenuOpen(true);
-                      setSelected((prev) => [...prev, tag]);
+                      setSelectedSlot(tag);
                       setQuery("");
                     }}
                   >

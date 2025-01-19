@@ -2,7 +2,7 @@ const consult_list = [
 
   {
     counselor_id: 2,
-    name: "Vrushali Naik",
+    name: "Vrushali Naikol",
     specialize: "Marriage and Family Therapists",
     counselor_img:
       "https://media.istockphoto.com/id/1395128697/photo/psychologist-session.jpg?s=612x612&w=0&k=20&c=VL2uUVLzrb8VW6WiT-nyvoM3GkZE8kDicDen4uP-MJ0=",
