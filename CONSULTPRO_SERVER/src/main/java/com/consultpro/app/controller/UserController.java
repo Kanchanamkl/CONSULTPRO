@@ -73,12 +73,12 @@ public class UserController {
         return userService.getAllCounselors();
     }
     @GetMapping("/get-inactive-counselors")
-    public List<InactiveCounselorDTO> getAllInactiveCounselors() {
+    public List<CounselorDTO> getAllInactiveCounselors() {
         return userService.getAllInactiveCounselors();
     }
 
     @GetMapping("/get-active-counselors")
-    public List<Counselor> getAllActiveCounselors() {
+    public List<CounselorDTO> getAllActiveCounselors() {
         return userService.getAllActiveCounselors();
     }
 

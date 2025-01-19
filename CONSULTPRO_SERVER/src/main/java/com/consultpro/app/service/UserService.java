@@ -222,25 +222,25 @@ public class UserService {
         return counselorRepository.findAll();
     }
 
-    public List<InactiveCounselorDTO> getAllInactiveCounselors() {
+    public List<CounselorDTO> getAllInactiveCounselors() {
         return userRepository.findUsersByStatusAndRole(USER_STATUS.INACTIVE, ROLE.COUNSELOR)
                 .stream()
                 .map(user -> {
                     Counselor counselor = counselorRepository.findByUser(user).orElseThrow();
-                    return InactiveCounselorDTO.builder()
-                            .id(user.getUserId())
+                    return CounselorDTO.builder()
+                            .id(counselor.getId())
                             .firstName(counselor.getFirstName())
                             .lastName(counselor.getLastName())
                             .username(user.getUsername())
-                            .dob(counselor.getDob()) // Implement calculateAge method
+                            .dob(counselor.getDob())
                             .address(counselor.getAddress())
                             .city(counselor.getCity())
                             .district(counselor.getCity())
                             .specialization(counselor.getSpecialize())
-                            .contact(user.getUsername()) // Assuming username is the email
+                            .contact(counselor.getPhoneNumber())
                             .isPsychiatrist(counselor.isPsychologist())
                             .medicalQualification(counselor.getMedicalQualification())
-                            .profileImg(counselor.getProfilePic())
+                            .profilePic(counselor.getProfilePic())
                             .nic(counselor.getNic())
                             .degreeTranscript(counselor.getDegreeTranscript())
                             .experience(counselor.getExperienceDescription())
@@ -250,19 +250,21 @@ public class UserService {
                 .collect(Collectors.toList());
     }
 
-    public List<Counselor> getAllActiveCounselors() {
+    public List<CounselorDTO> getAllActiveCounselors() {
         return userRepository.findUsersByStatusAndRole(USER_STATUS.ACTIVE, ROLE.COUNSELOR)
                 .stream()
                 .map(user -> {
                     Counselor counselor = counselorRepository.findByUser(user).orElseThrow();
-                    return Counselor.builder()
-                            .id(user.getUserId())
+                    return CounselorDTO.builder()
+                            .id(counselor.getId())
                             .firstName(counselor.getFirstName())
                             .lastName(counselor.getLastName())
-                            .profilePic(counselor.getProfilePic())
-                            .specialize(counselor.getSpecialize())
+                            .username(user.getUsername())
+                            .profilePic(user.getProfilePic())
+                            .specialization(counselor.getSpecialize())
                             .dob(counselor.getDob())
                             .address(counselor.getAddress())
+                            .contact(counselor.getPhoneNumber())
                             .city(counselor.getCity())
                             .medicalQualification(counselor.getMedicalQualification())
                             .nic(counselor.getNic())

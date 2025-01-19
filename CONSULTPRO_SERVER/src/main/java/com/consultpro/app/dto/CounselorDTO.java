@@ -13,7 +13,7 @@ import java.time.LocalDate;
 
 @Data
 @Builder
-public class InactiveCounselorDTO {
+public class CounselorDTO {
     private Long id;
     private String firstName;
     private String lastName;
@@ -26,7 +26,7 @@ public class InactiveCounselorDTO {
     private String contact;
     private boolean isPsychiatrist;
     private String medicalQualification;
-    private String profileImg;
+    private String profilePic;
     private String nic;
     private String degreeTranscript;
     private String experience;
