@@ -10,36 +10,36 @@ const JitsiMeeting = () => {
   const startMeeting = () => {
     if (apiRef.current) return;
 
-    const domain = "142.93.215.196"; 
+    const domain = "142.93.215.196:8082";
     const options = {
       roomName: "DemoMeeting",
       width: "100%",
       height: "80%",
       parentNode: jitsiContainerRef.current,
       interfaceConfigOverwrite: {
-      TOOLBAR_BUTTONS: [
-        "microphone",
-        // "camera",
-        "desktop",
-        "fullscreen",
-        "fodeviceselection",
-        "hangup",
-        // "profile",
-        "chat",
-        "recording",
-        "raisehand",
-        "videoquality",
-        "tileview",
-        "download",
-        "help",
-        "mute-everyone",
-      ],
+        TOOLBAR_BUTTONS: [
+          "microphone",
+          // "camera",
+          "desktop",
+          "fullscreen",
+          "fodeviceselection",
+          "hangup",
+          // "profile",
+          "chat",
+          "recording",
+          "raisehand",
+          "videoquality",
+          "tileview",
+          "download",
+          "help",
+          "mute-everyone",
+        ],
       },
       configOverwrite: {
-      disableDeepLinking: true,
+        disableDeepLinking: true,
       },
       userInfo: {
-      displayName: "demo Client",
+        displayName: "demo Client",
       },
     };
 
@@ -54,7 +54,7 @@ const JitsiMeeting = () => {
 
   const endMeeting = () => {
     if (apiRef.current) {
-      apiRef.current.dispose(); 
+      apiRef.current.dispose();
       apiRef.current = null;
       navigate("/appointments");
     }
@@ -64,7 +64,7 @@ const JitsiMeeting = () => {
     startMeeting();
 
     return () => {
-      endMeeting(); 
+      endMeeting();
     };
   }, []);
 
