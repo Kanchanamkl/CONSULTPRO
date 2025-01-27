@@ -1,4 +1,4 @@
-@use '../../colors/systemColors' as sysColors;
+@use "../../colors/systemColors" as sysColors;
 
 .consultn-card {
   background-color: sysColors.$card-bg-color;
@@ -7,8 +7,9 @@
   text-align: center;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
   margin-bottom: 15px;
-  width: 250px; 
-  &:hover{
+  width: 250px;
+  position: relative; // Add this for positioning the spinner
+  &:hover {
     box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.377);
   }
 }
@@ -18,6 +19,9 @@
   height: 200px;
   object-fit: cover;
   border-radius: 8px;
+  &.hidden {
+    display: none;
+  }
 }
 
 .consultn-name {
@@ -29,10 +33,9 @@
   color: #61666b;
   font-weight: 500;
   font-size: 0.9rem;
-  margin-bottom: 6px
+  margin-bottom: 6px;
 }
 
-// Styles for the button
 .appointment-button {
   background-color: sysColors.$secondary-color;
   color: white;
@@ -50,11 +53,32 @@
   margin-right: 20px;
   margin-top: 2px;
   &:hover {
-    background-color:sysColors.$secondary-color-hover;
+    background-color: sysColors.$secondary-color-hover;
   }
 }
 
 .appointment-icon {
-  margin-right: 5px; 
-  
+  margin-right: 5px;
+}
+
+.spinner {
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-top: 4px solid sysColors.$primary-color;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
