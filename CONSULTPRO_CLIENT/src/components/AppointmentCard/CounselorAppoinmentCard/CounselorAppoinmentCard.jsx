@@ -19,7 +19,7 @@ const CounselorAppointmentCard = ({ appointment }) => {
         <p className="appointment-date">Date: {appointment.date}</p>
         <p className="appointment-time">Time: {appointment.time}</p>
         <div className="join-section">
-          {appointment.status === "Today" && (
+          {appointment.status === "TODAY" && (
             <button onClick={handleJoinSession}>Join Session</button>
           )}
         </div>

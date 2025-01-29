@@ -5,7 +5,7 @@ import consult_list from "/src/assets/tempdata/consult_list.js";
 import ConsultantCard from "../../../components/ConsultantCard/ConsultantCard";
 import Specialties from "../../../components/Specialties/Specialties";
 import { GrFormPrevious, GrFormNext } from "react-icons/gr";
-import RecentAppointments from "../../../components/AppointmentCard/ClientAppointmentCard/ClientAppointmentCard";
+import RecentAppointments from "../../../components/AppointmentCard/AppointmentCard/AppointmentCard";
 import JitsiMeeting from "../../../components/ChatRoom/JitsiMeeting";
 
 const ClientDashboard = () => {
@@ -29,10 +29,10 @@ const ClientDashboard = () => {
     fetch("http://localhost:8080/api/users/get-active-counselors")
       .then((response) => response.json())
       .then((data) => {
-      setFeaturedConsultant(data);
+        setFeaturedConsultant(data);
       })
       .catch((error) => {
-      console.error("Error fetching data:", error);
+        console.error("Error fetching data:", error);
       });
   }, []);
 
@@ -109,7 +109,7 @@ const ClientDashboard = () => {
         </SectionContainer>
       </div>
 
-      <div className="recent-apointments-consultants">
+      {/* <div className="recent-apointments-consultants">
         <SectionContainer title="Recent Appointments">
           <div className="recentAppoinemts">
             {appointments.map((appointment) => (
@@ -120,7 +120,7 @@ const ClientDashboard = () => {
             ))}
           </div>
         </SectionContainer>
-      </div>
+      </div> */}
 
       <div className="spcialities-consultants">
         <SectionContainer title="Our Spcialities">
