@@ -1,5 +1,6 @@
 package com.consultpro.app.controller;
 
+import com.consultpro.app.dto.AppointmentResponseDTO;
 import com.consultpro.app.entity.Appointment;
 import com.consultpro.app.entity.Client;
 import com.consultpro.app.entity.Counselor;
@@ -43,9 +44,9 @@ public class AppointmentController {
     }
 
     @GetMapping("/get_appointments_by_clientId/")
-    public List<Appointment> getAppointmentsByClientId(@RequestParam Long userId) {
+    public List<AppointmentResponseDTO> getAppointmentsByClientId(@RequestParam Long userId) {
         Optional<Client> client = clientRepository.findByUser(userService.getUserById(userId));
-        List<Appointment> appointments = appointmentService.getAppointmentsByClientId(client.get().getId());
+        List<AppointmentResponseDTO> appointments = appointmentService.getAppointmentsByClientId(client.get().getId());
         return appointments;
 
     }

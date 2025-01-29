@@ -1,6 +1,7 @@
 package com.consultpro.app.service;
 
 import com.consultpro.app.dto.AppointmentDTO;
+import com.consultpro.app.dto.AppointmentResponseDTO;
 import com.consultpro.app.entity.Appointment;
 import com.consultpro.app.entity.Client;
 import com.consultpro.app.entity.Counselor;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -55,8 +57,20 @@ public class AppointmentService {
                 .orElseThrow(() -> new AppointmentNotFoundException("appointment not found with id: " + id));
     }
 
-    public List<Appointment> getAppointmentsByClientId(Long clientId) {
-        return appointmentRepository.findAllByClientId(clientId);
+    public List<AppointmentResponseDTO> getAppointmentsByClientId(Long clientId) {
+        List<Appointment> appointments = appointmentRepository.findAllByClientId(clientId);
+        return appointments.stream().map(appointment -> {
+            String time = appointment.getStartTime().toString() + " - " + appointment.getEndTime().toString();
+            return AppointmentResponseDTO.builder()
+                    .id(appointment.getId())
+                    .counselorName(appointment.getCounselor().getFirstName() + " " + appointment.getCounselor().getLastName())
+                    .counselorImg(appointment.getCounselor().getProfilePic())
+                    .clientName(appointment.getClient().getFirstName() + " " + appointment.getClient().getLastName())
+                    .clientImg(appointment.getClient().getProfilePic())
+                    .date(appointment.getDate().toString())
+                    .time(time)
+                    .build();
+        }).collect(Collectors.toList());
     }
 
     public List<Appointment> getAppointmentsByCounselorId(Long counselorId) {
