@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@jitsi/react-sdk": "^1.4.0",
+    "@stomp/stompjs": "^7.0.0",
     "antd": "^5.23.0",
     "axios": "^1.7.7",
     "bootstrap": "^5.3.3",
@@ -26,6 +27,9 @@
     "react-router-dom": "^6.26.2",
     "react-toastify": "^11.0.2",
     "sass": "^1.80.6",
+    "socket.io-client": "^4.8.1",
+    "sockjs-client": "^1.6.1",
+    "stompjs": "^2.3.3",
     "sweetalert2": "^11.14.2"
   },
   "devDependencies": {
@@ -40,6 +44,7 @@
     "eslint-plugin-react-refresh": "^0.4.12",
     "globals": "^15.9.0",
     "postcss": "^8.4.47",
+    "rollup-plugin-polyfill-node": "^0.13.0",
     "vite": "^5.4.8"
   }
 }

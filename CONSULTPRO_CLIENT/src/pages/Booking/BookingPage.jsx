@@ -36,7 +36,7 @@ const BookingPage = () => {
         const response = await axios.get(
           `http://localhost:8080/api/appointments/get_appointment_slots_by_date_and_counselorId?appointmentDate=${
             selectedDate.toISOString().split("T")[0]
-          }&counselorId=${1}`
+          }&counselorId=${selectedCounselor.id}`
         );
         const bookedSlots = response.data;
         const availableSlots = timeSlots
@@ -127,16 +127,21 @@ const BookingPage = () => {
     }
   };
 
-  window.payhere.onCompleted = function onCompleted(orderId) {
-    handlePaymentCompletion(orderId);
-  };
-  window.payhere.onDismissed = function onDismissed() {
-    console.log("Payment dismissed");
-  };
+  if (window.payhere) {
+    window.payhere.onCompleted = function onCompleted(orderId) {
+      handlePaymentCompletion(orderId);
+    };
+    window.payhere.onDismissed = function onDismissed() {
+      console.log("Payment dismissed");
+    };
+  
+    window.payhere.onError = function onError(error) {
+      console.log("Error: " + error);
+    };
+  } else {
+    console.error("payhere is not defined");
+  }
 
-  window.payhere.onError = function onError(error) {
-    console.log("Error: " + error);
-  };
 
   const location = useLocation();
   const { consultant } = location.state || {};

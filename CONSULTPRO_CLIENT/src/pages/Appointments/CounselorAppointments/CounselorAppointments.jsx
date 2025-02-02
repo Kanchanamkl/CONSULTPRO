@@ -1,10 +1,47 @@
-import React, { useState } from "react";
+import React, { useState,useEffect ,useContext } from "react";
 import "./CounselorAppointmentsStyles.scss";
 import SectionContainer from "../../../components/SectionContainer/SectionContainer";
 import Table from "../../../components/Table/Table";
 import CounselorAppointmentCard from "../../../components/AppointmentCard/CounselorAppoinmentCard/CounselorAppoinmentCard";
+import SockJS from "sockjs-client";
+import { Client } from "@stomp/stompjs";
+import { StoreContext } from "../../../StoreContext/StoreContext";
 
 const CounselorAppointments = () => {
+      const { counselorId } = useContext(StoreContext);
+      useEffect(() => {
+        console.log("Counselor ID at page load:", counselorId);
+      }, [counselorId]);
+
+  const [stompClient, setStompClient] = useState(null);
+
+  useEffect(() => {
+    console.log("counselorId :", counselorId);
+    // Establish WebSocket connection
+    const socket = new SockJS("http://localhost:8080/ws");
+    const client = new Client({
+      webSocketFactory: () => socket,
+      reconnectDelay: 5000, // Reconnect on failure
+      onConnect: () => {
+        console.log("Connected to WebSocket");
+
+        // Subscribe to counselor-specific topic
+        client.subscribe(`/topic/appointments/${counselorId}`, (message) => {
+          console.log("Received message:", message.body);
+          // Handle the received message
+        });
+      },
+    });
+
+    client.activate();
+    setStompClient(client);
+
+    return () => {
+      if (client) {
+        client.deactivate();
+      }
+    };
+  }, []);
   const [filter, setFilter] = useState("ALL");
 
   const [todayAppointments, setTodayAppointments] = useState([

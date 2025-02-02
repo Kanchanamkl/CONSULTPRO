@@ -14,6 +14,9 @@ const StoreContextProvider = (props) => {
   const [userId, setUserId] = useState(
     () => localStorage.getItem("userId") || ""
   );
+  const [counselorId, setCounselorId] = useState(
+    () => localStorage.getItem("counselorId") || ""
+  );
   const [username, setUsername] = useState(
     () => localStorage.getItem("username") || ""
   );
@@ -78,6 +81,7 @@ const StoreContextProvider = (props) => {
     localStorage.setItem("role", role);
     localStorage.setItem("profilePic", profilePic);
     localStorage.setItem("userId", userId);
+    localStorage.setItem("counselorId", counselorId);
     localStorage.setItem(
       "selectedCounselor",
       JSON.stringify(selectedCounselor)
@@ -90,6 +94,7 @@ const StoreContextProvider = (props) => {
     role,
     profilePic,
     userId,
+    counselorId,
     selectedCounselor,
     selectedSlots,
   ]);
@@ -97,6 +102,7 @@ const StoreContextProvider = (props) => {
   const handleLogout = () => {
     setIsLoggedIn(false);
     setUserId("");
+    setCounselorId("");
     setUsername("");
     setFirstName("");
     setLastName("");
@@ -108,6 +114,7 @@ const StoreContextProvider = (props) => {
 
   const contextValue = {
     userId,
+    counselorId,
     isLoggedIn,
     username,
     firstName,
@@ -118,6 +125,7 @@ const StoreContextProvider = (props) => {
     selectedCounselor,
     selectedSlots,
     setUserId,
+    setCounselorId,
     setIsLoggedIn,
     setUsername,
     setFirstName,

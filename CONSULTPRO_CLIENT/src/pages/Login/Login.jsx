@@ -13,6 +13,7 @@ const Login = () => {
   const {
     setIsLoggedIn,
     setUserId,
+    setCounselorId,
     setFirstName,
     setRole,
     setUsername,
@@ -75,6 +76,9 @@ const Login = () => {
         console.log("profile-pic",response.data.profilePic)
 
         setUserId(response.data.id);
+        if (response.data.counselorId) {
+          setCounselorId(response.data.counselorId);
+        }
         setFirstName(firstName);
         setLastName(lastName);
         setUsername(username);
