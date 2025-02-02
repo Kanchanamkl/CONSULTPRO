@@ -171,6 +171,7 @@ public class UserService {
                 .lastName(user.getLastName())
                 .username(user.getUsername())
                 .role(user.getRole().toString())
+                .counselorId(user.getRole().equals(ROLE.COUNSELOR) ? counselorRepository.findByUser(user).orElseThrow().getId().toString() : null)
                 .profilePic(user.getProfilePic())
                 .message("")
                 .userStatus(user.getStatus().toString())

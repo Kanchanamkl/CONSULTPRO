@@ -23,5 +23,6 @@ public class AuthenticationResDTO {
     String profilePic;
     String message;
     String userStatus;
+    String counselorId;
     HttpStatus responseCode;
 }

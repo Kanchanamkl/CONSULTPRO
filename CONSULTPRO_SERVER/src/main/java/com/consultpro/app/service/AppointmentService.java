@@ -1,5 +1,6 @@
 package com.consultpro.app.service;
 
+import com.consultpro.app.controller.WebSocketController;
 import com.consultpro.app.dto.AppointmentDTO;
 import com.consultpro.app.dto.AppointmentResponseDTO;
 import com.consultpro.app.entity.Appointment;
@@ -27,6 +28,7 @@ public class AppointmentService {
     private final CounselorRepository counselorRepository;
     private final ClientRepository clientRepository;
     private final UserService userService;
+    private final WebSocketController webSocketController;
 
 
     @Transactional
@@ -49,6 +51,7 @@ public class AppointmentService {
                 .build();
 
         appointment = appointmentRepository.save(appointment);
+        webSocketController.sendAppointmentUpdate(appointment.getCounselor().getId(),appointment.getClient().getId());  // Notify the counselor
         return appointment;
     }
 
