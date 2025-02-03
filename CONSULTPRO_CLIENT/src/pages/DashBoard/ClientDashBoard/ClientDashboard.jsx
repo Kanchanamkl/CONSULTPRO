@@ -1,133 +1,570 @@
 import React, { useState, useEffect } from "react";
-import SectionContainer from "../../../components/SectionContainer/SectionContainer";
+
+import "./css/bootstrap.min.css";
+import "./css/nice-select.css";
+import "./css/font-awesome.min.css";
+import "./css/icofont.css";
+import "./css/slicknav.min.css";
+import "./css/datepicker.css";
+import "./css/animate.min.css";
+import "./css/magnific-popup.css";
+import "./css/normalize.css";
 import "./ClientDashboardStyles.scss";
-import consult_list from "/src/assets/tempdata/consult_list.js";
-import ConsultantCard from "../../../components/ConsultantCard/ConsultantCard";
-import Specialties from "../../../components/Specialties/Specialties";
-import { GrFormPrevious, GrFormNext } from "react-icons/gr";
-import RecentAppointments from "../../../components/AppointmentCard/AppointmentCard/AppointmentCard";
-import JitsiMeeting from "../../../components/ChatRoom/JitsiMeeting";
+import "./css/responsive.css";
+import sliderImage1 from "./img/slider2.jpeg";
+import sliderImage2 from "./img/slider.jpeg";
+import sliderImage3 from "./img/slider3.jpeg";
+import sectionImage from "./img/section-img.png";
+import favicon from "./img/favicon.png";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const ClientDashboard = () => {
-  const [featuredConsultant, setFeaturedConsultant] = useState([]);
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const consultsPerPage = 4;
-
-  // useEffect(() => {
-  //   // const topConsultants = consult_list.slice(0, 4);
-  //   const topConsultants = consult_list;
-  //   setFeaturedConsultant(topConsultants);
-  // }, []);
-
-  const nextConsults = () => {
-    if (currentIndex != 0) {
-      setCurrentIndex(currentIndex - 1);
-    }
-  };
-
-  useEffect(() => {
-    fetch("http://localhost:8080/api/users/get-active-counselors")
-      .then((response) => response.json())
-      .then((data) => {
-        setFeaturedConsultant(data);
-      })
-      .catch((error) => {
-        console.error("Error fetching data:", error);
-      });
-  }, []);
-
-  const previousConsults = () => {
-    if (currentIndex + consultsPerPage < featuredConsultant.length) {
-      setCurrentIndex(currentIndex + 1);
-    }
-  };
-
-  const currentConsults = featuredConsultant.slice(
-    currentIndex,
-    currentIndex + consultsPerPage
-  );
-
-  const appointments = [
+  const sliderData = [
     {
       id: 1,
-      consultantName: "Dr. John Smith",
-      consultantImg:
-        "https://media.gettyimages.com/id/1468678624/photo/nurse-hospital-employee-and-portrait-of-black-man-in-a-healthcare-wellness-and-clinic-feeling.jpg?s=612x612&w=0&k=20&c=AGQPyeEitUPVm3ud_h5_yVX4NKY9mVyXbFf50ZIEtQI=",
-      date: "2024-10-20",
-      time: "10:00 AM - 12.00 AM",
-      status: "Upcoming",
+      image: sliderImage1,
+      title: "We Provide Expert Counselling Services That You Can Trust!",
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sed nisl pellentesque, faucibus libero eu, gravida quam.",
+      button1: { text: "Get Appointment", link: "#" },
+      button2: { text: "Learn More", link: "#" },
     },
     {
       id: 2,
-      consultantName: "Aditya Gupta",
-      consultantImg:
-        "https://media.gettyimages.com/id/1386902483/photo/mental-health-therapist.jpg?s=612x612&w=0&k=20&c=7IMMLLIql2baNxNQFWiI8FWmp024OSzoDXm14iV_wpc=",
-      date: "2024-10-21",
-      time: "01:00 PM - 03.00 PM",
-      status: "Upcoming",
+      image: sliderImage2,
+      title: "We Provide Medical Services That You Can Trust!",
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sed nisl pellentesque, faucibus libero eu, gravida quam.",
+      button1: { text: "Get Appointment", link: "#" },
+      button2: { text: "About Us", link: "#" },
     },
     {
       id: 3,
-      consultantName: "Pratima J Singh",
-      consultantImg:
-        "https://media.gettyimages.com/id/1488909526/photo/phychologists-portrait-at-his-office.jpg?s=612x612&w=0&k=20&c=2wMPTB23ZzrfrPC2pX8eC9mj2jdzN9rgYtiWCYgDy54=",
-      date: "2024-10-22",
-      time: "02:00 PM - 04.00 PM",
-      status: "Upcoming",
+      image: sliderImage3,
+      title: "We Provide Medical Services That You Can Trust!",
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sed nisl pellentesque, faucibus libero eu, gravida quam.",
+      button1: { text: "Get Appointment", link: "#" },
+      button2: { text: "Contact Now", link: "#" },
     },
   ];
-
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 3000,
+    arrows: true,
+  };
   return (
-    <div className="dashboard-container">
-      <div className="featured-consultants">
-        <SectionContainer title="Featured Counselors">
-          <div className="consult-list">
-            {/* Previous Button */}
-            <div
-              onClick={previousConsults}
-              className={`pagination-icon left-icon ${
-                currentIndex === 0 ? "disabled" : ""
-              }`}
-            >
-              <GrFormPrevious size={30} cursor={"pointer"} />
+    <>
+      {/* Meta Tags */}
+      <meta charSet="utf-8" />
+      <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
+      <meta name="keywords" content="Site keywords here" />
+      <meta name="description" content="" />
+      <meta name="copyright" content="" />
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, shrink-to-fit=no"
+      />
+      {/* Title */}
+      <title>ConsultPro</title>
+      Favicon
+      <link rel="icon" href="img/favicon.png" />
+      
+        <link
+          href="https://fonts.googleapis.com/css?family=Poppins:200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap"
+          rel="stylesheet"
+        />
+        
+        <section className="slider"
+
+        
+        >
+          <div >
+            <Slider {...settings}>
+          {sliderData.map((slide) => (
+            <div>
+              <div     key={slide.id} className="single-slider"
+                          style={{
+                            backgroundImage: `url('${slide.image}')`,
+              }}>
+            <div className="row">
+              <div className="col-lg-7">
+                <div className="text">
+              <h1>{slide.title}</h1>
+              <p>{slide.description}</p>
+              <div className="button">
+                <a href={slide.button1.link} className="btn">
+                  {slide.button1.text}
+                </a>
+                <a href={slide.button2.link} className="btn primary">
+                  {slide.button2.text}
+                </a>
+              </div>
+                </div>
+              </div>
             </div>
-            {currentConsults.map((consult) => (
-              <ConsultantCard key={consult.id} consultant={consult} />
-            ))}
-            {/* Next Arrow Icon */}
-            <div
-              onClick={nextConsults}
-              className={`pagination-icon right-icon ${
-                currentIndex + consultsPerPage >= featuredConsultant.length
-                  ? "disabled"
-                  : ""
-              }`}
-            >
-              <GrFormNext size={30} cursor={"pointer"} />
+              </div>
+            </div>
+          ))}
+            </Slider>
+          </div>
+        </section>
+        {/*/ End Slider Area */}
+      {/* Start Schedule Area */}
+      <section className="schedule">
+        <div className="container">
+          <div className="schedule-inner">
+            <div className="row">
+              <div className="col-lg-4 col-md-6 col-12 ">
+                {/* single-schedule */}
+                <div className="single-schedule first">
+                  <div className="inner">
+                    <div className="icon">
+                      <i className="fa fa-ambulance" />
+                    </div>
+                    <div className="single-content">
+                      <span>Lorem Amet</span>
+                      <h4>How join as Counselor</h4>
+                      <p>
+                        Lorem ipsum sit amet consectetur adipiscing elit.
+                        Vivamus et erat in lacus convallis sodales.
+                      </p>
+                      <a href="#">
+                        LEARN MORE
+                        <i className="fa fa-long-arrow-right" />
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="col-lg-4 col-md-6 col-12">
+                {/* single-schedule */}
+                <div className="single-schedule middle">
+                  <div className="inner">
+                    <div className="icon">
+                      <i className="icofont-prescription" />
+                    </div>
+                    <div className="single-content">
+                      <span>Fusce Porttitor</span>
+                      <h4>Counselors Timetable</h4>
+                      <p>
+                        Lorem ipsum sit amet consectetur adipiscing elit.
+                        Vivamus et erat in lacus convallis sodales.
+                      </p>
+                      <a href="#">
+                        LEARN MORE
+                        <i className="fa fa-long-arrow-right" />
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="col-lg-4 col-md-12 col-12">
+                {/* single-schedule */}
+                <div className="single-schedule last">
+                  <div className="inner">
+                    <div className="icon">
+                      <i className="icofont-ui-clock" />
+                    </div>
+                    <div className="single-content">
+                      <span>Donec luctus</span>
+                      <h4>Opening Hours</h4>
+                      <ul className="time-sidual">
+                        <li className="day">
+                          Monday - Fridayp <span>8.00-20.00</span>
+                        </li>
+                        <li className="day">
+                          Saturday <span>9.00-18.30</span>
+                        </li>
+                        <li className="day">
+                          Monday - Thusday <span>9.00-15.00</span>
+                        </li>
+                      </ul>
+                      <a href="#">
+                        LEARN MORE
+                        <i className="fa fa-long-arrow-right" />
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-        </SectionContainer>
-      </div>
-
-      {/* <div className="recent-apointments-consultants">
-        <SectionContainer title="Recent Appointments">
-          <div className="recentAppoinemts">
-            {appointments.map((appointment) => (
-              <RecentAppointments
-                key={appointment.id}
-                appointment={appointment}
-              />
-            ))}
+        </div>
+      </section>
+      {/*/End Start schedule Area */}
+      {/* Start Fun-facts */}
+      <div id="fun-facts" className="fun-facts section overlay">
+        <div className="container">
+          <div className="row">
+            <div className="col-lg-4 col-md-6 col-12">
+              {/* Start Single Fun */}
+              <div className="single-fun">
+                <i className="icofont icofont-home" />
+                <div className="content">
+                  <span className="counter">3468</span>
+                  <p>Hospital Rooms</p>
+                </div>
+              </div>
+              {/* End Single Fun */}
+            </div>
+            <div className="col-lg-4 col-md-6 col-12">
+              {/* Start Single Fun */}
+              <div className="single-fun">
+                <i className="icofont icofont-user-alt-3" />
+                <div className="content">
+                  <span className="counter">557</span>
+                  <p>Specialist Counselors</p>
+                </div>
+              </div>
+              {/* End Single Fun */}
+            </div>
+            <div className="col-lg-4 col-md-6 col-12">
+              {/* Start Single Fun */}
+              <div className="single-fun">
+                <i className="icofont-simple-smile" />
+                <div className="content">
+                  <span className="counter">4379</span>
+                  <p>Happy Clinets</p>
+                </div>
+              </div>
+              {/* End Single Fun */}
+            </div>
           </div>
-        </SectionContainer>
-      </div> */}
-
-      <div className="spcialities-consultants">
-        <SectionContainer title="Our Spcialities">
-          <Specialties />
-        </SectionContainer>
+        </div>
       </div>
-    </div>
+      {/*/ End Fun-facts */}
+      {/* Start Why choose */}
+      <section className="why-choose section">
+        <div className="container">
+          <div className="row">
+            <div className="col-lg-12">
+              <div className="section-title">
+                <h2>We Offer Different Services To Improve Your Health</h2>
+                <img src={sectionImage} alt="#" />
+                <p>
+                  Lorem ipsum dolor sit amet consectetur adipiscing elit
+                  praesent aliquet. pretiumts
+                </p>
+              </div>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-lg-6 col-12">
+              {/* Start Choose Left */}
+              <div className="choose-left">
+                <h3>Who We Are</h3>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  Maecenas pharetra antege vel est lobortis, a commodo magna
+                  rhoncus. In quis nisi non emet quam pharetra commodo.{" "}
+                </p>
+                <p>
+                  className aptent taciti sociosqu ad litora torquent per
+                  conubia nostra, per inceptos himenaeos.{" "}
+                </p>
+                <div className="row">
+                  <div className="col-lg-6">
+                    <ul className="list">
+                      <li>
+                        <i className="fa fa-caret-right" />
+                        Maecenas vitae luctus nibh.{" "}
+                      </li>
+                      <li>
+                        <i className="fa fa-caret-right" />
+                        Duis massa massa.
+                      </li>
+                      <li>
+                        <i className="fa fa-caret-right" />
+                        Aliquam feugiat interdum.
+                      </li>
+                    </ul>
+                  </div>
+                  <div className="col-lg-6">
+                    <ul className="list">
+                      <li>
+                        <i className="fa fa-caret-right" />
+                        Maecenas vitae luctus nibh.{" "}
+                      </li>
+                      <li>
+                        <i className="fa fa-caret-right" />
+                        Duis massa massa.
+                      </li>
+                      <li>
+                        <i className="fa fa-caret-right" />
+                        Aliquam feugiat interdum.
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              {/* End Choose Left */}
+            </div>
+            <div className="col-lg-6 col-12">
+              {/* Start Choose Rights */}
+              <div className="choose-right">
+                <div className="video-image">
+                  {/* Video Animation */}
+                  <div className="promo-video">
+                    <div className="waves-block">
+                      <div className="waves wave-1" />
+                      <div className="waves wave-2" />
+                      <div className="waves wave-3" />
+                    </div>
+                  </div>
+                  {/*/ End Video Animation */}
+                  <a href="" className="video video-popup mfp-iframe">
+                    <i className="fa fa-play" />
+                  </a>
+                </div>
+              </div>
+              {/* End Choose Rights */}
+            </div>
+          </div>
+        </div>
+      </section>
+      {/*/ End Why choose */}
+      {/* Start Call to action */}
+      <section
+        className="call-action overlay"
+        data-stellar-background-ratio="0.5"
+      >
+        <div className="container">
+          <div className="row">
+            <div className="col-lg-12 col-md-12 col-12">
+              <div className="content">
+                <h2>Do you need Emergency Medical Care? Call @ 1234 56789</h2>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  Quisque porttitor dictum turpis nec gravida.
+                </p>
+                <div className="button">
+                  <a href="#" className="btn">
+                    Contact Now
+                  </a>
+                  <a href="#" className="btn second">
+                    Learn More
+                    <i className="fa fa-long-arrow-right" />
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      {/*/ End Call to action */}
+      {/* Footer Area */}
+      <footer id="footer" className="footer ">
+        {/* Footer Top */}
+        <div className="footer-top">
+          <div className="container">
+            <div className="row">
+              <div className="col-lg-3 col-md-6 col-12">
+                <div className="single-footer">
+                  <h2>About Us</h2>
+                  <p>
+                    Lorem ipsum dolor sit am consectetur adipisicing elit do
+                    eiusmod tempor incididunt ut labore dolore magna.
+                  </p>
+                  {/* Social */}
+                  <ul className="social">
+                    <li>
+                      <a href="#">
+                        <i className="icofont-facebook" />
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#">
+                        <i className="icofont-google-plus" />
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#">
+                        <i className="icofont-twitter" />
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#">
+                        <i className="icofont-vimeo" />
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#">
+                        <i className="icofont-pinterest" />
+                      </a>
+                    </li>
+                  </ul>
+                  {/* End Social */}
+                </div>
+              </div>
+              <div className="col-lg-3 col-md-6 col-12">
+                <div className="single-footer f-link">
+                  <h2>Quick Links</h2>
+                  <div className="row">
+                    <div className="col-lg-6 col-md-6 col-12">
+                      <ul>
+                        <li>
+                          <a href="#">
+                            <i
+                              className="fa fa-caret-right"
+                              aria-hidden="true"
+                            />
+                            Home
+                          </a>
+                        </li>
+                        <li>
+                          <a href="#">
+                            <i
+                              className="fa fa-caret-right"
+                              aria-hidden="true"
+                            />
+                            About Us
+                          </a>
+                        </li>
+                        <li>
+                          <a href="#">
+                            <i
+                              className="fa fa-caret-right"
+                              aria-hidden="true"
+                            />
+                            Services
+                          </a>
+                        </li>
+                        <li>
+                          <a href="#">
+                            <i
+                              className="fa fa-caret-right"
+                              aria-hidden="true"
+                            />
+                            Our Cases
+                          </a>
+                        </li>
+                        <li>
+                          <a href="#">
+                            <i
+                              className="fa fa-caret-right"
+                              aria-hidden="true"
+                            />
+                            Other Links
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                    <div className="col-lg-6 col-md-6 col-12">
+                      <ul>
+                        <li>
+                          <a href="#">
+                            <i
+                              className="fa fa-caret-right"
+                              aria-hidden="true"
+                            />
+                            Consuling
+                          </a>
+                        </li>
+                        <li>
+                          <a href="#">
+                            <i
+                              className="fa fa-caret-right"
+                              aria-hidden="true"
+                            />
+                            Finance
+                          </a>
+                        </li>
+                        <li>
+                          <a href="#">
+                            <i
+                              className="fa fa-caret-right"
+                              aria-hidden="true"
+                            />
+                            Testimonials
+                          </a>
+                        </li>
+                        <li>
+                          <a href="#">
+                            <i
+                              className="fa fa-caret-right"
+                              aria-hidden="true"
+                            />
+                            FAQ
+                          </a>
+                        </li>
+                        <li>
+                          <a href="#">
+                            <i
+                              className="fa fa-caret-right"
+                              aria-hidden="true"
+                            />
+                            Contact Us
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="col-lg-3 col-md-6 col-12">
+                <div className="single-footer">
+                  <h2>Open Hours</h2>
+                  <p>
+                    Lorem ipsum dolor sit ame consectetur adipisicing elit do
+                    eiusmod tempor incididunt.
+                  </p>
+                  <ul className="time-sidual">
+                    <li className="day">
+                      Monday - Fridayp <span>8.00-20.00</span>
+                    </li>
+                    <li className="day">
+                      Saturday <span>9.00-18.30</span>
+                    </li>
+                    <li className="day">
+                      Monday - Thusday <span>9.00-15.00</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div className="col-lg-3 col-md-6 col-12">
+                <div className="single-footer">
+                  <h2>Newsletter</h2>
+                  <p>
+                    subscribe to our newsletter to get allour news in your
+                    inbox.. Lorem ipsum dolor sit amet, consectetur adipisicing
+                    elit,
+                  </p>
+                  <form
+                    action="mail/mail.php"
+                    method="get"
+                    target="_blank"
+                    className="newsletter-inner"
+                  >
+                    <input
+                      name="email"
+                      placeholder="Email Address"
+                      className="common-input"
+                      onFocus="this.placeholder = ''"
+                      onBlur="this.placeholder = 'Your email address'"
+                      required=""
+                      type="email"
+                    />
+                    <button className="button">
+                      <i className="icofont icofont-paper-plane" />
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {/*/ End Footer Top */}
+      </footer>
+  
+    </>
   );
 };
 

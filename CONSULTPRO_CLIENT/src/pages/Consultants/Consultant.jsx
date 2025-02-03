@@ -1,4 +1,4 @@
-import React from "react";
+import React ,{useEffect} from "react";
 import ConsultantCard from "../../components/ConsultantCard/ConsultantCard";
 import SectionContainer from "../../components/SectionContainer/SectionContainer";
 import "./ConsultantStyles.scss";
@@ -6,7 +6,7 @@ import consult_list from "/src/assets/tempdata/consult_list.js";
 const Consultants = () => {
   const [consultants, setConsultants] = React.useState([]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     fetch("http://localhost:8080/api/users/get-active-counselors")
       .then((response) => response.json())
       .then((data) => setConsultants(data))

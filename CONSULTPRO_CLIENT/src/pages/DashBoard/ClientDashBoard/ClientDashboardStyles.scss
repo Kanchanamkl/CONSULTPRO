@@ -1,55 +1,676 @@
 @use '../../../colors/systemColors' as sysColors;
 
-.dashboard-container {
-  width: 100%;
-  height: 100%;
-  padding-top: 85px;
-  background-color: sysColors.$primary-bg-color;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+body{
+  font-family: 'Poppins', sans-serif;
+font-weight: 400;
+font-size:14px;
+color:#888;
+}
 
-  .featured-consultants {
-    width: 100%;
-    padding-left: 80px;
-    padding-right: 80px;
-    margin-bottom: 10px;
-  }
-
-  .spcialities-consultants {
-    width: 100%;
-    padding-left: 80px;
-    padding-right: 80px;
-    margin-bottom: 10px;
-  }
-
-  // Recent Appointments Section
-  .recent-apointments-consultants{
-    width: 100%;
-    padding-left: 80px;
-    padding-right: 80px;
-    margin-bottom: 10px;
-    .recentAppoinemts{
-      display: flex ;
-      justify-content: space-between;
-    }
-  }
-
-  .consult-list {
-    display: flex;
-    align-items: center; // Center vertically in the flex container
-    justify-content: space-between; // Space between buttons and cards
-    margin: 20px 0; // Add margin for better spacing
+#scrollUp {
+bottom: 15px;
+right: 15px;
+padding: 10px 20px;
+background: sysColors.$primary-color;
+color: #fff;
+font-size: 25px;
+width: 45px;
+height: 45px;
+text-align: center;
+line-height: 45px;
+padding: 0;
+border-radius: 3px;
+box-shadow: 0px 0px 10px #00000026;
+}
+#scrollUp:hover{
+background:#2C2D3F;
+}
 
 
-    .left-button {
-      margin-right: auto; // Push left button to the left
-    }
 
-    .right-button {
-      margin-left: auto; // Push right button to the right
-    }
-  }
+/*===========================
+Start Hero Area CSS
+=============================*/
+.slider .single-slider {
+height: 600px;
+background-size: cover;
+background-position: center;
+background-repeat:no-repeat;
+margin: 0;
+padding: 0;
+}
+.slider .single-slider .text{
+margin-top:120px;
+padding: 0 5rem;
+}
+.slider.index2 .single-slider .text{
+margin-top:150px;
+}
+.slider .single-slider h1 {
+color: #2C2D3F;
+font-size: 38px;
+font-weight: 700;
+margin: 0;
+padding: 0;
+line-height: 42px;
+}
+.slider .single-slider h1 span{
+color:sysColors.$primary-color;
+}
+.slider .single-slider p {
+color: #2C2D3F;
+margin-top: 27px;
+font-weight: 400;
+}
+.slider .single-slider .button{
+margin-top:30px;
+}
+.slider .single-slider .btn{
+color:#fff;
+background:sysColors.$primary-color;
+font-weight:500;
+display:inline-block;
+margin:0;
+margin-right:10px;
+}
+.slider .single-slider .btn:last-child{
+margin:0;
+}
+.slider .single-slider .btn.primary{
+background:#2C2D3F;
+color:#fff;
+}
+.slider .single-slider .btn.primary:before{
+background:sysColors.$primary-color;
+}
+
+
+/*=============================
+Start Schedule CSS
+===============================*/
+.schedule {
+background: #fff;
+margin: 0;
+padding: 0;
+height: 230px;
+}
+.schedule .schedule-inner {
+position: relative;
+transform: translateY(-50%);
+z-index:9;
+}
+.schedule .single-schedule {
+position: relative;
+text-align: left;
+z-index:3;
+border-radius:5px;
+background:sysColors.$primary-color;
+ -webkit-transition: all .3s ease-out 0s;
+  -moz-transition: all .3s ease-out 0s;
+  -ms-transition: all .3s ease-out 0s;
+  -o-transition: all .3s ease-out 0s;
+  transition: all .3s ease-out 0s;
+}
+.schedule .single-schedule .inner {
+overflow:hidden;
+position: relative;
+padding:30px;
+z-index:2;
+}
+.schedule .single-schedule:before{
+position: absolute;
+  z-index: -1;
+  content: '';
+  bottom: -10px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  width: 80%;
+  height: 90%;
+  background:sysColors.$primary-color;
+  opacity: 0;
+  filter: blur(10px);
+  -webkit-transition: all .3s ease-out 0s;
+  -moz-transition: all .3s ease-out 0s;
+  -ms-transition: all .3s ease-out 0s;
+  -o-transition: all .3s ease-out 0s;
+  transition: all .3s ease-out 0s;
+}
+.schedule .single-schedule:hover:before{
+opacity: 0.8;
+}
+.schedule .single-schedule:hover{
+transform: translateY(-5px);
+}
+.schedule .single-schedule .icon i{
+position: absolute;
+font-size: 110px;
+color: #fff;
+ -webkit-transition: all .3s ease-out 0s;
+  -moz-transition: all .3s ease-out 0s;
+  -ms-transition: all .3s ease-out 0s;
+  -o-transition: all .3s ease-out 0s;
+  transition: all .3s ease-out 0s;
+z-index:-1;
+visibility:visible;
+opacity:0.2;
+right: -25px;
+bottom: -30px;
+}
+.schedule .single-schedule span{
+display:block;
+color:#fff;
+}
+.schedule .single-schedule h4{
+font-size: 20px;
+font-weight:600;
+display:inline-block;
+text-transform:capitalize;
+color:#fff;
+margin-top:13px;
+}
+.schedule .single-schedule p{
+color:#fff;
+margin-top:22px;
+}
+.schedule .single-schedule a {
+color: #fff;
+margin-top: 25px;
+font-weight: 500;
+display: inline-block;
+position: relative;
+}
+.schedule .single-schedule a:before{
+position:absolute;
+content:"";
+left:0;
+bottom:0;
+height:1px;
+width:0%;
+background:#fff;
+-webkit-transition:all 0.4s ease;
+-moz-transition:all 0.4s ease;
+transition:all 0.4s ease;
+}
+.schedule .single-schedule a:hover:before{
+width:100%;
+width:100%;
+}
+.schedule .single-schedule a i{
+margin-left:10px;
+}
+.schedule .single-schedule .time-sidual{
 
 }
+.schedule .single-schedule .time-sidual{
+overflow:hidden;
+margin-top:17px;
+}
+.schedule .single-schedule .time-sidual li {
+display: block;
+color: #fff;
+width: 100%;
+margin-bottom:3px;
+}
+.schedule .single-schedule .time-sidual li:last-child{
+margin:0;
+}
+.schedule .single-schedule .time-sidual li span{
+display:inline-block;
+float:right;
+}
+.schedule .single-schedule .day-head .time {
+font-weight: 400;
+float: right;
+}
+/*=============================
+End Schedule CSS
+===============================*/
+
+
+/*=======================
+Start Fun Facts CSS
+=========================*/
+.fun-facts{
+position:relative;
+}
+.fun-facts.section{
+padding:120px 0;
+}
+.fun-facts{
+background:url('img/fun-bg.jpg');
+background-size:cover;
+background-repeat:no-repeat;
+}
+.fun-facts .single-fun {
+
+}
+.fun-facts .single-fun i {
+position: absolute;
+left: 0;
+font-size: 62px;
+color: #fff;
+height: 70px;
+width: 70px;
+line-height: 67px;
+font-size: 28px;
+text-align: center;
+padding: 0;
+margin: 0;
+border: 2px solid #fff;
+border-radius: 0px;
+top: 50%;
+margin-top: -35px;
+-webkit-transition: all 0.4s ease;
+-moz-transition: all 0.4s ease;
+transition: all 0.4s ease;
+border-radius: 50%;
+}
+.fun-facts .single-fun:hover i{
+color:sysColors.$primary-color;
+background:#fff;
+border-color:transparent;
+}
+.fun-facts .single-fun .content {
+padding-left: 80px;
+}
+.fun-facts .single-fun span {
+color: #fff;
+font-weight: 600;
+font-size: 30px;
+position: relative;
+display: block;
+-webkit-transition: all 0.4s ease;
+-moz-transition: all 0.4s ease;
+transition: all 0.4s eas;
+display: block;
+margin-bottom: 7px;
+}
+.fun-facts .single-fun p{
+color:#fff;
+font-size:15px;
+}
+/*===================
+End Fun Facts
+=====================*/
+
+/*===================
+Why choose CSS
+=====================*/
+.why-choose .choose-left h3{
+font-size:24px;
+font-weight:600;
+color:#2C2D3F;
+position:relative;
+padding-bottom:20px;
+margin-bottom:24px;
+}
+.why-choose .choose-left h3:before{
+position:absolute;
+content:"";
+left:0;
+bottom:0;
+height:2px;
+width:50px;
+background:sysColors.$primary-color;
+}
+.why-choose .choose-left p{
+margin-bottom:35px;
+}
+.why-choose .choose-left .list{}
+.why-choose .choose-left .list li {
+color: #868686;
+margin-bottom: 12px;
+}
+.why-choose .choose-left .list li:last-child{
+margin-bottom:0px;
+}
+.why-choose .choose-left .list li i{
+height:15px;
+width:15px;
+line-height:15px;
+text-align:center;
+background:sysColors.$primary-color;
+color:#fff;
+font-size:14px;
+border-radius:100%;
+padding-left:2px;
+margin-right:16px;
+}
+/* Start Faq CSS */
+.why-choose{
+background:#fff;
+}
+.why-choose .choose-right{
+height:100%;
+width:100%;
+background-image:url('img/counselling_thumbnail.jpg');
+background-size:cover;
+background-position:center;
+background-repeat:no-repeat;
+position:relative;
+}
+.why-choose .choose-right .video {
+color: #fff;
+height: 70px;
+width: 70px;
+line-height: 70px;
+text-align: center;
+border-radius: 100%;
+position: absolute;
+left: 50%;
+top: 50%;
+margin-left: -35px;
+margin-top: -35px;
+font-size: 21px;
+background: sysColors.$primary-color;
+padding-left: 4px;
+}
+.why-choose .choose-right .video:hover{
+transform:scale(1.1);
+}
+.why-choose .video-image .waves-block .waves {
+position: absolute;
+width: 200px;
+height: 200px;
+background: #fff;
+opacity: 0;
+-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+border-radius: 100%;
+-webkit-animation: waves 3s ease-in-out infinite;
+animation: waves 3s ease-in-out infinite;
+left: 50%;
+margin-left: -100px;
+top: 50%;
+margin-top: -100px;
+}
+.why-choose .video-image .waves-block .wave-1 {
+  -webkit-animation-delay: 0s;
+  animation-delay: 0s;
+}
+.why-choose .video-image .waves-block .wave-2 {
+  -webkit-animation-delay: 1s;
+  animation-delay: 1s;
+}
+.why-choose .video-image .waves-block .wave-3 {
+  -webkit-animation-delay: 2s;
+  animation-delay: 2s;
+}
+/*=======================
+End Why choose CSS
+=========================*/
+
+/*===============================
+Start Call to action CSS
+=================================*/
+.call-action{
+background-image:url('img/meidum-shot-woman-videocall.jpg');
+background-size:cover;
+background-position:center;
+position:relative;
+background-repeat:no-repeat;
+}
+.call-action .content{
+text-align:center;
+padding:100px 265px;
+}
+.call-action .content h2{
+color:#fff;
+font-size:32px;
+font-weight:600;
+line-height:46px;
+}
+.call-action .content p {
+color: #fff;
+margin: 30px 0px;
+font-size: 15px;
+}
+.call-action .content .btn{
+background:#fff;
+margin-right:20px;
+font-weight:500;
+border:1px solid #fff;
+color:sysColors.$primary-color;
+}
+.call-action .content .btn:before{
+background:sysColors.$primary-color;
+}
+.call-action .content .btn:hover{
+background:sysColors.$primary-color;
+color:#fff;
+}
+.call-action .content .btn:last-child{
+margin-right:0px;
+}
+.call-action .content .second {
+border: 1px solid #fff;
+color: #fff;
+background: transparent;
+color: #fff !important;
+}
+.call-action .content .second:before{
+background:#fff;
+}
+.call-action .content .second:hover{
+color:sysColors.$primary-color;
+border-color:transparent;
+background:#fff;
+}
+.call-action .content .second i{
+margin-left:10px;
+}
+/*===============================
+Start Call to action CSS
+=================================*/
+
+
+/*=========================
+Start Footer CSS
+===========================*/
+.footer{
+position:relative;
+}
+.footer .footer-top{
+padding:100px 0px;
+position:relative;
+background:sysColors.$primary-color;
+}
+.footer .footer-top:before{
+position:absolute;
+content:"";
+left:0;
+top:0;
+height:100%;
+width:100%;
+background:#000;
+opacity:0.1;
+}
+.footer .single-footer{
+
+}
+.footer .single-footer .social{
+margin-top:25px;
+}
+.footer .single-footer .social li{
+display:inline-block;
+margin-right:10px;
+}
+.footer .single-footer .social li:last-child{
+margin-right:0px;
+}
+.footer .single-footer .social li a {
+height: 34px;
+width: 34px;
+line-height: 34px;
+text-align: center;
+border: 1px solid #fff;
+text-align: center;
+padding: 0;
+border-radius: 100%;
+display: block;
+color:#fff;
+font-size: 16px;
+}
+.footer .single-footer .social li a:hover{
+color:sysColors.$primary-color;
+background:#fff;
+border-color:transparent;
+}
+.footer .single-footer .social li a i{
+
+}
+.footer .single-footer.f-link li a i{
+margin-right:10px;
+}
+.footer .single-footer.f-link li{
+display:block;
+margin-bottom:12px;
+}
+.footer .single-footer.f-link li:last-child{
+margin:0;
+}
+.footer .single-footer.f-link li a {
+display: block;
+color: #fff;
+text-transform: capitalize;
+-webkit-transition: all 0.4s ease;
+-moz-transition: all 0.4s ease;
+transition: all 0.4s ease;
+font-weight: 400;
+}
+.footer .single-footer.f-link li a:hover{
+padding-left:8px;
+}
+.footer .single-footer h2{
+color:#fff;
+font-size:20px;
+font-weight:600;
+text-transform:capitalize;
+margin-bottom:40px;
+padding-bottom:20px;
+text-transform:capitalize;
+position:relative;
+}
+.footer .single-footer h2::before{
+position: absolute;
+content: "";
+left: 0;
+bottom: 0px;
+height: 3px;
+width: 50px;
+background: #fff;
+}
+.footer .single-footer .time-sidual{
+margin-top:15px;
+}
+.footer .single-footer .time-sidual{
+overflow:hidden;
+}
+.footer .single-footer .time-sidual li {
+display: block;
+color: #fff;
+width: 100%;
+margin-bottom: 5px;
+}
+.footer .single-footer .time-sidual li span{
+display:inline-block;
+float:right;
+}
+.footer .single-footer .day-head .time {
+font-weight: 400;
+float: right;
+}
+.footer .single-footer p{
+color:#fff;
+}
+.footer .single-footer .newsletter-inner{
+margin-top:20px;
+position:relative;
+}
+.footer .single-footer .newsletter-inner input {
+background: transparent;
+border: 1px solid #fff;
+height: 50px;
+line-height: 42px;
+width: 100%;
+margin-right: 15px;
+color: #fff;
+padding-left: 18px;
+padding-right: 70px;
+display: inline-block;
+float: left;
+border-radius: 0px;
+-webkit-transition: all 0.4s ease;
+-moz-transition: all 0.4s ease;
+transition: all 0.4s ease;
+font-weight: 400;
+border-radius: 5px;
+}
+.footer .single-footer .newsletter-inner input:hover{
+padding-left: 22px;
+}
+.footer input::-webkit-input-placeholder {
+  opacity: 1;
+  color: #fff !important;
+}
+
+.footer input::-moz-placeholder {
+  opacity: 1;
+  color: #fff !important;
+}
+
+.footer input::-ms-input-placeholder {
+  opacity: 1;
+  color: #fff !important;
+}
+.footer input::input-placeholder {
+  opacity: 1;
+  color: #fff !important;
+}
+.footer .single-footer .newsletter-inner .button {
+position: absolute;
+right: 0;
+top: 0;
+height: 50px;
+line-height: 50px;
+width: 50px;
+background: #fff;
+border-left: 1px solid #fff;
+text-shadow: none;
+box-shadow: none;
+display: inline-block;
+border-radius: 0px;
+border: none;
+-webkit-transition: all 0.4s ease;
+-moz-transition: all 0.4s ease;
+transition: all 0.4s ease;
+border-radius: 0 5px 5px 0;
+color: sysColors.$primary-color;
+font-size: 25px;
+}
+.footer .single-footer .newsletter-inner .button i{
+-webkit-transition:all 0.4s ease;
+-moz-transition:all 0.4s ease;
+transition:all 0.4s ease;
+}
+.footer .single-footer .newsletter-inner .button:hover i{
+color:#2C2D3F;
+}
+.footer .copyright{
+background:sysColors.$primary-color;
+padding:25px 0px 25px 0px;
+text-align:center;
+}
+.footer .copyright .copyright-content p{
+color:#fff;
+}
+.footer .copyright .copyright-content p a{
+color:#fff;
+font-weight:400;
+text-decoration:underline;
+display:inline-block;
+margin-left:4px;
+}
+/*=========================
+End Footer CSS
+===========================*/
