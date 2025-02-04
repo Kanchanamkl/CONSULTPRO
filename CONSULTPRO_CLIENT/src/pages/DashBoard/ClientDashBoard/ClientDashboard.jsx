@@ -25,25 +25,26 @@ const ClientDashboard = () => {
     {
       id: 1,
       image: sliderImage1,
-      title: "We Provide Expert Counselling Services That You Can Trust!",
+      title: "We Provide Professional Guidance for Make You Happy!",
+
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sed nisl pellentesque, faucibus libero eu, gravida quam.",
       button1: { text: "Get Appointment", link: "#" },
-      button2: { text: "Learn More", link: "#" },
+      button2: { text: "Contact Now", link: "#" },
     },
     {
       id: 2,
       image: sliderImage2,
-      title: "We Provide Medical Services That You Can Trust!",
+      title: "We Provide Couselling Services That You Can Trust!",
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sed nisl pellentesque, faucibus libero eu, gravida quam.",
       button1: { text: "Get Appointment", link: "#" },
-      button2: { text: "About Us", link: "#" },
+      button2: { text: "Contact Now", link: "#" },
     },
     {
       id: 3,
       image: sliderImage3,
-      title: "We Provide Medical Services That You Can Trust!",
+      title: "Your Happiness is Our Priority!",
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sed nisl pellentesque, faucibus libero eu, gravida quam.",
       button1: { text: "Get Appointment", link: "#" },

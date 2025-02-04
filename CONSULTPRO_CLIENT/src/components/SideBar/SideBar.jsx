@@ -29,7 +29,7 @@ const SideBar = () => {
     role,
     username,
     profilePic,
-} = useContext(StoreContext);
+  } = useContext(StoreContext);
 
   const [sidebar, setSidebar] = useState(false);
 
@@ -75,20 +75,41 @@ const SideBar = () => {
     <>
       <IconContext.Provider value={{ color: "#fff" }}>
         <div className="dash-board-navbar">
-          <Link to="#" className="menu-bars">
-            <FaBars onClick={showSidebar} />
-          </Link>
+          {role !== "CLIENT" && (
+            <Link to="#" className="menu-bars">
+              <FaBars onClick={showSidebar} />
+            </Link>
+          )}
+          <button
+            onClick={() => navigate("/dashboard")}
+            className="menu-bars"
+          >
+            <Link to="/dashboard">
+              <img src="/src/assets/images/logokan.png" alt="ConsultPro Logo" className="logo-image" />
+            </Link>
+          </button>
           <div className="nav-bar-right">
             {role === "CLIENT" && (
-              <button
-                onClick={() => navigate("/consultants")}
-                className="nav-item-new-apointment"
-              >
-                <Link to="/consultants">
-                  <MdAssignmentAdd />
-                </Link>
-                <span>New Appointment</span>
-              </button>
+              <>
+                <button
+                  onClick={() => navigate("/consultants")}
+                  className="nav-item-new-apointment"
+                >
+                  <Link to="/consultants">
+                    <MdAssignmentAdd />
+                  </Link>
+                  <span>New Appointment</span>
+                </button>
+                <button
+                  onClick={() => navigate("/appointments")}
+                  className="nav-item-my-apointments"
+                >
+                  <Link to="/appointments">
+                    <FaAddressBook />
+                  </Link>
+                  <span>My Appointments</span>
+                </button>
+              </>
             )}
 
             <li className="nav-item" onClick={handleUserIconClick}>
