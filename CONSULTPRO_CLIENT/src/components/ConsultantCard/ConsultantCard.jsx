@@ -28,7 +28,7 @@ const ConsultantCard = ({ consultant }) => {
         onLoad={handleImageLoad}
       />
       <h3 className="consultn-name">{consultant.firstName}{consultant.lastName}</h3>
-      <p className="consultn-specialize">{consultant.specialize}</p>
+      <p className="consultn-specialize">{consultant.specialization}</p>
       <button className="appointment-button" onClick={handleNavigate}>
         <MdAssignmentAdd className="appointment-icon" />{" "}
         Book Now

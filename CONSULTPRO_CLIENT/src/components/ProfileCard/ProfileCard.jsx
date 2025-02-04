@@ -43,7 +43,7 @@ return (
                 <p className="user-role">{role}</p>
                 <button onClick={confirmLogout} className="logout-btn">
                 <span>
-                  <MdLogout />
+                  <MdLogout /> Loguot
                 </span>
               </button>               
 

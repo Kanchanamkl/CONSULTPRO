@@ -179,9 +179,11 @@ const Register = () => {
         </form>
 
         <p className="container my-2">Already have an account?</p>
-        <Link to="/login" className="btn-secondary">
+    
+        <Link to="/login" >
           Login
         </Link>
+
       </div>
     </div>
   );

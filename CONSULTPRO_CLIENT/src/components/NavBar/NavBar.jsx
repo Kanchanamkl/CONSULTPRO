@@ -3,10 +3,10 @@ import { Link } from 'react-router-dom';
 import HeroBG from '../../images/hero_bg.png';
 import './NavBarStyles.scss';
 
-const navbar = () => {
+const NavBar = () => {
   return (
     <div >
-      <nav className="navbar">
+      <div className="navbar">
         <div className="navbar-brand">
           <a href="/" className="logo">ConsultPro</a>
         </div>
@@ -15,9 +15,9 @@ const navbar = () => {
 
           <li className='nav-item-sign-up'><a href="/login">Sign In</a></li>
         </ul>
-      </nav>
+      </div>
     </div>
   );
 };
 
-export default navbar;
+export default NavBar;

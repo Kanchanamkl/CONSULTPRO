@@ -81,8 +81,18 @@ const AppointmentCard = ({ appointment }) => {
                     <span className="tooltip-text">
                       * You will have
                       access before 5 min
-                      from the start time
                     </span>
+                  </div>
+                )}
+                  {isJoinButtonEnabled && (
+                  <div className="tooltip-container">
+                    <button
+                      className={`join-button`}
+                      onClick={handleNavidate}
+                    >
+                      Join Now
+                    </button>
+           
                   </div>
                 )}
               </>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState,useEffect, useContext } from "react";
 
 import "./client_homepage_css/bootstrap.min.css";
 import "./client_homepage_css/nice-select.css";
@@ -18,8 +18,13 @@ import sectionImage from "./client_homepage_img/section-img.png";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { StoreContext } from "../../../StoreContext/StoreContext";
+
 
 const ClientDashboard = () => {
+  const {
+    isLoggedIn
+} = useContext(StoreContext);
   const sliderData = [
     {
       id: 1,
@@ -79,12 +84,25 @@ const ClientDashboard = () => {
               <h1>{slide.title}</h1>
               <p>{slide.description}</p>
               <div className="button">
-                <a href={slide.button1.link} className="btn">
-                  {slide.button1.text}
-                </a>
-                <a href={slide.button2.link} className="btn primary">
-                  {slide.button2.text}
-                </a>
+              {!isLoggedIn ? (
+                <>
+                  <a href="/register" className="btn">
+                     Get Start
+                  </a>
+                  <a href="/consultant-register" className="btn primary">
+                  Join as Counselor
+                  </a>
+                </>
+              ) : (
+                <>
+                  <a href="/consultants" className="btn">
+                    {slide.button1.text}
+                  </a>
+                  <a href={slide.button2.link} className="btn primary">
+                    {slide.button2.text}
+                  </a>
+                </>
+              )}
               </div>
                 </div>
               </div>

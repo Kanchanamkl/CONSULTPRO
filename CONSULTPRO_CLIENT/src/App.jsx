@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-import HeroPage from "./pages/HeroPage/HeroPage";
 import "./App.scss";
 import Login from "./pages/Login/Login";
 import Register from "./pages/Registration/Register";
@@ -31,14 +30,14 @@ function App() {
   if (!isLoggedIn) {
     return (
       <>
-        <NavBar />
+        <SideBar />
         <Routes>
-          <Route path="/" element={<HeroPage />} />
+        <Route path="/" element={<ClientDashboard />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/consultant-register" element={<ConsultantRegister />} />
           <Route path="/accSetup" element={<AccountSetUp />} />
-          <Route path="*" element={<HeroPage />} />
+          <Route path="*" element={<ClientDashboard />} />
         </Routes>
         <Footer />
       </>
@@ -99,14 +98,14 @@ function App() {
           <>
             <NavBar />
             <Routes>
-              <Route path="/" element={<HeroPage />} />
+              <Route path="/" element={<ClientDashboard />} /> 
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
               <Route
                 path="/consultant-register"
                 element={<ConsultantRegister />}
               />
-              <Route path="*" element={<HeroPage />} />
+              <Route path="*" element={<ClientDashboard />} />
             </Routes>
             <Footer />
           </>

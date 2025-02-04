@@ -75,19 +75,36 @@ const SideBar = () => {
     <>
       <IconContext.Provider value={{ color: "#fff" }}>
         <div className="dash-board-navbar">
-          {role !== "CLIENT" && (
+          {role !== "CLIENT" && isLoggedIn && (
             <Link to="#" className="menu-bars">
               <FaBars onClick={showSidebar} />
             </Link>
           )}
-          <button
-            onClick={() => navigate("/dashboard")}
-            className="menu-bars"
-          >
-            <Link to="/dashboard">
-              <img src="/src/assets/images/logokan.png" alt="ConsultPro Logo" className="logo-image" />
+          {!isLoggedIn && (
+          <button  className="menu-bars">
+            <Link to="/">
+              <img
+                src="/src/assets/images/logokan.png"
+                alt="ConsultPro Logo"
+                className="logo-image"
+              />
             </Link>
           </button>
+          )}
+
+          {isLoggedIn && (
+            <button onClick={() => navigate("/dashboard")} className="menu-bars">
+              <Link to="/dashboard">
+                <img
+                  src="/src/assets/images/logokan.png"
+                  alt="ConsultPro Logo"
+                  className="logo-image"
+                />
+              </Link>
+            </button>
+          )}
+
+
           <div className="nav-bar-right">
             {role === "CLIENT" && (
               <>
@@ -112,20 +129,31 @@ const SideBar = () => {
               </>
             )}
 
-            <li className="nav-item" onClick={handleUserIconClick}>
-              <Link onClick={toggleProfileCard}>
-                <FaUser />
-                {showProfileCard && (
-                  <UserProfileCard
-                    profile_icon={profilePic}
-                    name={`${firstName} ${lastName}`}
-                    username={username}
-                    role={role}
-                    onClose={() => setShowProfileCard(false)}
-                  />
-                )}
-              </Link>
-            </li>
+            {isLoggedIn && (
+              <li className="nav-item" onClick={handleUserIconClick}>
+                <Link onClick={toggleProfileCard}>
+                  <FaUser />
+                  {showProfileCard && (
+                    <UserProfileCard
+                      profile_icon={profilePic}
+                      name={`${firstName} ${lastName}`}
+                      username={username}
+                      role={role}
+                      onClose={() => setShowProfileCard(false)}
+                    />
+                  )}
+                </Link>
+              </li>
+            )}
+
+            {!isLoggedIn && (
+              <button
+                onClick={() => navigate("/login")}
+                className="nav-item-my-apointments"
+              >
+                <span>Sign in</span>
+              </button>
+            )}
           </div>
         </div>
 
@@ -167,12 +195,6 @@ const SideBar = () => {
                         <span> Approvals </span>
                       </Link>
                     </li>
-                    {/* <li className="side-item">
-                      <Link to="/add-counselor">
-                        <FaUserMd />
-                        <span> Add Counselor </span>
-                      </Link>
-                    </li> */}
                   </>
                 )}
               </>

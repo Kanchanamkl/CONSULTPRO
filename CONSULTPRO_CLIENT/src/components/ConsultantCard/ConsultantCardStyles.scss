@@ -3,12 +3,12 @@
 .consultn-card {
   background-color: sysColors.$card-bg-color;
   border-radius: 8px;
-  padding: 12px;
+  padding: 18px;
   text-align: center;
-
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-  margin-bottom: 15px;
+  margin-bottom:10px;
   width: 250px;
+  height:auto;
   position: relative; // Add this for positioning the spinner
   &:hover {
     box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.377);
@@ -16,13 +16,14 @@
 }
 
 .consultn-img {
-  width: 100%;
-  height: 200px;
+  width: 70%;
+  height: 50%;
   object-fit: cover;
-  border-radius: 8px;
-  &.hidden {
-    display: none;
-  }
+  border-radius: 50%;
+  &.hidden
+{
+  display: none;
+}
 }
 
 .consultn-name {
@@ -34,22 +35,20 @@
   color: #61666b;
   font-weight: 500;
   font-size: 0.9rem;
-  margin-bottom: 6px;
+  margin: 6px;
+  text-transform: uppercase;
 }
 
 .appointment-button {
   background-color: sysColors.$primary-color;
   color: white;
-  border: none;
   border-radius: 7px;
   padding: 10px 10px;
   font-size: 0.9rem;
-  font-weight: 400;
+  font-weight: 500;
   cursor: pointer;
-  justify-content: space-evenly;
   transition: background-color 0.3s;
-  margin-top: 2px;
-  align-items: center;
+  margin: 5px;
   justify-content: center;
   &:hover {
     background-color: sysColors.$primary-color-hover;
@@ -68,7 +67,7 @@
   width: 40px;
   height: 40px;
   animation: spin 1s linear infinite;
-  position: absolute;
+  position: relative;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);

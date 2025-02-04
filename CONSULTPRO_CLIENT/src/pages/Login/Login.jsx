@@ -144,9 +144,12 @@ const Login = () => {
           </form>
 
           <p className="container my-2 mt-3">Don&apos;t have an account?</p>
-          <Link to="/register" className="btn btn-secondary">
+          <button className="btn">
+          <Link to="/register">
             Register
           </Link>
+          </button>
+   
         </div>
       </div>
     </div>
