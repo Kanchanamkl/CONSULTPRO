@@ -1,13 +1,41 @@
-// src/components/RecentAppointments.jsx
 import React, { useState, useEffect } from "react";
 import "./AppointmentCardStyles.scss";
 import { useNavigate } from "react-router-dom";
 import { StoreContext } from "../../../StoreContext/StoreContext";
 import { useContext } from "react";
+
 const AppointmentCard = ({ appointment }) => {
   const navigate = useNavigate();
   const { role } = useContext(StoreContext);
   const userRole = role;
+  const [isJoinButtonEnabled, setIsJoinButtonEnabled] = useState(false);
+
+  useEffect(() => {
+    const checkButtonStatus = () => {
+      const now = new Date();
+      const startTime = new Date(
+        appointment.date + " " + appointment.startTime
+      );
+      const endTime = new Date(appointment.date + " " + appointment.endTime);
+
+      // Enable button 5 minutes before start time
+      const enableTime = new Date(startTime.getTime() - 5 * 60000);
+      // Disable button 5 minutes after end time
+      const disableTime = new Date(endTime.getTime() + 5 * 60000);
+
+      if (now >= enableTime && now <= disableTime) {
+        setIsJoinButtonEnabled(true);
+      } else {
+        setIsJoinButtonEnabled(false);
+      }
+    };
+
+    checkButtonStatus();
+    const interval = setInterval(checkButtonStatus, 60000); // Check every minute
+
+    return () => clearInterval(interval);
+  }, [appointment]);
+
   const handleNavidate = () => {
     navigate("/meeting-page");
   };
@@ -24,7 +52,7 @@ const AppointmentCard = ({ appointment }) => {
         <div className="details">
           <h4 className="consultant-name">{appointment.counselorName}</h4>
           <p className="appointment-date">Date : {appointment.date}</p>
-          <p className="appointment-time">Time : {appointment.time}</p>
+          <p className="appointment-time">Time : {appointment.timeSlot}</p>
           <div className="join-section">
             {appointment.status !== "TODAY" && (
               <p
@@ -41,14 +69,22 @@ const AppointmentCard = ({ appointment }) => {
             )}
             {appointment.status === "TODAY" && (
               <>
-                <div>
-                  <button
-                    className={`join-button`}
-                    onClick={() => handleNavidate()}
-                  >
-                    Join Now
-                  </button>
-                </div>
+                {!isJoinButtonEnabled && (
+                  <div className="tooltip-container">
+                    <button
+                      className={`join-button`}
+                      onClick={handleNavidate}
+                      disabled={!isJoinButtonEnabled}
+                    >
+                      Join Now
+                    </button>
+                    <span className="tooltip-text">
+                      * You will have
+                      access before 5 min
+                      from the start time
+                    </span>
+                  </div>
+                )}
               </>
             )}
           </div>

@@ -119,6 +119,7 @@ const SideBar = () => {
                   <UserProfileCard
                     profile_icon={profilePic}
                     name={`${firstName} ${lastName}`}
+                    username={username}
                     role={role}
                     onClose={() => setShowProfileCard(false)}
                   />

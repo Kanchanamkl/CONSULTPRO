@@ -31,7 +31,7 @@ const ConsultantCard = ({ consultant }) => {
       <p className="consultn-specialize">{consultant.specialize}</p>
       <button className="appointment-button" onClick={handleNavigate}>
         <MdAssignmentAdd className="appointment-icon" />{" "}
-        Make an Appointment
+        Book Now
       </button>
     </div>
   );

@@ -5,6 +5,7 @@
   border-radius: 8px;
   padding: 12px;
   text-align: center;
+
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
   margin-bottom: 15px;
   width: 250px;
@@ -37,7 +38,7 @@
 }
 
 .appointment-button {
-  background-color: sysColors.$secondary-color;
+  background-color: sysColors.$primary-color;
   color: white;
   border: none;
   border-radius: 7px;
@@ -45,16 +46,15 @@
   font-size: 0.9rem;
   font-weight: 400;
   cursor: pointer;
-  display: flex;
-  align-items: center;
   justify-content: space-evenly;
   transition: background-color 0.3s;
-  margin-left: 20px;
-  margin-right: 20px;
   margin-top: 2px;
+  align-items: center;
+  justify-content: center;
   &:hover {
-    background-color: sysColors.$secondary-color-hover;
+    background-color: sysColors.$primary-color-hover;
   }
+  
 }
 
 .appointment-icon {

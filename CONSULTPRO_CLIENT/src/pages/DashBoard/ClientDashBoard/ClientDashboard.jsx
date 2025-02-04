@@ -1,21 +1,20 @@
 import React, { useState, useEffect } from "react";
 
-import "./css/bootstrap.min.css";
-import "./css/nice-select.css";
-import "./css/font-awesome.min.css";
-import "./css/icofont.css";
-import "./css/slicknav.min.css";
-import "./css/datepicker.css";
-import "./css/animate.min.css";
-import "./css/magnific-popup.css";
-import "./css/normalize.css";
+import "./client_homepage_css/bootstrap.min.css";
+import "./client_homepage_css/nice-select.css";
+import "./client_homepage_css/font-awesome.min.css";
+import "./client_homepage_css/icofont.css";
+import "./client_homepage_css/slicknav.min.css";
+import "./client_homepage_css/datepicker.css";
+import "./client_homepage_css/animate.min.css";
+import "./client_homepage_css/magnific-popup.css";
+import "./client_homepage_css/normalize.css";
 import "./ClientDashboardStyles.scss";
-import "./css/responsive.css";
-import sliderImage1 from "./img/slider2.jpeg";
-import sliderImage2 from "./img/slider.jpeg";
-import sliderImage3 from "./img/slider3.jpeg";
-import sectionImage from "./img/section-img.png";
-import favicon from "./img/favicon.png";
+import "./client_homepage_css/responsive.css";
+import sliderImage1 from "./client_homepage_img/slider2.jpeg";
+import sliderImage2 from "./client_homepage_img/slider.jpeg";
+import sliderImage3 from "./client_homepage_img/slider3.jpeg";
+import sectionImage from "./client_homepage_img/section-img.png";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -63,29 +62,8 @@ const ClientDashboard = () => {
   };
   return (
     <>
-      {/* Meta Tags */}
-      <meta charSet="utf-8" />
-      <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
-      <meta name="keywords" content="Site keywords here" />
-      <meta name="description" content="" />
-      <meta name="copyright" content="" />
-      <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1, shrink-to-fit=no"
-      />
-      {/* Title */}
-      <title>ConsultPro</title>
-      Favicon
-      <link rel="icon" href="img/favicon.png" />
-      
-        <link
-          href="https://fonts.googleapis.com/css?family=Poppins:200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap"
-          rel="stylesheet"
-        />
-        
+  
         <section className="slider"
-
-        
         >
           <div >
             <Slider {...settings}>

@@ -21,7 +21,9 @@ const ClientAppointments = () => {
             id: appointment.id,
             counselorName: appointment.counselorName,
             date: appointment.date,
-            time: appointment.time,
+            timeSlot: appointment.timeSlot,
+            startTime: appointment.startTime,
+            endTime: appointment.endTime,
             status: getStatus(appointment.date),
             counselorImg : appointment.counselorImg
         }));
@@ -81,7 +83,7 @@ const ClientAppointments = () => {
     id: appointment.id,
     counselorName: appointment.counselorName,
     date: appointment.date,
-    time: appointment.time,
+    timeSlot: appointment.timeSlot,
     status: appointment.status,
   
   }));
