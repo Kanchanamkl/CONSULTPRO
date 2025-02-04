@@ -1,4 +1,4 @@
-import { useState,useEffect, useContext } from "react";
+import { useState, useEffect, useContext } from "react";
 
 import "./client_homepage_css/bootstrap.min.css";
 import "./client_homepage_css/nice-select.css";
@@ -9,7 +9,7 @@ import "./client_homepage_css/datepicker.css";
 import "./client_homepage_css/animate.min.css";
 import "./client_homepage_css/magnific-popup.css";
 import "./client_homepage_css/normalize.css";
-import "./ClientDashboardStyles.scss";
+import "./HomePageStyles.scss";
 import "./client_homepage_css/responsive.css";
 import sliderImage1 from "./client_homepage_img/slider2.jpeg";
 import sliderImage2 from "./client_homepage_img/slider.jpeg";
@@ -18,13 +18,10 @@ import sectionImage from "./client_homepage_img/section-img.png";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { StoreContext } from "../../../StoreContext/StoreContext";
+import { StoreContext } from "../../StoreContext/StoreContext";
 
-
-const ClientDashboard = () => {
-  const {
-    isLoggedIn
-} = useContext(StoreContext);
+const HomePage = () => {
+  const { isLoggedIn } = useContext(StoreContext);
   const sliderData = [
     {
       id: 1,
@@ -67,53 +64,60 @@ const ClientDashboard = () => {
   };
   return (
     <>
-  
-        <section className="slider"
-        >
-          <div >
-            <Slider {...settings}>
-          {sliderData.map((slide) => (
-            <div>
-              <div     key={slide.id} className="single-slider"
-                          style={{
-                            backgroundImage: `url('${slide.image}')`,
-              }}>
-            <div className="row">
-              <div className="col-lg-7">
-                <div className="text">
-              <h1>{slide.title}</h1>
-              <p>{slide.description}</p>
-              <div className="button">
-              {!isLoggedIn ? (
-                <>
-                  <a href="/register" className="btn">
-                     Get Start
-                  </a>
-                  <a href="/consultant-register" className="btn primary">
-                  Join as Counselor
-                  </a>
-                </>
-              ) : (
-                <>
-                  <a href="/consultants" className="btn">
-                    {slide.button1.text}
-                  </a>
-                  <a href={slide.button2.link} className="btn primary">
-                    {slide.button2.text}
-                  </a>
-                </>
-              )}
-              </div>
+      <section className="slider">
+        <div>
+          <Slider {...settings}>
+            {sliderData.map((slide) => (
+              <div>
+                <div
+                  key={slide.id}
+                  className="single-slider"
+                  style={{
+                    backgroundImage: `url('${slide.image}')`,
+                  }}
+                >
+                  <div className="row">
+                    <div className="col-lg-7">
+                      <div className="text">
+                        <h1>{slide.title}</h1>
+                        <p>{slide.description}</p>
+                        <div className="button">
+                          {!isLoggedIn ? (
+                            <>
+                              <a href="/register" className="btn">
+                                Get Start
+                              </a>
+                              <a
+                                href="/consultant-register"
+                                className="btn primary"
+                              >
+                                Join as Counselor
+                              </a>
+                            </>
+                          ) : (
+                            <>
+                              <a href="/consultants" className="btn">
+                                {slide.button1.text}
+                              </a>
+                              <a
+                                href={slide.button2.link}
+                                className="btn primary"
+                              >
+                                {slide.button2.text}
+                              </a>
+                            </>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-              </div>
-            </div>
-          ))}
-            </Slider>
-          </div>
-        </section>
-        {/*/ End Slider Area */}
+            ))}
+          </Slider>
+        </div>
+      </section>
+      {/*/ End Slider Area */}
       {/* Start Schedule Area */}
       <section className="schedule">
         <div className="container">
@@ -560,9 +564,8 @@ const ClientDashboard = () => {
         </div>
         {/*/ End Footer Top */}
       </footer>
-  
     </>
   );
 };
 
-export default ClientDashboard;
+export default HomePage;

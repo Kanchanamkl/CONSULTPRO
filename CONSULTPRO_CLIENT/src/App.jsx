@@ -7,7 +7,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { StoreContext } from "./StoreContext/StoreContext";
 import SideBar from "./components/SideBar/SideBar";
 import ConsultantRegister from "./pages/Registration/ConsultantRegister";
-import ClientDashBoard from "./pages/DashBoard/ClientDashBoard/ClientDashboard";
 import Profile from "./pages/Profile/ClientProfile/Profie";
 import Consultants from "./pages/Consultants/Consultant";
 import Applications from "./pages/Applications/Applications";
@@ -20,7 +19,7 @@ import AdminAppointments from "./pages/Appointments/AdminAppointments/AdminAppoi
 import CounselorAppointments from "./pages/Appointments/CounselorAppointments/CounselorAppointments";
 import AdminDashBoard from "./pages/DashBoard/AdminDashBoard/AdminDashBoard";
 import CounselorDashBoard from "./pages/DashBoard/CounselorDashBoard/CounselorDashBoard";
-import ClientDashboard from "./pages/DashBoard/ClientDashBoard/ClientDashboard";
+import HomePage from "./pages/HomePage/HomePage";
 import Footer from "./components/Footer/Footer";
 import AccountSetUp from "./pages/AccountSetup/AccountSetup";
 
@@ -32,12 +31,12 @@ function App() {
       <>
         <SideBar />
         <Routes>
-        <Route path="/" element={<ClientDashboard />} />
+          <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/consultant-register" element={<ConsultantRegister />} />
           <Route path="/accSetup" element={<AccountSetUp />} />
-          <Route path="*" element={<ClientDashboard />} />
+          <Route path="*" element={<HomePage />} />
         </Routes>
         <Footer />
       </>
@@ -81,14 +80,14 @@ function App() {
           <>
             <SideBar />
             <Routes>
-              <Route path="/" element={<ClientDashboard />} />
-              <Route path="/dashboard" element={<ClientDashboard />} />
+              <Route path="/" element={<HomePage />} />
+              <Route path="/dashboard" element={<HomePage />} />
               <Route path="/appointments" element={<ClientAppointments />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/book" element={<BookingPage />} />
               <Route path="/meeting-page" element={<MeetingPage />} />
               <Route path="/consultants" element={<Consultants />} />
-              <Route path="*" element={<ClientDashboard />} />
+              <Route path="*" element={<HomePage />} />
             </Routes>
             <Footer />
           </>
@@ -98,14 +97,14 @@ function App() {
           <>
             <NavBar />
             <Routes>
-              <Route path="/" element={<ClientDashboard />} /> 
+              <Route path="/" element={<HomePage />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
               <Route
                 path="/consultant-register"
                 element={<ConsultantRegister />}
               />
-              <Route path="*" element={<ClientDashboard />} />
+              <Route path="*" element={<HomePage />} />
             </Routes>
             <Footer />
           </>
