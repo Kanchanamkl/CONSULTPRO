@@ -179,7 +179,7 @@ const HomePage = () => {
                       <h4>Opening Hours</h4>
                       <ul className="time-sidual">
                         <li className="day">
-                          Monday - Fridayp <span>8.00-20.00</span>
+                          Monday - Friday <span>8.00-20.00</span>
                         </li>
                         <li className="day">
                           Saturday <span>9.00-18.30</span>

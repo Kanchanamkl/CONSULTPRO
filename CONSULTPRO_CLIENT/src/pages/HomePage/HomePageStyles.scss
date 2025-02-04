@@ -1,10 +1,11 @@
 @use '../../colors/systemColors' as sysColors;
 
 body{
-  font-family: 'Poppins', sans-serif;
+font-family: 'Poppins', sans-serif;
 font-weight: 400;
 font-size:14px;
 color:#888;
+width: 100%;
 }
 
 #scrollUp {
@@ -99,17 +100,7 @@ position: relative;
 transform: translateY(-50%);
 z-index:9;
 }
-.schedule .single-schedule {
-position: relative;
-text-align: left;
-z-index:3;
-border-radius:5px;
-background:sysColors.$primary-color;
- -webkit-transition: all .3s ease-out 0s;
-  -moz-transition: all .3s ease-out 0s;
-  -ms-transition: all .3s ease-out 0s;
-  -o-transition: all .3s ease-out 0s;
-  transition: all .3s ease-out 0s;
+.schedule .single-schedule { position: relative; text-align: left; z-index:3; border-radius:15px; background:sysColors.$primary-color; -webkit-transition: all .3s ease-out 0s; -moz-transition: all .3s ease-out 0s; -ms-transition: all .3s ease-out 0s; -o-transition: all .3s ease-out 0s; transition: all .3s ease-out 0s; -webkit-border-radius:15px; -moz-border-radius:15px; -ms-border-radius:15px; -o-border-radius:15px;
 }
 .schedule .single-schedule .inner {
 overflow:hidden;
@@ -238,7 +229,7 @@ position:relative;
 padding:120px 0;
 }
 .fun-facts{
-background:url('img/fun-bg.jpg');
+background:url('client_homepage_img/fun-bg.jpg');
 background-size:cover;
 background-repeat:no-repeat;
 }
@@ -344,7 +335,7 @@ background:#fff;
 .why-choose .choose-right{
 height:100%;
 width:100%;
-background-image:url('img/counselling_thumbnail.jpg');
+background-image:url('client_homepage_img/counselling_thumbnail.jpg');
 background-size:cover;
 background-position:center;
 background-repeat:no-repeat;
@@ -404,7 +395,7 @@ End Why choose CSS
 Start Call to action CSS
 =================================*/
 .call-action{
-background-image:url('img/meidum-shot-woman-videocall.jpg');
+background-image:url('client_homepage_img/meidum-shot-woman-videocall.jpg');
 background-size:cover;
 background-position:center;
 position:relative;

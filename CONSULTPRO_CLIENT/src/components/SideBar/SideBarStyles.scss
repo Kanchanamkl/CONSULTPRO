@@ -113,9 +113,9 @@
   text-decoration: none;
   color: #f5f5f5;
 
-  :hover {
-    background: sysColors.$primary-color-hover;
-  }
+//   :hover {
+//     background: sysColors.$primary-color-hover;
+//   }
 }
 
 .menu-bars {
@@ -145,10 +145,10 @@
   transition: 0.4s;
 }
 
-.nav-item a:hover {
-  background: sysColors.$primary-color-hover;
-  font-weight: bold;
-}
+// .nav-item a:hover {
+//   background: sysColors.$primary-color-hover;
+//   font-weight: bold;
+// }
 
 .side-item a:hover {
   background: sysColors.$primary-color-hover;
@@ -162,8 +162,9 @@
   border-radius: 10px;
 }
 .nav-menu-items {
-  margin-right: 56px;
+  margin-right: 5px;
   width: 100%;
+  color: #f5f5f5;
 }
 .navbar-toggle {
   background: sysColors.$primary-color;
