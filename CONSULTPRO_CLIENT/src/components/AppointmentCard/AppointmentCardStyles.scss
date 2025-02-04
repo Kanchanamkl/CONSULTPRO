@@ -1,11 +1,11 @@
-@use '../../../colors/systemColors' as sysColors;
+@use '../../colors/systemColors' as sysColors;
 
 .client-appointment-card {
   background-color: sysColors.$card-bg-color;
   color: sysColors.$primary-text-color;
   border-radius: 8px;
   padding: 1px;
-  width:100%;
+  width:330px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   display: flex;
   align-items: center;

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./AppointmentCardStyles.scss";
 import { useNavigate } from "react-router-dom";
-import { StoreContext } from "../../../StoreContext/StoreContext";
+import { StoreContext } from "../../StoreContext/StoreContext";
 import { useContext } from "react";
 
 const AppointmentCard = ({ appointment }) => {
@@ -44,13 +44,21 @@ const AppointmentCard = ({ appointment }) => {
     <div className="appointments-container">
       <div className="client-appointment-card" key={appointment.id}>
         <div className="profile-img">
-          <img
-            src={appointment.counselorImg}
-            alt={appointment.consultantName}
-          />
+          {userRole === "CLIENT" ? (
+            <img
+              src={appointment.counselorImg}
+              alt={appointment.consultantName}
+            />
+          ) : userRole === "COUNSELOR" ? (
+            <img src={appointment.clientImg} alt={appointment.clientName} />
+          ) : null}
         </div>
         <div className="details">
-          <h4 className="consultant-name">{appointment.counselorName}</h4>
+          {userRole === "CLIENT" ? (
+            <h4 className="consultant-name">{appointment.counselorName}</h4>
+          ) : userRole === "COUNSELOR" ? (
+            <h4 className="consultant-name">{appointment.clientName}</h4>
+          ) : null}
           <p className="appointment-date">Date : {appointment.date}</p>
           <p className="appointment-time">Time : {appointment.timeSlot}</p>
           <div className="join-section">
@@ -79,20 +87,15 @@ const AppointmentCard = ({ appointment }) => {
                       Join Now
                     </button>
                     <span className="tooltip-text">
-                      * You will have
-                      access before 5 min
+                      * You will have access before 5 min
                     </span>
                   </div>
                 )}
-                  {isJoinButtonEnabled && (
+                {isJoinButtonEnabled && (
                   <div className="tooltip-container">
-                    <button
-                      className={`join-button`}
-                      onClick={handleNavidate}
-                    >
+                    <button className={`join-button`} onClick={handleNavidate}>
                       Join Now
                     </button>
-           
                   </div>
                 )}
               </>

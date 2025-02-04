@@ -190,9 +190,7 @@ width:100%;
 .schedule .single-schedule a i{
 margin-left:10px;
 }
-.schedule .single-schedule .time-sidual{
 
-}
 .schedule .single-schedule .time-sidual{
 overflow:hidden;
 margin-top:17px;
@@ -233,9 +231,7 @@ background:url('client_homepage_img/fun-bg.jpg');
 background-size:cover;
 background-repeat:no-repeat;
 }
-.fun-facts .single-fun {
 
-}
 .fun-facts .single-fun i {
 position: absolute;
 left: 0;
@@ -308,7 +304,7 @@ background:sysColors.$primary-color;
 .why-choose .choose-left p{
 margin-bottom:35px;
 }
-.why-choose .choose-left .list{}
+
 .why-choose .choose-left .list li {
 color: #868686;
 margin-bottom: 12px;
@@ -366,7 +362,6 @@ width: 200px;
 height: 200px;
 background: #fff;
 opacity: 0;
--ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
 border-radius: 100%;
 -webkit-animation: waves 3s ease-in-out infinite;
 animation: waves 3s ease-in-out infinite;
@@ -476,9 +471,7 @@ width:100%;
 background:#000;
 opacity:0.1;
 }
-.footer .single-footer{
 
-}
 .footer .single-footer .social{
 margin-top:25px;
 }
@@ -507,9 +500,7 @@ color:sysColors.$primary-color;
 background:#fff;
 border-color:transparent;
 }
-.footer .single-footer .social li a i{
 
-}
 .footer .single-footer.f-link li a i{
 margin-right:10px;
 }
@@ -565,7 +556,7 @@ margin-bottom: 5px;
 }
 .footer .single-footer .time-sidual li span{
 display:inline-block;
-float:right;
+
 }
 .footer .single-footer .day-head .time {
 font-weight: 400;
@@ -589,7 +580,7 @@ color: #fff;
 padding-left: 18px;
 padding-right: 70px;
 display: inline-block;
-float: left;
+
 border-radius: 0px;
 -webkit-transition: all 0.4s ease;
 -moz-transition: all 0.4s ease;
