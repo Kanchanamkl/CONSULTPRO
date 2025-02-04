@@ -16,6 +16,8 @@ public class AppointmentResponseDTO {
     private String clientName;
     private String clientImg;
     private String date;
-    private String time;
+    private String timeSlot;
+    private String startTime;
+    private String endTime;
     private String status;
 }

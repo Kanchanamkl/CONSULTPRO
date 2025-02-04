@@ -63,7 +63,7 @@ public class AppointmentService {
     public List<AppointmentResponseDTO> getAppointmentsByClientId(Long clientId) {
         List<Appointment> appointments = appointmentRepository.findAllByClientId(clientId);
         return appointments.stream().map(appointment -> {
-            String time = appointment.getStartTime().toString() + " - " + appointment.getEndTime().toString();
+            String timeSlot = appointment.getStartTime().toString() + " - " + appointment.getEndTime().toString();
             return AppointmentResponseDTO.builder()
                     .id(appointment.getId())
                     .counselorName(appointment.getCounselor().getFirstName() + " " + appointment.getCounselor().getLastName())
@@ -71,13 +71,30 @@ public class AppointmentService {
                     .clientName(appointment.getClient().getFirstName() + " " + appointment.getClient().getLastName())
                     .clientImg(appointment.getClient().getProfilePic())
                     .date(appointment.getDate().toString())
-                    .time(time)
+                    .timeSlot(timeSlot)
+                    .startTime(appointment.getStartTime().toString())
+                    .endTime(appointment.getEndTime().toString())
                     .build();
         }).collect(Collectors.toList());
     }
 
-    public List<Appointment> getAppointmentsByCounselorId(Long counselorId) {
-        return appointmentRepository.findAllByCounselorId(counselorId);
+
+    public List<AppointmentResponseDTO> getAppointmentsByCounselorId(Long counselorId) {
+        List<Appointment> appointments = appointmentRepository.findAllByCounselorId(counselorId);
+        return appointments.stream().map(appointment -> {
+            String timeSlot = appointment.getStartTime().toString() + " - " + appointment.getEndTime().toString();
+            return AppointmentResponseDTO.builder()
+                    .id(appointment.getId())
+                    .counselorName(appointment.getCounselor().getFirstName() + " " + appointment.getCounselor().getLastName())
+                    .counselorImg(appointment.getCounselor().getProfilePic())
+                    .clientName(appointment.getClient().getFirstName() + " " + appointment.getClient().getLastName())
+                    .clientImg(appointment.getClient().getProfilePic())
+                    .date(appointment.getDate().toString())
+                    .timeSlot(timeSlot)
+                    .startTime(appointment.getStartTime().toString())
+                    .endTime(appointment.getEndTime().toString())
+                    .build();
+        }).collect(Collectors.toList());
     }
 
     public List<Appointment> getAllAppointments() {

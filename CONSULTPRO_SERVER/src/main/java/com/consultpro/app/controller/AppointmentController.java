@@ -43,7 +43,7 @@ public class AppointmentController {
         return  appointmentService.getAllAppointments();
     }
 
-    @GetMapping("/get_appointments_by_clientId/")
+    @GetMapping("/get_appointments_by_clientId")
     public List<AppointmentResponseDTO> getAppointmentsByClientId(@RequestParam Long userId) {
         Optional<Client> client = clientRepository.findByUser(userService.getUserById(userId));
         List<AppointmentResponseDTO> appointments = appointmentService.getAppointmentsByClientId(client.get().getId());
@@ -52,9 +52,9 @@ public class AppointmentController {
     }
 
     @GetMapping("/get_appointments_by_counselorId")
-    public List<Appointment> getAppointmentsByCounselorId(@RequestParam Long userId) {
+    public List<AppointmentResponseDTO> getAppointmentsByCounselorId(@RequestParam Long userId) {
         Optional<Counselor> counselor = counselorRepository.findByUser(userService.getUserById(userId));
-        List<Appointment> appointments = appointmentService.getAppointmentsByCounselorId(counselor.get().getId());
+        List<AppointmentResponseDTO> appointments = appointmentService.getAppointmentsByCounselorId(counselor.get().getId());
         return appointments;
 
     }
