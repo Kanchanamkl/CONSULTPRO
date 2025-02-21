@@ -44,7 +44,7 @@ jobs:
 
       - name: Build Spring Boot JAR
         run: |
-          cd CONSULTPRO_BACKEND
+          cd CONSULTPRO_SERVER
           mvn clean package -DskipTests
 
       - name: Copy backend files to DigitalOcean VPS
@@ -53,7 +53,7 @@ jobs:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USER }}
           password: ${{ secrets.VPS_PASSWORD }}
-          source: "CONSULTPRO_BACKEND/Dockerfile, CONSULTPRO_BACKEND/target/*.jar"
+          source: "CONSULTPRO_SERVER/Dockerfile, CONSULTPRO_BACKEND/target/*.jar"
           target: "~/backend"
 
       - name: Deploy Backend with Docker on VPS
