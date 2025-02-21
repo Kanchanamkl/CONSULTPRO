@@ -63,7 +63,7 @@ jobs:
           username: ${{ secrets.VPS_USER }}
           password: ${{ secrets.VPS_PASSWORD }}
           script: |
-            cd ~/backend
+            cd ~/backend/CONSULTPRO_SERVER
             echo "Checking if Dockerfile exists..."
             if [ ! -f Dockerfile ]; then echo "❌ Dockerfile missing!"; exit 1; fi
             echo "✅ Dockerfile found."
