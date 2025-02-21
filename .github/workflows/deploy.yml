@@ -53,7 +53,7 @@ jobs:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USER }}
           password: ${{ secrets.VPS_PASSWORD }}
-          source: "CONSULTPRO_SERVER/Dockerfile, CONSULTPRO_BACKEND/target/*.jar"
+          source: "CONSULTPRO_SERVER/Dockerfile, CONSULTPRO_SERVER/target/*.jar"
           target: "~/backend"
 
       - name: Deploy Backend with Docker on VPS
