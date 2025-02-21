@@ -1,0 +1,36 @@
+name: Deploy Vite React to DigitalOcean VPS
+
+on:
+  push:
+    branches:
+      - master  # Change if using a different branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Copy files to DigitalOcean VPS using SCP with password
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          password: ${{ secrets.VPS_PASSWORD }}
+          source: "CONSULTPRO_CLIENT"
+          target: "~/"
+
+      - name: Deploy Docker Container on VPS using SSH with password
+        uses: appleboy/sshpass-action@master
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          password: ${{ secrets.VPS_PASSWORD }}
+          script: |
+            cd ~/CONSULTPRO_CLIENT
+            docker stop vite-frontend || true
+            docker rm vite-frontend || true
+            docker build -t vite-frontend .
+            docker run -d --name vite-frontend -p 5173:80 vite-frontend
