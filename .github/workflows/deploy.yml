@@ -3,7 +3,7 @@ name: Deploy Vite React to DigitalOcean VPS
 on:
   push:
     branches:
-      - master  # Change if using a different branch
+      - master # Change if using a different branch
 
 jobs:
   deploy:
@@ -34,8 +34,8 @@ jobs:
             docker rm vite-frontend || true
             docker build -t vite-frontend .
             docker run -d --name vite-frontend -p 5173:80 vite-frontend
- 
- #Deploy Backend (Spring Boot)
+
+      #Deploy Backend (Spring Boot)
       - name: Copy backend files to DigitalOcean VPS
         uses: appleboy/scp-action@master
         with:
@@ -46,7 +46,7 @@ jobs:
           target: "~/"
 
       - name: Deploy Spring Boot Backend on VPS
-        uses: appleboy/sshpass-action@master
+        uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USER }}
@@ -57,4 +57,3 @@ jobs:
             docker rm springboot-backend || true
             docker build -t springboot-backend .
             docker run -d --name springboot-backend -p 8081:8081 springboot-backend
-            
