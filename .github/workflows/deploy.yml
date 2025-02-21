@@ -42,7 +42,7 @@ jobs:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USER }}
           password: ${{ secrets.VPS_PASSWORD }}
-          source: "CONSULTPRO_BACKEND"
+          source: "CONSULTPRO_SERVER"
           target: "~/"
 
       - name: Deploy Spring Boot Backend on VPS
@@ -52,7 +52,7 @@ jobs:
           username: ${{ secrets.VPS_USER }}
           password: ${{ secrets.VPS_PASSWORD }}
           script: |
-            cd ~/CONSULTPRO_BACKEND
+            cd ~/CONSULTPRO_SERVER
             docker stop springboot-backend || true
             docker rm springboot-backend || true
             docker build -t springboot-backend .
