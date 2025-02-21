@@ -1,0 +1,25 @@
+version: '3.8'
+services:
+  backend:
+    build: .
+    container_name: springboot_app
+    ports:
+      - "8081:8081"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://142.93.215.196:3306/CONSULTPROTEST1?createDatabaseIfNotExist=true
+      SPRING_DATASOURCE_USERNAME: root1
+      SPRING_DATASOURCE_PASSWORD: root1
+
+    depends_on:
+      - mysql_db
+
+  mysql_db:
+    image: mysql:8
+    container_name: mysql_container
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: your_database
+      MYSQL_USER: your_user
+      MYSQL_PASSWORD: your_password
+    ports:
+      - "3306:3306"
