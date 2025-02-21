@@ -55,35 +55,33 @@ const ConsultantRegister = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     setLoading(true);
-    console.log(
-      "submitting form data",
-      formData,
-      
-    );
+    console.log("submitting form data", formData);
 
     try {
       const profilePicUrl = await handleFileUpload(formData.profilePic);
       const nicUrl = await handleFileUpload(formData.nic);
-      const degreeTranscriptUrl = await handleFileUpload(formData.degreeTranscript);
+      const degreeTranscriptUrl = await handleFileUpload(
+        formData.degreeTranscript
+      );
       const medicalQualificationUrl = isPsychiatrist
         ? await handleFileUpload(formData.medicalQualification)
         : null;
       const signatureUrl = await handleFileUpload(formData.signature);
 
       const consultantData = {
-        firstName:formData.firstName,
-        lastName:formData.lastName,
-        username:formData.username,
-        password:formData.password,
-        specialization:formData.specialization,
-        contact:formData.contact,
-        role:formData.role,
-        age:formData.age,
-        isPsychiatrist:formData.isPsychiatrist,
-        address:formData.address,
-        city:formData.city,
-        district:formData.district,
-        dob:formData.dob,
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        username: formData.username,
+        password: formData.password,
+        specialization: formData.specialization,
+        contact: formData.contact,
+        role: formData.role,
+        age: formData.age,
+        isPsychiatrist: formData.isPsychiatrist,
+        address: formData.address,
+        city: formData.city,
+        district: formData.district,
+        dob: formData.dob,
         profilePic: profilePicUrl,
         nic: nicUrl,
         degreeTranscript: degreeTranscriptUrl,
@@ -94,7 +92,7 @@ const ConsultantRegister = () => {
       };
 
       axios
-        .post("http://localhost:8080/api/users/create-user", consultantData)
+        .post("http://localhost:8081/api/users/create-user", consultantData)
         .then((result) => {
           console.log(result);
           if (result.data === "Already registered") {
@@ -143,7 +141,6 @@ const ConsultantRegister = () => {
                 value={formData.firstName}
                 onChange={handleChange}
                 required
-                
               />
             </div>
             <div className="form-group">
@@ -255,18 +252,20 @@ const ConsultantRegister = () => {
               <input
                 type="file"
                 id="profile-img"
-                onChange={handleChange} 
-                name="profilePic" 
+                onChange={handleChange}
+                name="profilePic"
                 required
               />
             </div>
             <div className="form-group">
               <label htmlFor="nic">NIC File</label>
-              <input type="file" 
-              id="nic" 
-              onChange={handleChange} 
-              required 
-              name="nic"/>
+              <input
+                type="file"
+                id="nic"
+                onChange={handleChange}
+                required
+                name="nic"
+              />
             </div>
             <div className="form-group">
               <label htmlFor="degreeTranscript">Degree Transcript</label>
@@ -289,7 +288,7 @@ const ConsultantRegister = () => {
             <div className="form-group">
               <label htmlFor="signature">Signature</label>
               <input
-              name="signature"
+                name="signature"
                 type="file"
                 id="signature"
                 onChange={handleChange}

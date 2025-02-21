@@ -1,6 +1,6 @@
-import React, { useState,useEffect  } from "react";
-import { Table, Button , Popconfirm } from "antd";
-import { EyeOutlined ,} from "@ant-design/icons";
+import React, { useState, useEffect } from "react";
+import { Table, Button, Popconfirm } from "antd";
+import { EyeOutlined } from "@ant-design/icons";
 import applicationsData from "../../assets/tempdata/applicationsData";
 import axios from "axios";
 import "./ApplicationsStyles.scss";
@@ -11,7 +11,9 @@ const Applications = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:8080/api/users/get-inactive-counselors");
+        const response = await axios.get(
+          "http://localhost:8081/api/users/get-inactive-counselors"
+        );
         setApplications(response.data);
       } catch (error) {
         console.error("Error fetching data: ", error);
@@ -23,13 +25,18 @@ const Applications = () => {
 
   const handleApprove = (id) => {
     alert(`Request approved for ID: ${id}`);
-    axios.post(`http://localhost:8080/api/users/approve-counselor?userId=${id}&userEmail=${applications.find((application) => application.id === id).username}`)
-    .then((response) => {
-      console.log("Approval successful: ", response);
-    })
-    .catch((error) => {
-      console.error("Error approving request: ", error);
-    });
+    axios
+      .post(
+        `http://localhost:8081/api/users/approve-counselor?userId=${id}&userEmail=${
+          applications.find((application) => application.id === id).username
+        }`
+      )
+      .then((response) => {
+        console.log("Approval successful: ", response);
+      })
+      .catch((error) => {
+        console.error("Error approving request: ", error);
+      });
     setApplications(
       applications.filter((application) => application.id !== id)
     );
@@ -41,8 +48,6 @@ const Applications = () => {
       applications.filter((application) => application.id !== id)
     );
   };
-
-
 
   const columns = [
     {

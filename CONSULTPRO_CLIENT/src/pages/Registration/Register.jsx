@@ -50,7 +50,7 @@ const Register = () => {
 
     console.log("Sending payload:", userData);
     axios
-      .post("http://localhost:8080/api/users/create-user", userData)
+      .post("http://localhost:8081/api/users/create-user", userData)
       .then((result) => {
         console.log(result);
         if (result.data === "Already registered") {
@@ -179,11 +179,8 @@ const Register = () => {
         </form>
 
         <p className="container my-2">Already have an account?</p>
-    
-        <Link to="/login" >
-          Login
-        </Link>
 
+        <Link to="/login">Login</Link>
       </div>
     </div>
   );

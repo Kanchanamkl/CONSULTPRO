@@ -1,4 +1,4 @@
-import React ,{useEffect} from "react";
+import React, { useEffect } from "react";
 import ConsultantCard from "../../components/ConsultantCard/ConsultantCard";
 import SectionContainer from "../../components/SectionContainer/SectionContainer";
 import "./ConsultantStyles.scss";
@@ -7,7 +7,7 @@ const Consultants = () => {
   const [consultants, setConsultants] = React.useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:8080/api/users/get-active-counselors")
+    fetch("http://localhost:8081/api/users/get-active-counselors")
       .then((response) => response.json())
       .then((data) => setConsultants(data))
       .catch((error) => console.error("Error fetching data:", error));

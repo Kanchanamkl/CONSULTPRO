@@ -34,7 +34,7 @@ const BookingPage = () => {
     const fetchBookedSlots = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8080/api/appointments/get_appointment_slots_by_date_and_counselorId?appointmentDate=${
+          `http://localhost:8081/api/appointments/get_appointment_slots_by_date_and_counselorId?appointmentDate=${
             selectedDate.toISOString().split("T")[0]
           }&counselorId=${selectedCounselor.id}`
         );
@@ -67,7 +67,7 @@ const BookingPage = () => {
   const [showPopup, setShowPopup] = useState(false);
   const appointmentDetails = {
     date: selectedDate.toLocaleDateString(),
-    counselor: selectedCounselor ? selectedCounselor: "",
+    counselor: selectedCounselor ? selectedCounselor : "",
     selectedSlot: selectedSlot,
   };
 
@@ -104,7 +104,7 @@ const BookingPage = () => {
 
         const [startTime, endTime] = selectedSlot.split(" - ");
         const response = await axios.post(
-          "http://localhost:8080/api/appointments/create",
+          "http://localhost:8081/api/appointments/create",
           {
             counselorId: selectedCounselor.id,
             clientId: userId,
@@ -134,14 +134,13 @@ const BookingPage = () => {
     window.payhere.onDismissed = function onDismissed() {
       console.log("Payment dismissed");
     };
-  
+
     window.payhere.onError = function onError(error) {
       console.log("Error: " + error);
     };
   } else {
     console.error("payhere is not defined");
   }
-
 
   const location = useLocation();
   const { consultant } = location.state || {};
@@ -171,22 +170,28 @@ const BookingPage = () => {
           <div className="counselor-container-left">
             <img
               src={selectedCounselor.profilePic}
-              alt={`${selectedCounselor.firstName} ${selectedCounselor.lastName}`} 
+              alt={`${selectedCounselor.firstName} ${selectedCounselor.lastName}`}
               className="consultn-img"
             />
           </div>
           <div className="counselor-container-right">
             <h3 className="consultn-name">
-            {selectedCounselor.firstName}{selectedCounselor.lastName} 
+              {selectedCounselor.firstName}
+              {selectedCounselor.lastName}
             </h3>
-            <p className="consultn-detail-item"> Specialize : {selectedCounselor.specialization}</p>
+            <p className="consultn-detail-item">
+              {" "}
+              Specialize : {selectedCounselor.specialization}
+            </p>
             <p className="consultn-detail-item">
               Email : {"thenuka@gmail.com"}
             </p>
             <p className="consultn-detail-item">
               Mobile : {selectedCounselor.contact}
             </p>
-            <p className="consultn-detail-item">City : {selectedCounselor.city}</p>
+            <p className="consultn-detail-item">
+              City : {selectedCounselor.city}
+            </p>
           </div>
         </div>
       )}

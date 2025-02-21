@@ -23,11 +23,11 @@ const AppointmentCard = ({ appointment }) => {
       // Disable button 5 minutes after end time
       const disableTime = new Date(endTime.getTime() + 5 * 60000);
 
-      if (now >= enableTime && now <= disableTime) {
+      // if (now >= enableTime && now <= disableTime) {
         setIsJoinButtonEnabled(true);
-      } else {
-        setIsJoinButtonEnabled(false);
-      }
+      // } else {
+        // setIsJoinButtonEnabled(false);
+      // }
     };
 
     checkButtonStatus();

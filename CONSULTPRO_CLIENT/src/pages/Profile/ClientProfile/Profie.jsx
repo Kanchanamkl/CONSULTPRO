@@ -1,4 +1,4 @@
-import React, { useState, useEffect,useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "./ProfileStyles.scss";
 import SectionContainer from "../../../components/SectionContainer/SectionContainer";
 import axios from "axios";
@@ -16,32 +16,33 @@ const Profile = () => {
     email: "",
     birthday: "",
     profilePic: "",
-});
+  });
 
-useEffect(() => {
-  const fetchUserData = async () => {
+  useEffect(() => {
+    const fetchUserData = async () => {
       try {
-
-          const response = await axios.get(`http://localhost:8080/api/users/get-user?id=${userId}`);
-          const userData = response.data;
-          setuserInfo({
-              firstName: userData.firstName,
-              lastName: userData.lastName,
-              country: userData.country || "",
-              city: userData.city || "Colombo",
-              role: userData.role || "",
-              mobile: userData.mobile || "0760345876",
-              email: userData.username,
-              birthday: userData.birthday || "13-06-2000",
-              profilePic: userData.profilePic,
-          });
+        const response = await axios.get(
+          `http://localhost:8081/api/users/get-user?id=${userId}`
+        );
+        const userData = response.data;
+        setuserInfo({
+          firstName: userData.firstName,
+          lastName: userData.lastName,
+          country: userData.country || "",
+          city: userData.city || "Colombo",
+          role: userData.role || "",
+          mobile: userData.mobile || "0760345876",
+          email: userData.username,
+          birthday: userData.birthday || "13-06-2000",
+          profilePic: userData.profilePic,
+        });
       } catch (error) {
-          console.error("Error fetching user data:", error);
+        console.error("Error fetching user data:", error);
       }
-  };
+    };
 
-  fetchUserData();
-}, []);
+    fetchUserData();
+  }, []);
 
   const handleEditToggle = () => {
     setIsEditing(!isEditing);
@@ -58,37 +59,32 @@ useEffect(() => {
   };
   return (
     <div className="profile-page">
-        <SectionContainer title="">
-            <div className="profile-section">
-                <div className="left-container">
-                    <div className="profile-picture-card">
-                        <img
-                            src={userInfo.profilePic}
-                            alt="Profile"
-                        />
-                        {isEditing && (
-                            <input
-                                type="file"
-                                name="profilePic"
-                                onChange={(e) =>
-                                    setuserInfo({
-                                        ...userInfo,
-                                        profilePic: URL.createObjectURL(
-                                            e.target.files[0]
-                                        ),
-                                    })
-                                }
-                            />
-                        )}
+      <SectionContainer title="">
+        <div className="profile-section">
+          <div className="left-container">
+            <div className="profile-picture-card">
+              <img src={userInfo.profilePic} alt="Profile" />
+              {isEditing && (
+                <input
+                  type="file"
+                  name="profilePic"
+                  onChange={(e) =>
+                    setuserInfo({
+                      ...userInfo,
+                      profilePic: URL.createObjectURL(e.target.files[0]),
+                    })
+                  }
+                />
+              )}
 
-                        <h5>
-                            {userInfo.firstName} {userInfo.lastName}
-                        </h5>
-                    </div>
-                </div>
-                <div className="right-container">
-                    <div className="bio-section">
-                        {/* {isEditing ? (
+              <h5>
+                {userInfo.firstName} {userInfo.lastName}
+              </h5>
+            </div>
+          </div>
+          <div className="right-container">
+            <div className="bio-section">
+              {/* {isEditing ? (
                             <>
                                 <input
                                     type="text"
@@ -151,70 +147,54 @@ useEffect(() => {
                                 </button>
                             </>
                         ) : ( */}
-                            <>
-                                <p>
-                                    <label style={{ marginRight: "27px" }}>
-                                        First Name
-                                    </label>
-                                    :{"   "}
-                                    {userInfo.firstName}
-                                </p>
+              <>
+                <p>
+                  <label style={{ marginRight: "27px" }}>First Name</label>:
+                  {"   "}
+                  {userInfo.firstName}
+                </p>
 
-                                <p>
-                                    <label style={{ marginRight: "30px" }}>
-                                        Last Name
-                                    </label>
-                                    :{"   "}
-                                    {userInfo.lastName}
-                                </p>
+                <p>
+                  <label style={{ marginRight: "30px" }}>Last Name</label>:
+                  {"   "}
+                  {userInfo.lastName}
+                </p>
 
-                                <p>
-                                    <label style={{ marginRight: "35px" }}>
-                                        Username
-                                    </label>
-                                    :{"   "}
-                                    {userInfo.email}
-                                </p>
-                                <p>
-                                    <label style={{ marginRight: "64px" }}>
-                                        Mobile
-                                    </label>
-                                    :{"   "}
-                                    {userInfo.mobile}
-                                </p>
+                <p>
+                  <label style={{ marginRight: "35px" }}>Username</label>:
+                  {"   "}
+                  {userInfo.email}
+                </p>
+                <p>
+                  <label style={{ marginRight: "64px" }}>Mobile</label>:{"   "}
+                  {userInfo.mobile}
+                </p>
 
-                                <p>
-                                    <label style={{ marginRight: "50px" }}>
-                                        Birthday
-                                    </label>
-                                    :{"   "}
-                                    {userInfo.birthday}
-                                </p>
-                                <p>
-                                    <label style={{ marginRight: "84px" }}>
-                                        Role      
-                                    </label>
-                                    :{"   "}
-                                    {userInfo.role}
-                                </p>
-                                <p>
-                                    <label style={{ marginRight: "80px" }}>
-                                        City:{"  "}
-                                    </label>
-                                    : {userInfo.city}
-                                </p>
+                <p>
+                  <label style={{ marginRight: "50px" }}>Birthday</label>:
+                  {"   "}
+                  {userInfo.birthday}
+                </p>
+                <p>
+                  <label style={{ marginRight: "84px" }}>Role</label>:{"   "}
+                  {userInfo.role}
+                </p>
+                <p>
+                  <label style={{ marginRight: "80px" }}>City:{"  "}</label>:{" "}
+                  {userInfo.city}
+                </p>
 
-                                {/* <button onClick={handleEditToggle}>
+                {/* <button onClick={handleEditToggle}>
                                     Edit
                                 </button> */}
-                            </>
-                        {/* )} */}
-                    </div>
-                </div>
+              </>
+              {/* )} */}
             </div>
-        </SectionContainer>
+          </div>
+        </div>
+      </SectionContainer>
     </div>
-);
+  );
   // return (
   //   <div className="profile-page">
   //     <SectionContainer>

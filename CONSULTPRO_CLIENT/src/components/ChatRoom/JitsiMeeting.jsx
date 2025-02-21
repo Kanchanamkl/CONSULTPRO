@@ -10,7 +10,7 @@ const JitsiMeeting = () => {
   const startMeeting = () => {
     if (apiRef.current) return;
 
-    const domain = "142.93.215.196:8082";
+    const domain = "meet.melotech200.me";
     const options = {
       roomName: "DemoMeeting",
       width: "100%",

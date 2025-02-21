@@ -20,6 +20,7 @@ import { FaUsers } from "react-icons/fa6";
 import Swal from "sweetalert2"; // Import SweetAlert2
 import "./SideBarStyles.scss";
 import UserProfileCard from "../../components/ProfileCard/ProfileCard";
+import logo from "../../../src/assets/images/logokan.png";
 const SideBar = () => {
   const {
     isLoggedIn,
@@ -71,6 +72,8 @@ const SideBar = () => {
     }
   };
 
+
+
   return (
     <>
       <IconContext.Provider value={{ color: "#fff" }}>
@@ -81,29 +84,20 @@ const SideBar = () => {
             </Link>
           )}
           {!isLoggedIn && (
-          <button  className="menu-bars">
-            <Link to="/">
-              <img
-                src="/src/assets/images/logokan.png"
-                alt="ConsultPro Logo"
-                className="logo-image"
-              />
-            </Link>
-          </button>
+            <button className="menu-bars">
+              <Link to="/">
+                <img src={logo} alt="ConsultPro Logo" className="logo-image" />
+              </Link>
+            </button>
           )}
 
           {isLoggedIn && (
             <button onClick={() => navigate("/dashboard")} className="menu-bars">
               <Link to="/dashboard">
-                <img
-                  src="/src/assets/images/logokan.png"
-                  alt="ConsultPro Logo"
-                  className="logo-image"
-                />
+                <img src={logo} alt="ConsultPro Logo" className="logo-image" />
               </Link>
             </button>
           )}
-
 
           <div className="nav-bar-right">
             {role === "CLIENT" && (

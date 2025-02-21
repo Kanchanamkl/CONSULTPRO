@@ -19,7 +19,7 @@ const Login = () => {
     setUsername,
     setLastName,
     setProfilePic,
-} = useContext(StoreContext);
+  } = useContext(StoreContext);
   const demoUsers = [
     {
       username: "client@gmail.com",
@@ -49,7 +49,7 @@ const Login = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:8080/api/users/authenticate",
+        "http://localhost:8081/api/users/authenticate",
         {
           email: email,
           password: password,
@@ -73,7 +73,7 @@ const Login = () => {
         console.log("Last Name:", lastName);
         console.log("Role:", role);
         console.log("username", username);
-        console.log("profile-pic",response.data.profilePic)
+        console.log("profile-pic", response.data.profilePic);
 
         setUserId(response.data.id);
         if (response.data.counselorId) {
@@ -145,11 +145,8 @@ const Login = () => {
 
           <p className="container my-2 mt-3">Don&apos;t have an account?</p>
           <button className="btn">
-          <Link to="/register">
-            Register
-          </Link>
+            <Link to="/register">Register</Link>
           </button>
-   
         </div>
       </div>
     </div>
