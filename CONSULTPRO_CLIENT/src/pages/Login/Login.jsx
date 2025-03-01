@@ -63,6 +63,7 @@ const Login = () => {
           alert("Your account is Inactive. Please contact support.");
           return;
         }
+        
 
         const role = response.data.role;
         const firstName = response.data.firstName;
