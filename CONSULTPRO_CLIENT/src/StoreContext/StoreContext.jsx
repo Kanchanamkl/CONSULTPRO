@@ -51,7 +51,7 @@ const StoreContextProvider = (props) => {
   const fetchActiveCounselors = async () => {
     try {
       const response = await fetch(
-        "http://142.93.215.196.196:8001/api//users/get-active-counselors"
+        "http://142.93.215.196:8001/api//users/get-active-counselors"
       );
       const data = await response.json();
       const formattedData = data.map((counselor) => ({

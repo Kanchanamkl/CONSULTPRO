@@ -11,21 +11,21 @@ services:
     volumes:
       - mysql-data:/var/lib/mysql
 
-  backend:
-    build: ./CONSULTPRO_SERVER
+  consultpro_server:
+    build: ./consultpro_server
     ports:
-      - "8080:8080"
+      - "8081:8081"
     depends_on:
       - mysql
     environment:
       - MYSQL_HOST=mysql
 
-  frontend:
-    build: ./CONSULTPRO_CLIENT
+  consultpro_client:
+    build: ./consultpro_client
     ports:
       - "80:80"
     depends_on:
-      - CONSULTPRO_SERVER
+      - consultpro_server
 
 volumes:
   mysql-data:

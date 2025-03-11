@@ -14,7 +14,7 @@ const CounselorAppointments = () => {
   useEffect(() => {
     axios
       .get(
-        `http://142.93.215.196.196:8001/api//appointments/get_appointments_by_counselorId?userId=${userId}`
+        `http://142.93.215.196:8001/api//appointments/get_appointments_by_counselorId?userId=${userId}`
       )
       .then((response) => {
         const preparedAppointments = response.data.map((appointment) => ({
@@ -37,7 +37,7 @@ const CounselorAppointments = () => {
   useEffect(() => {
     console.log("counselorId :", counselorId);
 
-    const socket = new SockJS("http://142.93.215.196.196:8001/ws");
+    const socket = new SockJS("http://142.93.215.196:8001/ws");
     const client = new Client({
       webSocketFactory: () => socket,
       reconnectDelay: 5000,
@@ -48,7 +48,7 @@ const CounselorAppointments = () => {
           console.log("Received message:", message.body);
           axios
             .get(
-              `http://142.93.215.196.196:8001/api//appointments/get_appointments_by_counselorId?userId=${userId}`
+              `http://142.93.215.196:8001/api//appointments/get_appointments_by_counselorId?userId=${userId}`
             )
             .then((response) => {
               const preparedAppointments = response.data.map((appointment) => ({

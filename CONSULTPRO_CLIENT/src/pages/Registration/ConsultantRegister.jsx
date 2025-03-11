@@ -92,7 +92,7 @@ const ConsultantRegister = () => {
       };
 
       axios
-        .post("http://142.93.215.196.196:8001/api//users/create-user", consultantData)
+        .post("http://142.93.215.196:8001/api//users/create-user", consultantData)
         .then((result) => {
           console.log(result);
           if (result.data === "Already registered") {
