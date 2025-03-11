@@ -22,7 +22,7 @@ const Profile = () => {
     const fetchUserData = async () => {
       try {
         const response = await axios.get(
-          `http://142.93.215.196:8081/api//users/get-user?id=${userId}`
+          `http://142.93.215.196:8081/api/users/get-user?id=${userId}`
         );
         const userData = response.data;
         setuserInfo({
