@@ -50,7 +50,7 @@ const Register = () => {
 
     console.log("Sending payload:", userData);
     axios
-      .post("http://142.93.215.196:8001/api//users/create-user", userData)
+      .post("http://142.93.215.196:8081/api//users/create-user", userData)
       .then((result) => {
         console.log(result);
         if (result.data === "Already registered") {

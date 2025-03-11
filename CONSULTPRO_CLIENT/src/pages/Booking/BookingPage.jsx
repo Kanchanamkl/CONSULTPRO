@@ -34,7 +34,7 @@ const BookingPage = () => {
     const fetchBookedSlots = async () => {
       try {
         const response = await axios.get(
-          `http://142.93.215.196:8001/api//appointments/get_appointment_slots_by_date_and_counselorId?appointmentDate=${
+          `http://142.93.215.196:8081/api//appointments/get_appointment_slots_by_date_and_counselorId?appointmentDate=${
             selectedDate.toISOString().split("T")[0]
           }&counselorId=${selectedCounselor.id}`
         );
@@ -104,7 +104,7 @@ const BookingPage = () => {
 
         const [startTime, endTime] = selectedSlot.split(" - ");
         const response = await axios.post(
-          "http://142.93.215.196:8001/api//appointments/create",
+          "http://142.93.215.196:8081/api//appointments/create",
           {
             counselorId: selectedCounselor.id,
             clientId: userId,

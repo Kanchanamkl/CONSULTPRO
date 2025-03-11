@@ -36,7 +36,7 @@ const AccountSetUp = () => {
 
     try {
       const response = await fetch(
-        "http://142.93.215.196:8001/api/users/account-setup",
+        "http://142.93.215.196:8081/api/users/account-setup",
         {
           method: "POST",
           headers: {

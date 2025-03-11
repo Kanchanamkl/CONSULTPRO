@@ -7,7 +7,7 @@ const Consultants = () => {
   const [consultants, setConsultants] = React.useState([]);
 
   useEffect(() => {
-    fetch("http://142.93.215.196:8001/api//users/get-active-counselors")
+    fetch("http://142.93.215.196:8081/api//users/get-active-counselors")
       .then((response) => response.json())
       .then((data) => setConsultants(data))
       .catch((error) => console.error("Error fetching data:", error));
