@@ -16,7 +16,7 @@ const ClientAppointments = () => {
   useEffect(() => {
     axios
       .get(
-        `http://localhost:8081/api/appointments/get_appointments_by_clientId?userId=${userId}`
+        `http://142.93.215.196.196:8001/api//appointments/get_appointments_by_clientId?userId=${userId}`
       )
       .then((response) => {
         const preparedAppointments = response.data.map((appointment) => ({

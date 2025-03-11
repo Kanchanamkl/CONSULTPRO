@@ -12,7 +12,7 @@ const Applications = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:8081/api/users/get-inactive-counselors"
+          `http://142.93.215.196.196:8001/api//users/get-inactive-counselors`
         );
         setApplications(response.data);
       } catch (error) {
@@ -27,7 +27,7 @@ const Applications = () => {
     alert(`Request approved for ID: ${id}`);
     axios
       .post(
-        `http://localhost:8081/api/users/approve-counselor?userId=${id}&userEmail=${
+        `http://142.93.215.196.196:8001/api//users/approve-counselor?userId=${id}&userEmail=${
           applications.find((application) => application.id === id).username
         }`
       )
