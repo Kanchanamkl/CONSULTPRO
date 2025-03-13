@@ -40,4 +40,4 @@ spring:
     encoding: UTF-8
 
 app:
-  client-url: http://142.93.215.196:3000
+  client-url: http://142.93.215.196:5173

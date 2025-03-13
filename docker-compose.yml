@@ -23,7 +23,7 @@ services:
   consultpro_client:
     build: ./consultpro_client
     ports:
-      - "3000:3000"
+      - "80:80"
     depends_on:
       - consultpro_server
 
