@@ -64,7 +64,7 @@ public class ApplicationConfig {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
 //        config.setAllowedOrigins(List.of("http://142.93.215.196:5173"));
-        config.setAllowedOrigins(List.of("http://142.93.215.196","http://localhost:5173"));
+        config.setAllowedOrigins(List.of("http://142.93.215.196:3000","http://localhost:5173"));
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         config.setAllowedHeaders(List.of("Origin", "Content-Type", "Accept", "Authorization"));
         config.setAllowCredentials(true);
