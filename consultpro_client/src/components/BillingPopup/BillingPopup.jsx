@@ -51,9 +51,9 @@ const BillingPopup = ({ appointmentDetails, onClose }) => {
     const payment = {
       sandbox: true,
       merchant_id: paymentDetails.merchant_id,
-      return_url: "http://localhost:5174/appointments",
+      return_url: `http://142.93.215.196/appointments`,
       cancel_url: undefined,
-      notify_url: "http://localhost:5174/appointments",
+      notify_url: `http://142.93.215.196/appointments`,
       order_id: paymentDetails.order_id,
       items: "Training session",
       amount: paymentDetails.amount,
