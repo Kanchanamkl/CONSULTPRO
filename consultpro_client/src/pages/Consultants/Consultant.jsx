@@ -7,7 +7,7 @@ const Consultants = () => {
   const [consultants, setConsultants] = React.useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:8081/api/users/get-active-counselors")
+    fetch(`${import.meta.env.VITE_API_URL}/api/users/get-active-counselors`)
       .then((response) => response.json())
       .then((data) => setConsultants(data))
       .catch((error) => console.error("Error fetching data:", error));

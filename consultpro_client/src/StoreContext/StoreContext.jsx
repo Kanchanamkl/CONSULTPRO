@@ -51,7 +51,7 @@ const StoreContextProvider = (props) => {
   const fetchActiveCounselors = async () => {
     try {
       const response = await fetch(
-        "http://localhost:8081/api/users/get-active-counselors"
+        `${import.meta.env.VITE_API_URL}/api/users/get-active-counselors`
       );
       const data = await response.json();
       const formattedData = data.map((counselor) => ({

@@ -22,7 +22,7 @@ const Profile = () => {
     const fetchUserData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8081/api/users/get-user?id=${userId}`
+          `${import.meta.env.VITE_API_URL}/api/users/get-user?id=${userId}`
         );
         const userData = response.data;
         setuserInfo({

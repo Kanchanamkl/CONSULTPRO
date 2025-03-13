@@ -92,7 +92,7 @@ const ConsultantRegister = () => {
       };
 
       axios
-        .post("http://localhost:8081/api/users/create-user", consultantData)
+        .post(`${import.meta.env.VITE_API_URL}/api/users/create-user`, consultantData)
         .then((result) => {
           console.log(result);
           if (result.data === "Already registered") {

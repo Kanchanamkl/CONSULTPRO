@@ -49,7 +49,7 @@ const Login = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:8081/api/users/authenticate",
+        `${import.meta.env.VITE_API_URL}/api/users/authenticate`,
         {
           email: email,
           password: password,

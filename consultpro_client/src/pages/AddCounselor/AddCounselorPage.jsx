@@ -29,18 +29,18 @@ const AddCounselor = () => {
 
     // Post the data to your API
     axios
-      .post("http://localhost:8081/api/users/create-user", consultantData)
+      .post(`${import.meta.env.VITE_API_URL}/api/users/create-user`, consultantData)
       .then((result) => {
-        console.log(result);
-        if (result.data === "Already registered") {
-          alert("Email already registered! Please login.");
-          navigate("/login");
-        } else {
-          alert(
-            "Registered successfully! You'll receive confirmation after admin approval."
-          );
-          navigate("/login");
-        }
+      console.log(result);
+      if (result.data === "Already registered") {
+        alert("Email already registered! Please login.");
+        navigate("/login");
+      } else {
+        alert(
+        "Registered successfully! You'll receive confirmation after admin approval."
+        );
+        navigate("/login");
+      }
       })
       .catch((err) => console.log(err));
   };

@@ -16,7 +16,7 @@ const ClientAppointments = () => {
   useEffect(() => {
     axios
       .get(
-        `http://localhost:8081/api/appointments/get_appointments_by_clientId?userId=${userId}`
+        `${import.meta.env.VITE_API_URL}/api/appointments/get_appointments_by_clientId?userId=${userId}`
       )
       .then((response) => {
         const preparedAppointments = response.data.map((appointment) => ({

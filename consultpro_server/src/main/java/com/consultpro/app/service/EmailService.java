@@ -36,7 +36,7 @@ public class EmailService {
     private final Key jwtSecret = Keys.secretKeyFor(SignatureAlgorithm.HS512);
     private final long jwtExpirationMs = 3600000; // 1 hour
 
-    @Value("${app.setup-url}")
+    @Value("${app.client-url}")
     private String setupUrlBase;
 
 

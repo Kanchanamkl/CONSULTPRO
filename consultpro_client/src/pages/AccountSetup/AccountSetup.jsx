@@ -36,7 +36,7 @@ const AccountSetUp = () => {
 
     try {
       const response = await fetch(
-        "http://localhost:8081/api/users/account-setup",
+        `${import.meta.env.VITE_API_URL}/api/users/account-setup`,
         {
           method: "POST",
           headers: {
