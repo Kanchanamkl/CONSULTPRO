@@ -5,7 +5,8 @@
   color: sysColors.$primary-text-color;
   border-radius: 8px;
   padding: 1px;
-  width: 330px;
+  width: 350px;
+  height: auto;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   display: flex;
   align-items: center;
@@ -14,15 +15,14 @@
   margin: 15px;
 
   .profile-img {
-    width: 35%;
     margin: 10px;
 
     img {
-      width: 125px;
-      height: 125px;
+      width: 100px;
+      height: 100px;
       border-radius: 50%;
       border: 3px solid #7a7d80;
-      margin-right: 15px;
+      margin: 15px;
     }
   }
 

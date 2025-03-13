@@ -6,7 +6,7 @@ import { useContext } from "react";
 
 const AppointmentCard = ({ appointment }) => {
   const navigate = useNavigate();
-  const { role } = useContext(StoreContext);
+  const { role , setCurrentMeeting } = useContext(StoreContext);
   const userRole = role;
   const [isJoinButtonEnabled, setIsJoinButtonEnabled] = useState(false);
 
@@ -37,6 +37,7 @@ const AppointmentCard = ({ appointment }) => {
   }, [appointment]);
 
   const handleNavidate = () => {
+    setCurrentMeeting(appointment);
     navigate("/meeting-page");
   };
 

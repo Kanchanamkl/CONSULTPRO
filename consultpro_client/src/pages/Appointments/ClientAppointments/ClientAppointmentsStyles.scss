@@ -14,9 +14,9 @@
   .today-sesstions{
     display: flex;
     flex-wrap: wrap;
-    justify-content: flex-start;
-    gap: 20px;
+    justify-content:baseline ; 
     padding: 5px;
+    
 
     .no-data-notice{
       color: #0c0c0cc9;

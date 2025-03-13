@@ -37,6 +37,7 @@ const StoreContextProvider = (props) => {
     setSelectedCounselor(coach);
   };
 
+  const [currentMeeting, setCurrentMeeting] = useState(null);
   const [selectedSlots, setSelectedSlots] = useState([]);
 
   const addSlot = (startTime, endTime, description) => {
@@ -86,6 +87,7 @@ const StoreContextProvider = (props) => {
       "selectedCounselor",
       JSON.stringify(selectedCounselor)
     );
+    localStorage.setItem("currentMeeting",currentMeeting);
   }, [
     isLoggedIn,
     username,
@@ -97,6 +99,7 @@ const StoreContextProvider = (props) => {
     counselorId,
     selectedCounselor,
     selectedSlots,
+    currentMeeting
   ]);
 
   const handleLogout = () => {
@@ -110,6 +113,7 @@ const StoreContextProvider = (props) => {
     setProfilePic("");
     localStorage.clear();
     navigate("/");
+    setCurrentMeeting("");
   };
 
   const contextValue = {
@@ -124,6 +128,7 @@ const StoreContextProvider = (props) => {
     activeCounselors,
     selectedCounselor,
     selectedSlots,
+    currentMeeting,
     setUserId,
     setCounselorId,
     setIsLoggedIn,
@@ -132,6 +137,7 @@ const StoreContextProvider = (props) => {
     setLastName,
     setRole,
     setProfilePic,
+    setCurrentMeeting,
     setSelectedCounselor,
     updateSelectedCounselor,
     handleLogout,

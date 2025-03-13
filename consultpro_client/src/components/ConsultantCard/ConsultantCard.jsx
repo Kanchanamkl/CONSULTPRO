@@ -27,12 +27,12 @@ const ConsultantCard = ({ consultant }) => {
         className={`consultn-img ${loading ? "hidden" : ""}`}
         onLoad={handleImageLoad}
       />
-      <h3 className="consultn-name">{consultant.firstName}{consultant.lastName}</h3>
-      <p className="consultn-specialize">{consultant.specialization}</p>
-      <button className="appointment-button" onClick={handleNavigate}>
-        <MdAssignmentAdd className="appointment-icon" />{" "}
-        Book Now
-      </button>
+       {!loading && (
+      <><h3 className="consultn-name">{consultant.firstName}{consultant.lastName}</h3><p className="consultn-specialize">{consultant.specialization}</p><button className="appointment-button" onClick={handleNavigate}>
+          <MdAssignmentAdd className="appointment-icon" />{" "}
+          Book Now
+        </button></>
+      )}
     </div>
   );
 };
