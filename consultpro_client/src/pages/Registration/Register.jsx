@@ -36,21 +36,23 @@ const Register = () => {
       profilePicUrl = await handleFileUpload(profilePic);
     }
 
-    const userData = new FormData();
-    userData.append("firstName", firstName);
-    userData.append("lastName", lastName);
-    userData.append("username", username);
-    userData.append("password", password);
-    userData.append("role", role);
-    userData.append("gender", gender);
-    userData.append("dob", dob);
-    userData.append("profilePic", profilePicUrl);
-    userData.append("phoneNumber", phoneNumber);
-    userData.append("country", country);
+    const userData = {
+      firstName,
+      lastName,
+      username,
+      password,
+      role,
+      gender,
+      dob,
+      profilePic: profilePicUrl, // This is a URL, not a file
+      phoneNumber,
+      country,
+    };
+  
 
     console.log("Sending payload:", userData);
     axios
-      .post("http://142.93.215.196:8081/api/users/create-user", userData)
+      .post("http://localhost:8081/api/users/create-user", userData)
       .then((result) => {
         console.log(result);
         if (result.data === "Already registered") {

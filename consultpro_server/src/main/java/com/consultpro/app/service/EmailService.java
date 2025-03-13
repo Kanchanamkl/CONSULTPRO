@@ -11,6 +11,7 @@ import io.jsonwebtoken.security.Keys;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -35,9 +36,13 @@ public class EmailService {
     private final Key jwtSecret = Keys.secretKeyFor(SignatureAlgorithm.HS512);
     private final long jwtExpirationMs = 3600000; // 1 hour
 
+    @Value("${app.setup-url}")
+    private String setupUrlBase;
+
+
     public void sendAccountSetupEmail(String toEmail, String userId) throws MessagingException {
         String token = generateJwtToken(userId , toEmail);
-        String setupUrl = "http://localhost:5173/accSetup?token=" + token;
+        String setupUrl = setupUrlBase + "/accSetup?token=" + token;
 
         Context context = new Context();
         context.setVariable("setupUrl", setupUrl);

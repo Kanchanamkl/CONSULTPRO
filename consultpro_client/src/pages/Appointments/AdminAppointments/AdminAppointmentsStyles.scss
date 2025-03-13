@@ -44,4 +44,30 @@
       }
     }
   }
+
+  .filter-options {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+
+    button {
+      padding: 10px 20px;
+      font-size: 1em;
+      color: #fff;
+      background-color: sysColors.$primary-color;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+
+      &:hover {
+        background-color:   sysColors.$secondary-color;
+      }
+
+      &.active {
+        background-color: sysColors.$secondary-color;
+      }
+    }
+  }
+
 }

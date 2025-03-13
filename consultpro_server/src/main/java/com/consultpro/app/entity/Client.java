@@ -32,5 +32,6 @@ public class Client {
     private String address;
     private String gender;
     private LocalDate dob;
+    @Column(length = 2048)
     private String profilePic;
 }

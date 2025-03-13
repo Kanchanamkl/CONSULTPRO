@@ -97,8 +97,22 @@ public class AppointmentService {
         }).collect(Collectors.toList());
     }
 
-    public List<Appointment> getAllAppointments() {
-        return appointmentRepository.findAll();
+    public List<AppointmentResponseDTO> getAllAppointments() {
+        List<Appointment> appointments = appointmentRepository.findAll();
+        return appointments.stream().map(appointment -> {
+            String timeSlot = appointment.getStartTime().toString() + " - " + appointment.getEndTime().toString();
+            return AppointmentResponseDTO.builder()
+                    .id(appointment.getId())
+                    .counselorName(appointment.getCounselor().getFirstName() + " " + appointment.getCounselor().getLastName())
+                    .counselorImg(appointment.getCounselor().getProfilePic())
+                    .clientName(appointment.getClient().getFirstName() + " " + appointment.getClient().getLastName())
+                    .clientImg(appointment.getClient().getProfilePic())
+                    .date(appointment.getDate().toString())
+                    .timeSlot(timeSlot)
+                    .startTime(appointment.getStartTime().toString())
+                    .endTime(appointment.getEndTime().toString())
+                    .build();
+        }).collect(Collectors.toList());
     }
 
     @Transactional

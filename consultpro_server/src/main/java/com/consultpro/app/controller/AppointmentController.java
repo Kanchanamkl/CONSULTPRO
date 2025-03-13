@@ -40,7 +40,7 @@ public class AppointmentController {
     }
 
     @GetMapping("/get_all_appointments")
-    public List<Appointment> getAllAppointments() {
+    public List<AppointmentResponseDTO> getAllAppointments() {
         return  appointmentService.getAllAppointments();
     }
 
